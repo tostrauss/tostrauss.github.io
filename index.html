@@ -3,26 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tobias Strauss Portfolio</title>
-    <link rel="stylesheet" href="style.css"> <!-- Add this if you'll use an external CSS file -->
+    <title>Portfolio | Tobias Strauss</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Hello! I am a senior in college studying Computer Science and Data Analytics. Here are some of my key projects:</p>
-    </header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-light">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="nav-links ms-auto">
+                <a href="about.html" class="nav-link">.about()</a>
+                <a href="projects.html" class="nav-link">.projects()</a>
+                <a href="resume.html" class="nav-link">.resume()</a>
+            </div>
+        </div>
+        <button id="theme-toggle" class="button theme-toggle">Dark Mode</button>
+    </nav>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-            <li><a href="https://github.com/tostrauss/project1">Project 1</a> - Description of the project</li>
-            <li><a href="https://github.com/tostrauss/project2">Project 2</a> - Description of the project</li>
-            <li><a href="https://github.com/tostrauss/project3">Project 3</a> - Description of the project</li>
-        </ul>
-    </section>
+    <!-- Hero Section with Background -->
+    <div id="interactive-bg">
+        <section class="hero d-flex align-items-center">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="hero-text">
+                    <h1>Hello, <br> I'm <span>Tobias Strauss</span></h1>
+                    <p class="highlight">Web Development, Machine Learning & Problem Solving of any kind</p>
+                    <p><br></p>
+                    <a href="contact.html" class="button">Contact Me</a>
+                </div>
+            </div>
+        </section>
+    </div>
 
-    <footer>
-        <p>Contact: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
-    </footer>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js (interactive background)
+        particlesJS('interactive-bg', {
+            particles: {
+                number: {
+                    value: 150
+                },
+                color: {
+                    value: '#ffcc00'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.4
+                },
+                size: {
+                    value: 3
+                },
+                move: {
+                    speed: 3
+                }
+            }
+        });
+
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                themeToggle.textContent = 'Dark Mode';
+                themeToggle.style.backgroundColor = 'white';
+                themeToggle.style.color = 'black';
+            } else {
+                themeToggle.textContent = 'Light Mode';
+                themeToggle.style.backgroundColor = 'black';
+                themeToggle.style.color = 'white';
+            }
+        });
+    </script>
 </body>
 </html>
