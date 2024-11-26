@@ -436,9 +436,9 @@ h3 {
     text-decoration: none;
     font-size: 16px;
     color: white; /* Standard link color */
-    background-color: black; /* Light background */
+    background-color: rgb(16, 24, 32); /* Light background */
     padding: 8px 12px;
-    border: 1px solid black; /* Subtle border */
+    border: 1px solid rgb(16, 24, 32); /* Subtle border */
     border-radius: 4px; /* Rounded corners */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
