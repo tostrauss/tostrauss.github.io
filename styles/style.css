@@ -7,7 +7,7 @@
     --text-dark: #e0e0e0;
     --bg-light: #f8f9fa;
     --text-light: #2d3436;
-    --navbar-bg-dark: #121212;
+    --navbar-bg-dark: #111111;
     --navbar-bg-light: rgba(248, 249, 250, 0.8);
     --transition-speed: 0.3s;
     --border-radius: 8px;
@@ -48,7 +48,7 @@
     top: 0;
     width: 100%;
     backdrop-filter: blur(2.5rem);
-    background-color: rgba(255, 255, 255, 0.4rem);
+    background-color: rgba(255, 255, 255,);
     padding: 0rem 0.5rem;
     z-index: 1000;
     transition: background-color var(--transition-speed);
