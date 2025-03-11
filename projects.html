@@ -3,65 +3,134 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Projects by Tobias Strauss - Showcasing my expertise in web development, mobile apps, and data analytics.">
+  <meta property="og:title" content="Projects | Tobias Strauss">
+  <meta property="og:description" content="Explore my portfolio of development projects including web apps, mobile applications, and data analysis tools">
+  <meta property="og:type" content="website">
+  
   <title>Projects | Tobias Strauss</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="container">
-      <div class="nav-links">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">TS.</a>
+      <button class="mobile-toggle" id="mobile-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="index.html" class="nav-link">.home()</a>
         <a href="about.html" class="nav-link">.about()</a>
+        <a href="projects.html" class="nav-link active">.projects()</a>
         <a href="resume.html" class="nav-link">.resume()</a>
+        <a href="contact.html" class="nav-link">.contact()</a>
       </div>
-      <button id="theme-toggle" class="button theme-toggle">Dark Mode</button>
+      <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
   </nav>
-<br>
-<br>
-<br>
-<br>
+
   <!-- Projects Section -->
-  <main class="container">
-    <section class="projects-section">
-      <h2 class="section-title">My Tech Portfolio</h2>
-      <p class="section-subtitle">Explore my projects showcasing my development expertise and passion for technology.</p>
+  <section id="projects" class="projects-section page-section">
+    <div class="container">
+      <h1 class="section-title fade-in">My Projects</h1>
+      <p class="section-subtitle fade-in">Explore my portfolio of work showcasing my expertise and passion for development.</p>
+      
       <div class="projects-grid">
-        <!-- Project Card 1 -->
-        <div class="project-card">
-          <img src="images/CollegeRecruit_Logo.png" alt="College Recruit App">
-          <h3>College Recruit App</h3>
-          <p>
-            A comprehensive web and mobile application designed to help international students pursue college soccer opportunities in the U.S. Now available on both the Apple App Store and Google Play Store, the app features robust user registration, profile management, real-time messaging, advanced recruitment tools, and more – fully deployed and making an impact in the market.
-          </p>
-          <br>
-          <a href="https://collegerecruit.us/" target="_blank" class="button">View Website</a>
-        </div>        
-        <!-- Project Card 2 -->
-        <div class="project-card">
-          <img src="images\lockin.png" alt="Stock Analysis & Options Trading">
-          <h3>Stock Analysis & Options Trading Tool</h3>
-          <p>
-            This application shows a deep integration of financial data analysis, interactive UI design, and automated trading tools. It showcases proficiency in Python, data science, and web application development, all while delivering a practical solution for traders and financial analysts. The combination of real-time analytics, advanced visualization, and robust backend integration makes it an excellent example of a modern, data-driven financial tool.
-          </p>
-          <br>
-          <a href="https://github.com/tostrauss/ToFuStockTracker" target="_blank" class="button">View on GitHub</a>
+        <!-- Project 1 -->
+        <div class="project-card fade-in">
+          <div class="project-image">
+            <img src="images/CollegeRecruit_Logo.png" alt="College Recruit App">
+          </div>
+          <div class="project-content">
+            <h3>College Recruit App</h3>
+            <div class="project-tags">
+              <span class="project-tag">Angular</span>
+              <span class="project-tag">Mobile App</span>
+              <span class="project-tag">Web App</span>
+            </div>
+            <div class="project-description">
+              <p>A comprehensive web and mobile application designed to help international students pursue college soccer opportunities in the U.S. Now available on both the Apple App Store and Google Play Store.</p>
+              <p>Features include robust user registration, profile management, real-time messaging, and advanced recruitment tools.</p>
+            </div>
+            <div class="project-links">
+              <a href="https://collegerecruit.us/" target="_blank" class="button">View Live</a>
+            </div>
+          </div>
         </div>
-        <!-- Project Card 3 -->
-        <div class="project-card">
-          <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time Tracker App">
-          <h3>Time Tracking & Gantt-Chart</h3>
-          <p>
-            An application to track work hours, clock in/out, and visualize data using charts. Is now fully integrated into the CollegeRecruit library to track Clock-ins, current projects, working hours etc. Basically a tool to help automate the hours/projects for my Internship
-          </p>
-          <br>
-          <a href="https://github.com/tostrauss/Merged-Time-Recording-Gantt-Chart" target="_blank" class="button">View on GitHub</a>
+        
+        <!-- Project 2 -->
+        <div class="project-card fade-in">
+          <div class="project-image">
+            <img src="images/lockin.png" alt="Stock Analysis & Options Trading">
+          </div>
+          <div class="project-content">
+            <h3>Stock Analysis & Options Trading Tool</h3>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Data Science</span>
+              <span class="project-tag">Financial</span>
+            </div>
+            <div class="project-description">
+              <p>This application shows a deep integration of financial data analysis, interactive UI design, and automated trading tools.</p>
+              <p>It showcases proficiency in Python, data science, and web application development, all while delivering a practical solution for traders and financial analysts.</p>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/tostrauss/ToFuStockTracker" target="_blank" class="button">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="project-card fade-in">
+          <div class="project-image">
+            <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time Tracker App">
+          </div>
+          <div class="project-content">
+            <h3>Time Tracking & Gantt-Chart</h3>
+            <div class="project-tags">
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">Project Management</span>
+              <span class="project-tag">Web App</span>
+            </div>
+            <div class="project-description">
+              <p>An application to track work hours, clock in/out, and visualize data using charts. Now fully integrated into the CollegeRecruit library for tracking work hours and project management.</p>
+              <p>Automates the tracking of hours/projects for my internship with intuitive visualization tools.</p>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/tostrauss/Merged-Time-Recording-Gantt-Chart" target="_blank" class="button">View on GitHub</a>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h3>Tobias Strauss</h3>
+          <p>Full-Stack Developer & Data Analyst</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="projects.html" class="footer-link">Projects</a>
+          <a href="resume.html" class="footer-link">Resume</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2025 Tobias Strauss. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
 
   <!-- Interactive Background -->
   <div id="interactive-bg"></div>
@@ -71,6 +140,5 @@
   <script src="scripts/main.js"></script>
 </body>
 </html>
-
 
 

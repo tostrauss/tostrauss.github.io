@@ -3,33 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio | Tobias Strauss</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <meta name="description" content="Tobias Strauss - Full-stack web developer specializing in Angular, Python, and Data Analytics. View my portfolio of projects and professional experience.">
+  <meta name="keywords" content="web developer, software engineer, full-stack, angular, python, react, SQL, data analytics">
+  <meta property="og:title" content="Tobias Strauss | Software Developer">
+  <meta property="og:description" content="Full-stack web developer specializing in Angular, Python, and Data Analytics">
+  <meta property="og:type" content="website">
+  
+  <title>Tobias Strauss | Software Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="container">
-      <div class="nav-links">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">TS.</a>
+      <button class="mobile-toggle" id="mobile-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="about.html" class="nav-link">.about()</a>
         <a href="projects.html" class="nav-link">.projects()</a>
         <a href="resume.html" class="nav-link">.resume()</a>
+        <a href="contact.html" class="nav-link">.contact()</a>
       </div>
-      <button id="theme-toggle" class="button theme-toggle">Dark Mode</button>
+      <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <main id="home" class="hero">
+  <section id="home" class="hero">
     <div class="container">
-      <div class="hero-text">
-        <h1>Hello, I'm <span>Tobias Strauss</span></h1>
-        <p class="highlight">Web Development, Data Analysis &amp; Problem Solving</p>
-        <a href="contact.html" class="button">Contact Me</a>
+      <div class="hero-content">
+        <div class="hero-text fade-in">
+          <p class="highlight">Hello, I'm</p>
+          <h1>Tobias <span class="highlight-accent">Strauss</span></h1>
+          <p class="highlight typewriter">Full-Stack Developer & Data Analyst</p>
+          <p>I build efficient, impactful software solutions with a focus on web development and data analytics.</p>
+          <div class="buttons">
+            <a href="projects.html" class="button">View My Work</a>
+            <a href="contact.html" class="button-outline">Let's Connect</a>
+          </div>
+          <div class="social-icons">
+            <a href="https://github.com/tostrauss" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:contact@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="hero-image fade-in">
+          <!-- Add your profile image here -->
+          <img src="images/profile.jpg" alt="Tobias Strauss" />
+        </div>
       </div>
     </div>
-  </main>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h3>Tobias Strauss</h3>
+          <p>Full-Stack Developer & Data Analyst</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="projects.html" class="footer-link">Projects</a>
+          <a href="resume.html" class="footer-link">Resume</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2025 Tobias Strauss. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
 
   <!-- Interactive Background -->
   <div id="interactive-bg"></div>

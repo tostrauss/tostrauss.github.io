@@ -20,6 +20,33 @@
     box-sizing: border-box;
   }
   
+  /* Additional CSS for multi-page layout */
+
+/* Page Section adjustment to provide padding for fixed navbar */
+.page-section {
+  padding-top: 8rem;
+  min-height: calc(100vh - 250px); /* Account for footer height */
+}
+
+/* Active navigation link */
+.nav-link.active {
+  color: var(--accent-color);
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* document.addEventListener("DOMContentLoaded", function() {
+  Add this to the main.js file
+  This ensures animations work on all pages
+  setTimeout(function() {
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.classList.add('active');
+    });
+  , 300);
+}); */
+
   body {
     font-family: 'Open Sans', sans-serif;
     background-color: var(--bg-dark);
