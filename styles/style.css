@@ -373,3 +373,10 @@
     z-index: -1;
   }
   
+  .centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
