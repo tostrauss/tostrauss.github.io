@@ -85,27 +85,144 @@
       <br>
       
       <div class="text-center fade-in">
-  <h3>Key Skills</h3>
-  <br>
-  <div class="skill-badges">
-    <span class="badge">Web Development</span>
-    <span class="badge">Data Analysis</span>
-    <span class="badge">Machine Learning</span>
-    <span class="badge">Python</span>
-    <span class="badge">JavaScript</span>
-    <span class="badge">Angular</span>
-    <span class="badge">SQL</span>
-    <span class="badge">Streamlit</span>
-    <span class="badge">React</span>
-    <span class="badge">Flask</span>
-    <span class="badge">node.js</span>
-    <span class="badge">PostgreSQL</span>
-    <span class="badge">Express.js</span>
-  </div>
-  <!-- Fixed download link for the resume PDF -->
-  <a href="Resume Tobias Strauss.pdf" class="button download-btn" download="Resume Tobias Strauss.pdf">Download Full Resume</a>
-</div>
-
+  
+        <div class="skills-section fade-in">
+          <h3>Key Skills</h3>
+          
+          <div class="skills-categories">
+            <div class="skill-category active" data-category="all">All</div>
+            <div class="skill-category" data-category="development">Development</div>
+            <div class="skill-category" data-category="data">Data</div>
+            <div class="skill-category" data-category="tools">Tools</div>
+          </div>
+          
+          <div class="skills-container">
+            <!-- Development Skills -->
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fas fa-code skill-icon"></i>
+                <span class="skill-name">Web Development</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 95%;">
+                  <span class="skill-percent">95%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fab fa-js-square skill-icon"></i>
+                <span class="skill-name">JavaScript</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 90%;">
+                  <span class="skill-percent">90%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fab fa-angular skill-icon"></i>
+                <span class="skill-name">Angular</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 85%;">
+                  <span class="skill-percent">85%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fab fa-react skill-icon"></i>
+                <span class="skill-name">React</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 75%;">
+                  <span class="skill-percent">75%</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Data Skills -->
+            <div class="skill-item" data-category="data">
+              <div class="skill-info">
+                <i class="fas fa-database skill-icon"></i>
+                <span class="skill-name">Data Analysis</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 90%;">
+                  <span class="skill-percent">90%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-item" data-category="data">
+              <div class="skill-info">
+                <i class="fab fa-python skill-icon"></i>
+                <span class="skill-name">Python</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 85%;">
+                  <span class="skill-percent">85%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-item" data-category="data">
+              <div class="skill-info">
+                <i class="fas fa-table skill-icon"></i>
+                <span class="skill-name">SQL</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 80%;">
+                  <span class="skill-percent">80%</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Tool Skills -->
+            <div class="skill-item" data-category="tools">
+              <div class="skill-info">
+                <i class="fas fa-server skill-icon"></i>
+                <span class="skill-name">Node.js</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 75%;">
+                  <span class="skill-percent">75%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-item" data-category="tools">
+              <div class="skill-info">
+                <i class="fas fa-chart-line skill-icon"></i>
+                <span class="skill-name">Streamlit</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 80%;">
+                  <span class="skill-percent">80%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-item" data-category="tools">
+              <div class="skill-info">
+                <i class="fas fa-file-code skill-icon"></i>
+                <span class="skill-name">Flask</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 70%;">
+                  <span class="skill-percent">70%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <a href="Resume Tobias Strauss.pdf" class="button download-btn" download target="_blank" rel="noopener">Download Full Resume</a>
+        </div>
 <!-- Add this right before the closing </body> tag to ensure the PDF loads properly -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
