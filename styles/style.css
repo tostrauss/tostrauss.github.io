@@ -286,14 +286,6 @@ body.light-mode .theme-toggle {
   line-height: 1.2;
 }
 
-.auto-underline {
-  display: inline-block;
-  position: relative;
-  color: var(--accent-color);
-  transition: transform 0.3s ease-in-out;
-  text-underline-offset: 0.2em;
-}
-
 .hero-text h1 span {
   position: relative;
   text-underline-position: auto;
@@ -462,12 +454,13 @@ body.light-mode .button-outline:hover {
   max-width: 250px;
 }
 
+
+
 /* ===== SOCIAL ICONS ===== */
 .social-icons {
   display: flex;
   gap: 1.5rem;
   margin-top: 2rem;
-  justify-content: center;
 }
 
 .social-icon {
@@ -480,7 +473,6 @@ body.light-mode .button-outline:hover {
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content: center;
   border-radius: 50%;
   background-color: rgba(255, 204, 0, 0.05);
 }
@@ -1591,6 +1583,16 @@ button:focus,
 
 .skip-to-content:focus {
   top: 0;
+}
+
+#interactive-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */

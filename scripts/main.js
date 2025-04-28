@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Core functionality
   initInteractiveBackground();
   initThemeToggle();
+  initMobileNavigation();
   initProjectCards();
   initFadeIn();
   initSkillsAnimation();
@@ -34,12 +35,12 @@ function initInteractiveBackground() {
   // Get theme state
   const isLightMode = document.body.classList.contains('light-mode');
   
-  // More lightweight configuration for better performance
+  // Clean configuration with optimized settings
   particlesJS("interactive-bg", {
     particles: {
       number: { 
-        value: 40, // Reduced from 60
-        density: { enable: true, value_area: 1500 } // Increased area
+        value: 40,
+        density: { enable: true, value_area: 1500 }
       },
       color: { 
         value: isLightMode ? "#ffaa00" : "#ffcc00" 
@@ -47,12 +48,12 @@ function initInteractiveBackground() {
       opacity: { 
         value: isLightMode ? 0.2 : 0.3, 
         random: true, 
-        anim: { enable: true, speed: 0.2, opacity_min: 0.1, sync: false } // Slower animation
+        anim: { enable: true, speed: 0.2, opacity_min: 0.1, sync: false }
       },
       size: { 
         value: 3, 
         random: true, 
-        anim: { enable: true, speed: 0.5, size_min: 0.1, sync: false } // Slower animation
+        anim: { enable: true, speed: 0.5, size_min: 0.1, sync: false }
       },
       line_linked: {
         enable: true,
@@ -63,7 +64,7 @@ function initInteractiveBackground() {
       },
       move: { 
         enable: true, 
-        speed: 0.8, // Reduced speed
+        speed: 0.8,
         direction: "none", 
         random: false, 
         straight: false,
@@ -81,31 +82,13 @@ function initInteractiveBackground() {
       },
       modes: {
         grab: { distance: 140, line_linked: { opacity: 0.8 } },
-        push: { particles_nb: 1 }, // Reduced particles
+        push: { particles_nb: 1 },
       },
     },
-    retina_detect: false, // Disable for performance
-    fps_limit: 30 // Reduced FPS limit
+    retina_detect: false,
+    fps_limit: 30
   });
   
-  applyBackgroundStyles(interactiveBg, isLightMode);
-}
-function createBackupPattern() {
-  const interactiveBg = document.getElementById("interactive-bg") || document.createElement("div");
-  
-  if (!document.getElementById("interactive-bg")) {
-    interactiveBg.id = "interactive-bg";
-    document.body.appendChild(interactiveBg);
-  }
-  
-  const isLightMode = document.body.classList.contains('light-mode');
-  
-  // Create a simple CSS background as fallback
-  interactiveBg.style.backgroundImage = isLightMode 
-    ? "radial-gradient(circle at 50% 50%, rgba(255,170,0,0.05) 0%, transparent 75%), radial-gradient(circle at 80% 20%, rgba(255,170,0,0.08) 0%, transparent 60%)"
-    : "radial-gradient(circle at 50% 50%, rgba(255,204,0,0.07) 0%, transparent 75%), radial-gradient(circle at 80% 20%, rgba(255,204,0,0.1) 0%, transparent 60%)";
-    
-  // Apply common styles
   applyBackgroundStyles(interactiveBg, isLightMode);
 }
 
@@ -150,7 +133,6 @@ function createBackupPattern() {
 
 /**
  * Initializes theme toggle functionality
- * FIXED: Theme toggle now works reliably across page loads
  */
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
@@ -220,6 +202,35 @@ function initThemeToggle() {
 }
 
 /**
+ * Initialize mobile navigation toggle
+ */
+function initMobileNavigation() {
+  const mobileToggle = document.getElementById("mobile-toggle");
+  const navLinks = document.getElementById("nav-links");
+  
+  if (!mobileToggle || !navLinks) {
+    return;
+  }
+  
+  mobileToggle.addEventListener("click", function() {
+    navLinks.classList.toggle("active");
+    mobileToggle.querySelector("i").classList.toggle("fa-bars");
+    mobileToggle.querySelector("i").classList.toggle("fa-times");
+  });
+  
+  // Close mobile menu when clicking on a link
+  document.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", function() {
+      navLinks.classList.remove("active");
+      if (mobileToggle.querySelector("i")) {
+        mobileToggle.querySelector("i").classList.add("fa-bars");
+        mobileToggle.querySelector("i").classList.remove("fa-times");
+      }
+    });
+  });
+}
+
+/**
  * Updates the interactive background when theme changes
  */
 function updateBackgroundForTheme() {
@@ -257,7 +268,6 @@ function updateBackgroundForTheme() {
 
 /**
  * Initializes project cards with enhanced 3D effects and interactions
- * FIXED: Card flipping functionality now works reliably
  */
 function initProjectCards() {
   const projectCards = document.querySelectorAll('.project-card');
@@ -576,55 +586,13 @@ function animateSkillCard(card) {
 
 /**
  * Initialize skills filtering and animation
- * FIXED: Skills filtering functionality
  */
 function initSkillsSection() {
   const skillCategories = document.querySelectorAll('.skill-category');
   const skillItems = document.querySelectorAll('.skill-item');
-  const skillCards = document.querySelectorAll('.skill-card');
-  const skillCategoryTitles = document.querySelectorAll('.skill-category-title');
-  
-  // Fix category title line issue
-  skillCategoryTitles.forEach(title => {
-    // Ensure the pseudo-element is visible by forcing a reflow
-    title.style.position = 'relative';
-    
-    // Create a manual line if needed
-    if (!title.querySelector('.category-line')) {
-      const line = document.createElement('div');
-      line.className = 'category-line';
-      title.appendChild(line);
-    }
-  });
-  
-  // Initialize skill card animations
-  skillCards.forEach(card => {
-    // Make sure the progress bar is visible and properly styled
-    const progressBar = card.querySelector('.progress');
-    if (progressBar) {
-      const width = progressBar.style.width;
-      
-      // Force a reflow to ensure animation works
-      progressBar.style.width = '0%';
-      
-      setTimeout(() => {
-        progressBar.style.width = width;
-        progressBar.style.transition = 'width 1.2s cubic-bezier(0.19, 1, 0.22, 1)';
-      }, 300);
-    }
-    
-    // Add click interaction for skill cards
-    card.addEventListener('click', function() {
-      const skillName = this.querySelector('h3').textContent;
-      const progressWidth = this.querySelector('.progress').style.width;
-      
-      // Create and show a skill detail modal
-      showSkillDetailModal(skillName, progressWidth);
-    });
-  });
   
   // Handle category filtering if present
-  if (skillCategories.length > 0) {
+  if (skillCategories.length > 0 && skillItems.length > 0) {
     // Set default active category
     const defaultActiveCategory = document.querySelector('.skill-category[data-category="all"]');
     if (defaultActiveCategory) {
@@ -661,91 +629,40 @@ function initSkillsSection() {
       });
     });
   }
+  
+  // Fix category title line issue
+  const skillCategoryTitles = document.querySelectorAll('.skill-category-title');
+  skillCategoryTitles.forEach(title => {
+    // Ensure the pseudo-element is visible by forcing a reflow
+    title.style.position = 'relative';
+    
+    // Create a manual line if needed
+    if (!title.querySelector('.category-line')) {
+      const line = document.createElement('div');
+      line.className = 'category-line';
+      title.appendChild(line);
+    }
+  });
 }
 
 /**
- * Show a modal with detailed skill information
+ * Add the name underline animation effect
  */
-function showSkillDetailModal(skillName, progressWidth) {
-  // Remove any existing modal
-  const existingModal = document.querySelector('.skill-detail-modal');
-  if (existingModal) {
-    existingModal.remove();
-  }
-  
-  // Create modal
-  const modal = document.createElement('div');
-  modal.className = 'skill-detail-modal';
-  
-  // Convert percentage to a level description
-  const percentage = parseInt(progressWidth);
-  let levelText = 'Beginner';
-  if (percentage >= 90) levelText = 'Expert';
-  else if (percentage >= 80) levelText = 'Advanced';
-  else if (percentage >= 60) levelText = 'Intermediate';
-  
-  // Generate content based on skill
-  let detailContent = '';
-  switch(skillName) {
-    case 'HTML':
-      detailContent = `<p>3+ years of experience building semantic, accessible HTML structures. Familiar with HTML5 features including Canvas, Web Storage, and custom data attributes.</p>`;
-      break;
-    case 'CSS':
-      detailContent = `<p>3+ years styling applications using modern CSS techniques including Flexbox, Grid, custom properties, and animations. Experience with CSS preprocessors like SASS.</p>`;
-      break;
-    case 'JavaScript':
-      detailContent = `<p>2+ years building interactive web applications. Strong understanding of ES6+ features, asynchronous programming, and DOM manipulation.</p>`;
-      break;
-    case 'Angular':
-      detailContent = `<p>2+ years developing with Angular framework. Experience with components, services, routing, forms, and HTTP client. Proficiency in TypeScript and RxJS.</p>`;
-      break;
-    case 'React':
-      detailContent = `<p>1+ year experience with React. Knowledge of functional components, hooks, context API, and state management solutions.</p>`;
-      break;
-    default:
-      detailContent = `<p>Professional experience using ${skillName} for web development and data analytics projects.</p>`;
-  }
-  
-  // Create modal content
-  modal.innerHTML = `
-    <div class="skill-detail-content">
-      <h3>${skillName}</h3>
-      <div class="skill-level-indicator">
-        <div class="skill-meter">
-          <div class="skill-meter-fill" style="width: ${progressWidth}"></div>
-        </div>
-        <span>${levelText} (${progressWidth})</span>
-      </div>
-      ${detailContent}
-      <button class="close-modal">Close</button>
-    </div>
-  `;
-  
-  // Add to body
-  document.body.appendChild(modal);
-  
-  // Animation
-  setTimeout(() => {
-    modal.classList.add('active');
-  }, 10);
-  
-  // Close functionality
-  modal.querySelector('.close-modal').addEventListener('click', () => {
-    modal.classList.remove('active');
-    setTimeout(() => {
-      modal.remove();
-    }, 300);
-  });
-  
-  // Close on outside click
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-      setTimeout(() => {
-        modal.remove();
-      }, 300);
+function initNameUnderline() {
+  const heroNameSpan = document.querySelector('.hero-text h1 span');
+  if (heroNameSpan) {
+    // Create underline element if it doesn't exist
+    if (!heroNameSpan.querySelector('.name-underline')) {
+      const underline = document.createElement('span');
+      underline.className = 'name-underline';
+      heroNameSpan.appendChild(underline);
     }
-  });
+    
+    // Add auto-underline class to trigger animation
+    setTimeout(() => {
+      heroNameSpan.classList.add('auto-underline');
+    }, 800);
+  }
 }
 
 /**
@@ -765,24 +682,6 @@ function enhanceNavigationLinks() {
   });
 }
 
-
-// the initNameUnderline function
-function initNameUnderline() {
-  const heroNameSpan = document.querySelector('.hero-text h1 span');
-  if (heroNameSpan) {
-    // Create underline element if it doesn't exist
-    if (!heroNameSpan.querySelector('.name-underline')) {
-      const underline = document.createElement('span');
-      underline.className = 'name-underline';
-      heroNameSpan.appendChild(underline);
-    }
-    
-    // Add auto-underline class to trigger animation
-    setTimeout(() => {
-      heroNameSpan.classList.add('auto-underline');
-    }, 800);
-  }
-}
 /**
  * Add keyframe animations required for various effects
  */
