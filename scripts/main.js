@@ -31,35 +31,28 @@ function initInteractiveBackground() {
     return;
   }
   
-  // Clear any existing content to prevent overwriting
-  interactiveBg.innerHTML = '';
-  
   // Get theme state
   const isLightMode = document.body.classList.contains('light-mode');
   
-  // Enhanced particles configuration with better performance and visual appeal
+  // More lightweight configuration for better performance
   particlesJS("interactive-bg", {
     particles: {
       number: { 
-        value: 60, 
-        density: { enable: true, value_area: 1200 } 
+        value: 40, // Reduced from 60
+        density: { enable: true, value_area: 1500 } // Increased area
       },
       color: { 
         value: isLightMode ? "#ffaa00" : "#ffcc00" 
       },
-      shape: { 
-        type: "circle",
-        stroke: { width: 0, color: "#000000" },
-      },
       opacity: { 
         value: isLightMode ? 0.2 : 0.3, 
         random: true, 
-        anim: { enable: true, speed: 0.3, opacity_min: 0.1, sync: false } 
+        anim: { enable: true, speed: 0.2, opacity_min: 0.1, sync: false } // Slower animation
       },
       size: { 
         value: 3, 
         random: true, 
-        anim: { enable: true, speed: 0.8, size_min: 0.1, sync: false } 
+        anim: { enable: true, speed: 0.5, size_min: 0.1, sync: false } // Slower animation
       },
       line_linked: {
         enable: true,
@@ -70,7 +63,7 @@ function initInteractiveBackground() {
       },
       move: { 
         enable: true, 
-        speed: 1, 
+        speed: 0.8, // Reduced speed
         direction: "none", 
         random: false, 
         straight: false,
@@ -88,14 +81,31 @@ function initInteractiveBackground() {
       },
       modes: {
         grab: { distance: 140, line_linked: { opacity: 0.8 } },
-        push: { particles_nb: 2 },
+        push: { particles_nb: 1 }, // Reduced particles
       },
     },
-    retina_detect: true,
-    fps_limit: 60
+    retina_detect: false, // Disable for performance
+    fps_limit: 30 // Reduced FPS limit
   });
   
-  // Apply proper styling to the background container
+  applyBackgroundStyles(interactiveBg, isLightMode);
+}
+function createBackupPattern() {
+  const interactiveBg = document.getElementById("interactive-bg") || document.createElement("div");
+  
+  if (!document.getElementById("interactive-bg")) {
+    interactiveBg.id = "interactive-bg";
+    document.body.appendChild(interactiveBg);
+  }
+  
+  const isLightMode = document.body.classList.contains('light-mode');
+  
+  // Create a simple CSS background as fallback
+  interactiveBg.style.backgroundImage = isLightMode 
+    ? "radial-gradient(circle at 50% 50%, rgba(255,170,0,0.05) 0%, transparent 75%), radial-gradient(circle at 80% 20%, rgba(255,170,0,0.08) 0%, transparent 60%)"
+    : "radial-gradient(circle at 50% 50%, rgba(255,204,0,0.07) 0%, transparent 75%), radial-gradient(circle at 80% 20%, rgba(255,204,0,0.1) 0%, transparent 60%)";
+    
+  // Apply common styles
   applyBackgroundStyles(interactiveBg, isLightMode);
 }
 
@@ -755,10 +765,8 @@ function enhanceNavigationLinks() {
   });
 }
 
-/**
- * Add automatic underline effect to name on homepage
- * FIXED: Name underline on index page
- */
+
+// the initNameUnderline function
 function initNameUnderline() {
   const heroNameSpan = document.querySelector('.hero-text h1 span');
   if (heroNameSpan) {
@@ -772,20 +780,9 @@ function initNameUnderline() {
     // Add auto-underline class to trigger animation
     setTimeout(() => {
       heroNameSpan.classList.add('auto-underline');
-    }, 800); // Delay for visual effect
-    
-    // Add hover effect to make name appear bigger
-    heroNameSpan.addEventListener('mouseenter', function() {
-      this.style.transform = 'scale(1.05)';
-      this.style.transition = 'transform 0.3s ease';
-    });
-    
-    heroNameSpan.addEventListener('mouseleave', function() {
-      this.style.transform = 'scale(1)';
-    });
+    }, 800);
   }
 }
-
 /**
  * Add keyframe animations required for various effects
  */
@@ -898,10 +895,25 @@ function addAccessibilityFeatures() {
 window.addEventListener('resize', function() {
   if (typeof particlesJS !== 'undefined' && window.pJSDom && window.pJSDom.length > 0) {
     try {
-      window.pJSDom[0].pJS.fn.vendors.destroy();
+      // Check if destroy method exists before calling it
+      if (window.pJSDom[0].pJS.fn.vendors.destroy) {
+        window.pJSDom[0].pJS.fn.vendors.destroy();
+      } else {
+        // If destroy isn't available, remove the canvas and reinitialize
+        const canvas = document.querySelector('#interactive-bg canvas');
+        if (canvas) {
+          canvas.remove();
+        }
+      }
       initInteractiveBackground();
     } catch (err) {
       console.warn("Error resizing particles background", err);
+      // Fallback: Clear and reinitialize
+      const interactiveBg = document.getElementById("interactive-bg");
+      if (interactiveBg) {
+        interactiveBg.innerHTML = '';
+        initInteractiveBackground();
+      }
     }
   }
 });

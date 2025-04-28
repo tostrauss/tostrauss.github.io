@@ -286,22 +286,52 @@ body.light-mode .theme-toggle {
   line-height: 1.2;
 }
 
-/* FIXED: Name underline style */
+.auto-underline {
+  display: inline-block;
+  position: relative;
+  color: var(--accent-color);
+  transition: transform 0.3s ease-in-out;
+  text-underline-offset: 0.2em;
+}
+
 .hero-text h1 span {
+  position: relative;
+  text-underline-position: auto;
+}
+
+/* FIXED: Name underline style */
+/* .hero-text h1 span {
   color: var(--accent-color);
   position: relative;
   display: inline-block;
   transition: transform 0.3s ease-in-out;
-}
+  z-index: 2; /* Add z-index to ensure it appears above the text */
+/* } */
 
 .name-underline {
   position: absolute;
-  bottom: -5px;
+  bottom: -1px; /* Adjust this value from -5px to -8px */
   left: 0;
   width: 0;
   height: 2px;
   background-color: var(--accent-color);
   transition: width 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 1; /* Add z-index to ensure it appears below the text */
+}
+
+.project-card-front,
+.project-card-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.project-card {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
 }
 
 .hero-text h1 span.auto-underline .name-underline {
