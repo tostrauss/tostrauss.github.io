@@ -10,10 +10,13 @@ document.addEventListener("DOMContentLoaded", function() {
   initProjectCards();
   initFadeIn();
   initSkillsAnimation();
+  initSkillsSection();
+  initNameUnderline();
   
   // Additional enhancements
   enhanceNavigationLinks();
   addKeyframeStyles();
+  addAccessibilityFeatures();
 });
 
 /**
@@ -27,6 +30,9 @@ function initInteractiveBackground() {
     createBackupPattern();
     return;
   }
+  
+  // Clear any existing content to prevent overwriting
+  interactiveBg.innerHTML = '';
   
   // Get theme state
   const isLightMode = document.body.classList.contains('light-mode');
@@ -134,68 +140,73 @@ function createBackupPattern() {
 
 /**
  * Initializes theme toggle functionality
+ * FIXED: Theme toggle now works reliably across page loads
  */
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
   
-  if (!themeToggle) return;
+  if (!themeToggle) {
+    console.warn("Theme toggle button not found");
+    return;
+  }
   
   const themeIcon = themeToggle.querySelector("i");
+  if (!themeIcon) {
+    console.warn("Theme icon not found within toggle button");
+    return;
+  }
   
   // Check for saved theme preference
   try {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
       document.body.classList.add('light-mode');
-      if (themeIcon) {
-        themeIcon.classList.remove("fa-moon");
-        themeIcon.classList.add("fa-sun");
-      }
+      themeIcon.classList.remove("fa-moon");
+      themeIcon.classList.add("fa-sun");
     }
   } catch (err) {
-    console.warn("Unable to access localStorage for theme preference");
+    console.warn("Unable to access localStorage for theme preference", err);
   }
   
   // Add bounce animation to icon on hover
   themeToggle.addEventListener("mouseenter", function() {
-    if (themeIcon) {
-      themeIcon.style.animation = "bounce 0.5s";
-    }
+    themeIcon.style.animation = "bounce 0.5s";
   });
   
   themeToggle.addEventListener("animationend", function() {
-    if (themeIcon) {
-      themeIcon.style.animation = "";
-    }
+    themeIcon.style.animation = "";
   });
   
   // Toggle theme with smooth transition and save preference
   themeToggle.addEventListener("click", function() {
+    // Toggle the light-mode class on the body
     document.body.classList.toggle("light-mode");
     
-    if (themeIcon) {
-      if (document.body.classList.contains("light-mode")) {
-        themeIcon.classList.remove("fa-moon");
-        themeIcon.classList.add("fa-sun");
-        try {
-          localStorage.setItem('theme', 'light');
-        } catch (err) {
-          console.warn("Unable to save theme preference");
-        }
-      } else {
-        themeIcon.classList.remove("fa-sun");
-        themeIcon.classList.add("fa-moon");
-        try {
-          localStorage.setItem('theme', 'dark');
-        } catch (err) {
-          console.warn("Unable to save theme preference");
-        }
+    // Update the icon based on current theme
+    if (document.body.classList.contains("light-mode")) {
+      themeIcon.classList.remove("fa-moon");
+      themeIcon.classList.add("fa-sun");
+      try {
+        localStorage.setItem('theme', 'light');
+      } catch (err) {
+        console.warn("Unable to save theme preference", err);
+      }
+    } else {
+      themeIcon.classList.remove("fa-sun");
+      themeIcon.classList.add("fa-moon");
+      try {
+        localStorage.setItem('theme', 'dark');
+      } catch (err) {
+        console.warn("Unable to save theme preference", err);
       }
     }
     
     // Refresh interactive background for theme change
     updateBackgroundForTheme();
   });
+  
+  // Mark the toggle as initialized to prevent duplicate initialization
+  themeToggle._initialized = true;
 }
 
 /**
@@ -222,8 +233,11 @@ function updateBackgroundForTheme() {
       console.warn("Could not update particles theme", err);
       
       // Reinitialize as fallback
-      document.getElementById("interactive-bg").innerHTML = '';
-      initInteractiveBackground();
+      const interactiveBg = document.getElementById("interactive-bg");
+      if (interactiveBg) {
+        interactiveBg.innerHTML = '';
+        initInteractiveBackground();
+      }
     }
   } else {
     // Update fallback pattern
@@ -233,22 +247,44 @@ function updateBackgroundForTheme() {
 
 /**
  * Initializes project cards with enhanced 3D effects and interactions
+ * FIXED: Card flipping functionality now works reliably
  */
 function initProjectCards() {
   const projectCards = document.querySelectorAll('.project-card');
-  const flipButtons = document.querySelectorAll('.flip-button');
   
   if (projectCards.length === 0) return;
   
-  // Add shimmer effect to cards if not already present
   projectCards.forEach(card => {
+    // Ensure 3D perspective is preserved
+    card.style.transformStyle = 'preserve-3d';
+    
+    // Ensure front and back faces have proper styles
+    const front = card.querySelector('.project-card-front');
+    const back = card.querySelector('.project-card-back');
+    
+    if (front && back) {
+      front.style.backfaceVisibility = 'hidden';
+      front.style.webkitBackfaceVisibility = 'hidden';
+      front.style.position = 'absolute';
+      front.style.width = '100%';
+      front.style.height = '100%';
+      
+      back.style.backfaceVisibility = 'hidden';
+      back.style.webkitBackfaceVisibility = 'hidden';
+      back.style.transform = 'rotateY(180deg)';
+      back.style.position = 'absolute';
+      back.style.width = '100%';
+      back.style.height = '100%';
+    }
+    
+    // Add shimmer effect if not already present
     if (!card.querySelector('.shimmer-effect')) {
       const shimmer = document.createElement('div');
       shimmer.className = 'shimmer-effect';
       card.appendChild(shimmer);
     }
     
-    // Add 3D hover effect
+    // Add 3D hover effect when not flipped
     card.addEventListener('mousemove', function(e) {
       // Only apply effect if card is not flipped
       if (this.classList.contains('flipped')) return;
@@ -306,12 +342,15 @@ function initProjectCards() {
   });
   
   // Handle flip button clicks with improved animation
+  const flipButtons = document.querySelectorAll('.flip-button');
   flipButtons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
       
       const card = this.closest('.project-card');
+      if (!card) return;
+      
       card.classList.toggle('flipped');
       
       // Enhanced 3D effect during flip
@@ -404,27 +443,36 @@ function initFadeIn() {
   if (fadeElements.length === 0) return;
   
   // Use Intersection Observer for better performance
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        // Add a staggered delay based on element position
-        setTimeout(() => {
-          entry.target.classList.add('active');
-        }, 100 + (i * 80));
-        
-        // Stop observing once animation is triggered
-        observer.unobserve(entry.target);
-      }
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Add a staggered delay based on element position
+          setTimeout(() => {
+            entry.target.classList.add('active');
+          }, 100 + (i * 80));
+          
+          // Stop observing once animation is triggered
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
     });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
-  });
-  
-  // Observe each fade element
-  fadeElements.forEach(el => {
-    observer.observe(el);
-  });
+    
+    // Observe each fade element
+    fadeElements.forEach(el => {
+      observer.observe(el);
+    });
+  } else {
+    // Fallback for browsers that don't support Intersection Observer
+    fadeElements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('active');
+      }, 100 + (index * 100));
+    });
+  }
 }
 
 /**
@@ -435,22 +483,29 @@ function initSkillsAnimation() {
   
   if (skillCards.length === 0) return;
   
-  // Create an Intersection Observer to trigger skill animations when visible
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateSkillCard(entry.target);
-        observer.unobserve(entry.target);
-      }
+  if ('IntersectionObserver' in window) {
+    // Create an Intersection Observer to trigger skill animations when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateSkillCard(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
     });
-  }, {
-    threshold: 0.1
-  });
-  
-  // Start observing each skill card
-  skillCards.forEach(card => {
-    observer.observe(card);
-  });
+    
+    // Start observing each skill card
+    skillCards.forEach(card => {
+      observer.observe(card);
+    });
+  } else {
+    // Fallback for browsers without Intersection Observer
+    skillCards.forEach(card => {
+      animateSkillCard(card);
+    });
+  }
 }
 
 /**
@@ -510,6 +565,180 @@ function animateSkillCard(card) {
 }
 
 /**
+ * Initialize skills filtering and animation
+ * FIXED: Skills filtering functionality
+ */
+function initSkillsSection() {
+  const skillCategories = document.querySelectorAll('.skill-category');
+  const skillItems = document.querySelectorAll('.skill-item');
+  const skillCards = document.querySelectorAll('.skill-card');
+  const skillCategoryTitles = document.querySelectorAll('.skill-category-title');
+  
+  // Fix category title line issue
+  skillCategoryTitles.forEach(title => {
+    // Ensure the pseudo-element is visible by forcing a reflow
+    title.style.position = 'relative';
+    
+    // Create a manual line if needed
+    if (!title.querySelector('.category-line')) {
+      const line = document.createElement('div');
+      line.className = 'category-line';
+      title.appendChild(line);
+    }
+  });
+  
+  // Initialize skill card animations
+  skillCards.forEach(card => {
+    // Make sure the progress bar is visible and properly styled
+    const progressBar = card.querySelector('.progress');
+    if (progressBar) {
+      const width = progressBar.style.width;
+      
+      // Force a reflow to ensure animation works
+      progressBar.style.width = '0%';
+      
+      setTimeout(() => {
+        progressBar.style.width = width;
+        progressBar.style.transition = 'width 1.2s cubic-bezier(0.19, 1, 0.22, 1)';
+      }, 300);
+    }
+    
+    // Add click interaction for skill cards
+    card.addEventListener('click', function() {
+      const skillName = this.querySelector('h3').textContent;
+      const progressWidth = this.querySelector('.progress').style.width;
+      
+      // Create and show a skill detail modal
+      showSkillDetailModal(skillName, progressWidth);
+    });
+  });
+  
+  // Handle category filtering if present
+  if (skillCategories.length > 0) {
+    // Set default active category
+    const defaultActiveCategory = document.querySelector('.skill-category[data-category="all"]');
+    if (defaultActiveCategory) {
+      defaultActiveCategory.classList.add('active');
+    }
+    
+    skillCategories.forEach(category => {
+      category.addEventListener('click', function() {
+        // Update active state
+        skillCategories.forEach(cat => cat.classList.remove('active'));
+        this.classList.add('active');
+        
+        const selectedCategory = this.dataset.category;
+        
+        // Filter items
+        skillItems.forEach(item => {
+          if (selectedCategory === 'all' || item.dataset.category === selectedCategory) {
+            item.style.display = 'block';
+            // Trigger animation again
+            setTimeout(() => {
+              const level = item.querySelector('.skill-level');
+              if (level) {
+                const width = level.style.width;
+                level.style.width = '0%';
+                setTimeout(() => {
+                  level.style.width = width;
+                }, 50);
+              }
+            }, 50);
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+}
+
+/**
+ * Show a modal with detailed skill information
+ */
+function showSkillDetailModal(skillName, progressWidth) {
+  // Remove any existing modal
+  const existingModal = document.querySelector('.skill-detail-modal');
+  if (existingModal) {
+    existingModal.remove();
+  }
+  
+  // Create modal
+  const modal = document.createElement('div');
+  modal.className = 'skill-detail-modal';
+  
+  // Convert percentage to a level description
+  const percentage = parseInt(progressWidth);
+  let levelText = 'Beginner';
+  if (percentage >= 90) levelText = 'Expert';
+  else if (percentage >= 80) levelText = 'Advanced';
+  else if (percentage >= 60) levelText = 'Intermediate';
+  
+  // Generate content based on skill
+  let detailContent = '';
+  switch(skillName) {
+    case 'HTML':
+      detailContent = `<p>3+ years of experience building semantic, accessible HTML structures. Familiar with HTML5 features including Canvas, Web Storage, and custom data attributes.</p>`;
+      break;
+    case 'CSS':
+      detailContent = `<p>3+ years styling applications using modern CSS techniques including Flexbox, Grid, custom properties, and animations. Experience with CSS preprocessors like SASS.</p>`;
+      break;
+    case 'JavaScript':
+      detailContent = `<p>2+ years building interactive web applications. Strong understanding of ES6+ features, asynchronous programming, and DOM manipulation.</p>`;
+      break;
+    case 'Angular':
+      detailContent = `<p>2+ years developing with Angular framework. Experience with components, services, routing, forms, and HTTP client. Proficiency in TypeScript and RxJS.</p>`;
+      break;
+    case 'React':
+      detailContent = `<p>1+ year experience with React. Knowledge of functional components, hooks, context API, and state management solutions.</p>`;
+      break;
+    default:
+      detailContent = `<p>Professional experience using ${skillName} for web development and data analytics projects.</p>`;
+  }
+  
+  // Create modal content
+  modal.innerHTML = `
+    <div class="skill-detail-content">
+      <h3>${skillName}</h3>
+      <div class="skill-level-indicator">
+        <div class="skill-meter">
+          <div class="skill-meter-fill" style="width: ${progressWidth}"></div>
+        </div>
+        <span>${levelText} (${progressWidth})</span>
+      </div>
+      ${detailContent}
+      <button class="close-modal">Close</button>
+    </div>
+  `;
+  
+  // Add to body
+  document.body.appendChild(modal);
+  
+  // Animation
+  setTimeout(() => {
+    modal.classList.add('active');
+  }, 10);
+  
+  // Close functionality
+  modal.querySelector('.close-modal').addEventListener('click', () => {
+    modal.classList.remove('active');
+    setTimeout(() => {
+      modal.remove();
+    }, 300);
+  });
+  
+  // Close on outside click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+      setTimeout(() => {
+        modal.remove();
+      }, 300);
+    }
+  });
+}
+
+/**
  * Add subtle enhancements to the navigation links
  */
 function enhanceNavigationLinks() {
@@ -524,6 +753,37 @@ function enhanceNavigationLinks() {
       this.style.transform = 'translateY(0)';
     });
   });
+}
+
+/**
+ * Add automatic underline effect to name on homepage
+ * FIXED: Name underline on index page
+ */
+function initNameUnderline() {
+  const heroNameSpan = document.querySelector('.hero-text h1 span');
+  if (heroNameSpan) {
+    // Create underline element if it doesn't exist
+    if (!heroNameSpan.querySelector('.name-underline')) {
+      const underline = document.createElement('span');
+      underline.className = 'name-underline';
+      heroNameSpan.appendChild(underline);
+    }
+    
+    // Add auto-underline class to trigger animation
+    setTimeout(() => {
+      heroNameSpan.classList.add('auto-underline');
+    }, 800); // Delay for visual effect
+    
+    // Add hover effect to make name appear bigger
+    heroNameSpan.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.05)';
+      this.style.transition = 'transform 0.3s ease';
+    });
+    
+    heroNameSpan.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  }
 }
 
 /**
@@ -559,6 +819,21 @@ function addKeyframeStyles() {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
     }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes progressGrow {
+      from { width: 0; }
+      to { width: 100%; }
+    }
   `;
   
   // Add the CSS to the style element
@@ -566,6 +841,57 @@ function addKeyframeStyles() {
   
   // Add the style element to the document head
   document.head.appendChild(style);
+}
+
+/**
+ * Add accessibility features to the site
+ */
+function addAccessibilityFeatures() {
+  // Add aria labels to interactive elements without text
+  document.querySelectorAll('button:not([aria-label]), a:not([aria-label])').forEach(el => {
+    if (!el.textContent.trim() && !el.getAttribute('aria-label')) {
+      const icon = el.querySelector('i');
+      if (icon && icon.className) {
+        const iconClass = icon.className;
+        if (iconClass.includes('fa-moon') || iconClass.includes('fa-sun')) {
+          el.setAttribute('aria-label', 'Toggle theme');
+        } else if (iconClass.includes('fa-sync')) {
+          el.setAttribute('aria-label', 'Flip card');
+        } else if (iconClass.includes('fa-github')) {
+          el.setAttribute('aria-label', 'GitHub profile');
+        } else if (iconClass.includes('fa-linkedin')) {
+          el.setAttribute('aria-label', 'LinkedIn profile');
+        } else if (iconClass.includes('fa-envelope')) {
+          el.setAttribute('aria-label', 'Send email');
+        } else {
+          el.setAttribute('aria-label', 'Interactive element');
+        }
+      }
+    }
+  });
+  
+  // Add skip to content link for keyboard users
+  if (!document.querySelector('.skip-to-content')) {
+    const skipLink = document.createElement('a');
+    skipLink.className = 'skip-to-content';
+    skipLink.href = '#content';
+    skipLink.textContent = 'Skip to content';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+  }
+  
+  // Add focus styles
+  const focusStyle = document.createElement('style');
+  focusStyle.textContent = `
+    a:focus, button:focus, input:focus, textarea:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+    
+    .skip-to-content:focus {
+      top: 0;
+    }
+  `;
+  document.head.appendChild(focusStyle);
 }
 
 // Ensure background is properly sized on window resize
@@ -589,107 +915,10 @@ window.addEventListener('load', function() {
     interactiveBg.innerHTML = ''; // Clear any existing content
     initInteractiveBackground(); // Reinitialize
   }
-});
-
-// Initialize skills filtering and animation
-function initSkillsSection() {
-  const skillCategories = document.querySelectorAll('.skill-category');
-  const skillItems = document.querySelectorAll('.skill-item');
-  const skillLevels = document.querySelectorAll('.skill-level');
   
-  if (skillCategories.length === 0) return;
-  
-  // Animate skill bars on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Find and animate all skill levels within this container
-        const levels = entry.target.querySelectorAll('.skill-level');
-        if (levels.length) {
-          setTimeout(() => {
-            levels.forEach(level => {
-              level.style.width = level.style.width;
-            });
-          }, 300);
-        }
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  
-  // Observe the skills container
-  const skillsContainer = document.querySelector('.skills-container');
-  if (skillsContainer) {
-    observer.observe(skillsContainer);
+  // Recheck theme toggle
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle && !themeToggle._initialized) {
+    initThemeToggle(); // Reinitialize if needed
   }
-  
-  // Handle category filtering
-  skillCategories.forEach(category => {
-    category.addEventListener('click', function() {
-      // Update active state
-      skillCategories.forEach(cat => cat.classList.remove('active'));
-      this.classList.add('active');
-      
-      const selectedCategory = this.dataset.category;
-      
-      // Filter items
-      skillItems.forEach(item => {
-        if (selectedCategory === 'all' || item.dataset.category === selectedCategory) {
-          item.style.display = 'block';
-          // Trigger animation again
-          setTimeout(() => {
-            const level = item.querySelector('.skill-level');
-            if (level) {
-              level.style.width = level.style.width;
-            }
-          }, 50);
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
-}
-
-// Add to your document ready function
-document.addEventListener("DOMContentLoaded", function() {
-  // Your existing initializations
-  initInteractiveBackground();
-  initThemeToggle();
-  initProjectCards();
-  initFadeIn();
-  initSkillsAnimation();
-  
-  // Add new skill section initialization
-  initSkillsSection();
-  
-  // Additional enhancements
-  enhanceNavigationLinks();
-  addKeyframeStyles();
-});
-
-// Add automatic underline effect to name on homepage
-function initNameUnderline() {
-  const heroNameSpan = document.querySelector('.hero-text h1 span');
-  if (heroNameSpan) {
-    // Create underline element if it doesn't exist
-    if (!heroNameSpan.querySelector('.name-underline')) {
-      const underline = document.createElement('span');
-      underline.className = 'name-underline';
-      heroNameSpan.appendChild(underline);
-    }
-    
-    // Add auto-underline class to trigger animation
-    setTimeout(() => {
-      heroNameSpan.classList.add('auto-underline');
-    }, 800); // Delay for visual effect
-  }
-}
-
-// Add to DOMContentLoaded event
-document.addEventListener("DOMContentLoaded", function() {
-  // ... existing code
-  
-  // Initialize name underline effect
-  initNameUnderline();
 });
