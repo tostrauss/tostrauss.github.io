@@ -26,32 +26,67 @@ document.addEventListener("DOMContentLoaded", function() {
 function initInteractiveBackground() {
   const interactiveBg = document.getElementById("interactive-bg");
   
-  if (!interactiveBg || typeof particlesJS === 'undefined') {
-    console.warn("Interactive background element not found or particles.js not loaded");
-    createBackupPattern();
+  if (!interactiveBg) {
+    console.warn("Interactive background element not found");
     return;
   }
+  
+  // Make sure interactive-bg has proper CSS
+  interactiveBg.style.position = "fixed";
+  interactiveBg.style.top = "0";
+  interactiveBg.style.left = "0";
+  interactiveBg.style.width = "100%";
+  interactiveBg.style.height = "100%";
+  interactiveBg.style.zIndex = "-1"; // Important: keep it behind content
+  interactiveBg.style.pointerEvents = "none";
   
   // Get theme state
   const isLightMode = document.body.classList.contains('light-mode');
   
-  // Clean configuration with optimized settings
+  // Check if particlesJS is loaded
+  if (typeof particlesJS === 'undefined') {
+    console.warn("particles.js not loaded! Loading it now...");
+    
+    // Create a script element to load particles.js
+    const script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
+    script.onload = function() {
+      console.log("particles.js loaded successfully!");
+      initParticles(interactiveBg, isLightMode);
+    };
+    script.onerror = function() {
+      console.error("Failed to load particles.js");
+      createBackupPattern(interactiveBg, isLightMode);
+    };
+    document.body.appendChild(script);
+  } else {
+    // particlesJS is already loaded
+    console.log("particles.js is already loaded");
+    initParticles(interactiveBg, isLightMode);
+  }
+}
+
+function initParticles(element, isLightMode) {
+  // Clear any existing content
+  element.innerHTML = '';
+  
+  // Configure particlesJS with improved settings
   particlesJS("interactive-bg", {
     particles: {
       number: { 
-        value: 40,
-        density: { enable: true, value_area: 1500 }
+        value: 120, // Increased number of particles
+        density: { enable: true, value_area: 800 }
       },
       color: { 
-        value: isLightMode ? "#ffaa00" : "#ffcc00" 
+        value: isLightMode ? "#ffcc00" : "#ffaa00" 
       },
       opacity: { 
-        value: isLightMode ? 0.2 : 0.3, 
-        random: true, 
+        value: isLightMode ? 0.3 : 0.5, // Increased opacity
+        random: false, 
         anim: { enable: true, speed: 0.2, opacity_min: 0.1, sync: false }
       },
       size: { 
-        value: 3, 
+        value: 4, 
         random: true, 
         anim: { enable: true, speed: 0.5, size_min: 0.1, sync: false }
       },
@@ -59,12 +94,12 @@ function initInteractiveBackground() {
         enable: true,
         distance: 150,
         color: isLightMode ? "#ffaa00" : "#ffcc00",
-        opacity: isLightMode ? 0.15 : 0.2,
+        opacity: isLightMode ? 0.3 : 0.4, // Increased opacity
         width: 1,
       },
       move: { 
         enable: true, 
-        speed: 0.8,
+        speed: 1.5, // Increased speed
         direction: "none", 
         random: false, 
         straight: false,
@@ -74,7 +109,7 @@ function initInteractiveBackground() {
       },
     },
     interactivity: {
-      detect_on: "canvas",
+      detect_on: "window",
       events: {
         onhover: { enable: true, mode: "grab" },
         onclick: { enable: true, mode: "push" },
@@ -82,16 +117,52 @@ function initInteractiveBackground() {
       },
       modes: {
         grab: { distance: 140, line_linked: { opacity: 0.8 } },
-        push: { particles_nb: 1 },
+        push: { particles_nb: 4 }, // Add more particles on click
       },
     },
-    retina_detect: false,
-    fps_limit: 30
+    retina_detect: true
   });
   
-  applyBackgroundStyles(interactiveBg, isLightMode);
+  console.log("Particles initialized successfully!");
 }
 
+function createBackupPattern(element, isLightMode) {
+  // Create a subtle gradient background as fallback
+  element.style.backgroundImage = isLightMode 
+    ? "radial-gradient(circle, rgba(255,170,0,0.2) 0%, rgba(0,0,0,0) 70%)"
+    : "radial-gradient(circle, rgba(255,204,0,0.2) 0%, rgba(0,0,0,0) 70%)";
+    
+  element.style.backgroundSize = "100px 100px";
+  element.style.backgroundPosition = "0 0, 50px 50px";
+  
+  // Apply common styles
+  element.style.opacity = isLightMode ? "0.3" : "0.5";
+  element.style.zIndex = "-1";
+  element.style.position = "fixed";
+  element.style.width = "100%";
+  element.style.height = "100%";
+  element.style.top = "0";
+  element.style.left = "0";
+  element.style.pointerEvents = "none";
+}
+
+// Function to call when DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("DOM loaded, initializing interactive background");
+  initInteractiveBackground();
+});
+
+// Also initialize on window load as a fallback
+window.addEventListener("load", function() {
+  console.log("Window loaded, checking if background is initialized");
+  const interactiveBg = document.getElementById("interactive-bg");
+  const hasCanvas = interactiveBg && interactiveBg.querySelector("canvas");
+  
+  if (!hasCanvas) {
+    console.log("No canvas found, reinitializing background");
+    initInteractiveBackground();
+  }
+});
 /**
  * Applies appropriate styles to the interactive background
  */
