@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Resume and professional experience of Tobias Strauss - Full-stack developer and data analyst.">
+  <meta name="description"
+    content="Resume and professional experience of Tobias Strauss - Full-stack developer and data analyst.">
   <meta property="og:title" content="Resume | Tobias Strauss">
   <meta property="og:description" content="Education, skills, and professional experience of Tobias Strauss">
   <meta property="og:type" content="website">
-  
+
   <title>Resume | Tobias Strauss</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
+  <style>
+    #interactive-bg {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: -1 !important;
+      /* Ensure it stays behind other content */
+      pointer-events: none !important;
+      opacity: 0.5 !important;
+      /* Adjust visibility as needed */
+    }
+
+    /* This ensures the canvas element has proper dimensions */
+    #interactive-bg canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
 </head>
+<!-- Interactive Background -->
+<div id="interactive-bg"></div>
+
 <body>
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container navbar-container">
-      
+
       <div class="nav-links" id="nav-links">
         <a href="index.html" class="nav-link">.home()</a>
         <a href="about.html" class="nav-link">.about()</a>
@@ -36,7 +64,7 @@
     <div class="container">
       <h1 class="section-title fade-in">My Journey</h1>
       <p class="section-subtitle fade-in">A chronological view of my educational and professional experiences.</p>
-      
+
       <div class="resume-grid">
         <div class="resume-column fade-in">
           <h2>Education</h2>
@@ -45,7 +73,8 @@
               <div class="timeline-date">2021 - 2025</div>
               <h3 class="timeline-title">Post University</h3>
               <p class="timeline-subtitle">Bachelor of Science in Computer Information Systems</p>
-              <p>Honors Student Athlete with a minor in Data Analytics. Focused on full-stack development, data analytics, and machine learning.</p>
+              <p>Honors Student Athlete with a minor in Data Analytics. Focused on full-stack development, data
+                analytics, and machine learning.</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-date">Graduated 2021</div>
@@ -63,79 +92,319 @@
               <div class="timeline-date">February 2024 - Present</div>
               <h3 class="timeline-title">Co-Founder</h3>
               <p class="timeline-subtitle">College Recruit</p>
-              <p>Spearheaded the development and launch of a comprehensive web and mobile application for international student-athletes seeking college soccer opportunities in the U.S.</p>
+              <p>Spearheaded the development and launch of a comprehensive web and mobile application for international
+                student-athletes seeking college soccer opportunities in the U.S.</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-date">June 2023 - August 2023</div>
               <h3 class="timeline-title">Data Analytics Intern</h3>
               <p class="timeline-subtitle">eEvolution GmbH</p>
-              <p>Applied data analytics techniques to derive actionable insights from company data. Developed and implemented ETL processes and created visual dashboards to highlight key business metrics.</p>
+              <p>Applied data analytics techniques to derive actionable insights from company data. Developed and
+                implemented ETL processes and created visual dashboards to highlight key business metrics.</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-date">2022 - Present</div>
               <h3 class="timeline-title">Co-Captain</h3>
               <p class="timeline-subtitle">D2 Tennis Program</p>
-              <p>Led the university tennis team as co-captain, demonstrating leadership skills, teamwork, and dedication to excellence both on and off the court.</p>
+              <p>Led the university tennis team as co-captain, demonstrating leadership skills, teamwork, and dedication
+                to excellence both on and off the court.</p>
             </div>
           </div>
         </div>
       </div>
       <br>
+      <br>
+      <br>
+
       <div class="text-center fade-in">
-        <h3>Key Skills</h3>
-        <br>
-        <div class="skill-badges">
-          <span class="badge">Web Development</span>
-          <span class="badge">Data Analysis</span>
-          <span class="badge">Machine Learning</span>
-          <span class="badge">Python</span>
-          <span class="badge">JavaScript</span>
-          <span class="badge">Angular</span>
-          <span class="badge">SQL</span>
-          <span class="badge">Streamlit</span>
-          <span class="badge">React</span>
-          <span class="badge">Flask</span>
-          <span class="badge">node.js</span>
-          <span class="badge">PostgreSQL</span>
-          <span class="badge">Express.js</span>
-        </div>
-        <a href="Resume TS ATS (3).docx" target="_blank" class="button download-btn" download>Download Full Resume</a>
-      </div>
-    </div>
-  </section>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div>
-          <h3>Tobias Strauss</h3>
-          <p>Full-Stack Developer & Data Analyst</p>
-        </div>
-        <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <a href="about.html" class="footer-link">About</a>
-          <a href="projects.html" class="footer-link">Projects</a>
-          <a href="resume.html" class="footer-link">Resume</a>
-          <a href="contact.html" class="footer-link">Contact</a>
-        </div>
-      </div>
-      <div class="copyright">
-        &copy; 2025 Tobias Strauss. All Rights Reserved.
-      </div>
-    </div>
-  </footer>
 
-  <!-- Interactive Background -->
-  <div id="interactive-bg"></div>
+        <div class="skills-section fade-in">
+          <h3>Key Skills</h3>
+          <br>
+          <div class="skills-categories">
+            <div class="skill-category active" data-category="all">All</div>
+            <div class="skill-category" data-category="development">Development</div>
+            <div class="skill-category" data-category="data">Data</div>
+            <div class="skill-category" data-category="tools">Tools</div>
+            <div class="skill-category" data-category="soft">Soft Skills</div>
+          </div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="scripts/main.js"></script>
+          <div class="skills-container">
+            <!-- Development Skills -->
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fas fa-code skill-icon"></i>
+                <span class="skill-name">Web Development</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 95%;">
+                  <span class="skill-percent">95%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fab fa-js-square skill-icon"></i>
+                <span class="skill-name">JavaScript</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 90%;">
+                  <span class="skill-percent">90%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fab fa-angular skill-icon"></i>
+                <span class="skill-name">Angular</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 85%;">
+                  <span class="skill-percent">90%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fab fa-react skill-icon"></i>
+                <span class="skill-name">React</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 75%;">
+                  <span class="skill-percent">75%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fas fa-database skill-icon"></i>
+                <span class="skill-name">MySQL</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 80%;">
+                  <span class="skill-percent">80%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-info">
+                <i class="fas fa-server skill-icon"></i>
+                <span class="skill-name">Java</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 50%;">
+                  <span class="skill-percent">50%</span>
+                </div>
+              </div>
+            </div>
+
+
+
+                <div class="skill-item" data-category="development">
+                  <div class="skill-info">
+                    <i class="fas fa-code skill-icon"></i>
+                    <span class="skill-name">C++</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 75%;">
+                      <span class="skill-percent">75%</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Add a new Soft Skills category -->
+                <div class="skill-item" data-category="soft">
+                  <div class="skill-info">
+                    <i class="fas fa-comments skill-icon"></i>
+                    <span class="skill-name">Communication</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 95%;">
+                      <span class="skill-percent">95%</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Data Skills -->
+                <div class="skill-item" data-category="data">
+                  <div class="skill-info">
+                    <i class="fas fa-database skill-icon"></i>
+                    <span class="skill-name">Data Analysis</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 90%;">
+                      <span class="skill-percent">90%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="skill-item" data-category="data">
+                  <div class="skill-info">
+                    <i class="fab fa-python skill-icon"></i>
+                    <span class="skill-name">Python</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 85%;">
+                      <span class="skill-percent">85%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="skill-item" data-category="data">
+                  <div class="skill-info">
+                    <i class="fas fa-table skill-icon"></i>
+                    <span class="skill-name">SQL</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 80%;">
+                      <span class="skill-percent">80%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tool Skills -->
+                <div class="skill-item" data-category="tools">
+                  <div class="skill-info">
+                    <i class="fas fa-server skill-icon"></i>
+                    <span class="skill-name">Node.js</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 75%;">
+                      <span class="skill-percent">75%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="skill-item" data-category="tools">
+                  <div class="skill-info">
+                    <i class="fas fa-chart-bar skill-icon"></i>
+                    <span class="skill-name">PowerBI</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 80%;">
+                      <span class="skill-percent">85%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="skill-item" data-category="tools">
+                  <div class="skill-info">
+                    <i class="fas fa-chart-line skill-icon"></i>
+                    <span class="skill-name">Streamlit</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 80%;">
+                      <span class="skill-percent">80%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="skill-item" data-category="soft">
+                  <div class="skill-info">
+                    <i class="fas fa-users skill-icon"></i>
+                    <span class="skill-name">Adaptility</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 90%;">
+                      <span class="skill-percent">90%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="skill-item" data-category="soft">
+                  <div class="skill-info">
+                    <i class="fas fa-lightbulb skill-icon"></i>
+                    <span class="skill-name">Problem Solving</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 95%;">
+                      <span class="skill-percent">95%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="skill-item" data-category="soft">
+                  <div class="skill-info">
+                    <i class="fas fa-users skill-icon"></i>
+                    <span class="skill-name">Teamwork</span>
+
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-level" style="width: 90%;">
+                      <span class="skill-percent">90%</span>
+                    </div>
+                  </div>
+                  </div>
+
+
+                  <div class="skill-item" data-category="tools">
+                    <div class="skill-info">
+                      <i class="fas fa-file-code skill-icon"></i>
+                      <span class="skill-name">Flask</span>
+                    </div>
+                    <div class="skill-bar">
+                      <div class="skill-level" style="width: 70%;">
+                        <span class="skill-percent">70%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <a href="resume1.html" class="button download-btn" target="_blank">Download Full Resume</a>
+              </div>
+              <!-- Add this right before the closing </body> tag to ensure the PDF loads properly -->
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  const downloadBtn = document.querySelector('.download-btn');
+                  if (downloadBtn) {
+                    downloadBtn.addEventListener('click', function (e) {
+                      // Check if the download attribute is supported
+                      if (!('download' in document.createElement('a'))) {
+                        // If not supported, open in new tab
+                        e.preventDefault();
+                        window.open(this.href, '_blank');
+                      }
+                      // Otherwise let the browser handle the download
+                    });
+                  }
+                });
+              </script>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <!-- Footer -->
+              <footer class="footer">
+                <div class="container">
+                  <div class="footer-content">
+                    <div>
+                      <h3>Tobias Strauss</h3>
+                      <p>Full-Stack Developer & Data Analyst</p>
+                    </div>
+                    <div class="footer-links">
+                      <a href="index.html" class="footer-link">Home</a>
+                      <a href="about.html" class="footer-link">About</a>
+                      <a href="projects.html" class="footer-link">Projects</a>
+                      <a href="resume.html" class="footer-link">Resume</a>
+                      <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                  </div>
+                  <div class="copyright">
+                    &copy; 2025 Tobias Strauss. All Rights Reserved.
+                  </div>
+                </div>
+              </footer>
+
+              >
+
+              <!-- Scripts -->
+              <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+              <script src="scripts/main.js"></script>
 </body>
-</html>
 
+</html>
