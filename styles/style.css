@@ -829,29 +829,36 @@ body.light-mode .project-card-back {
 
 /* Project Card Back - Image Display */
 .project-card-back-image {
-  width: 100%;
-  height: 180px;
-  margin-bottom: 1.5rem;
-  border-radius: var(--border-radius-sm);
-  overflow: hidden;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  height: 180px;
+  overflow: hidden;
 }
 
 .project-card-back-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: opacity 0.5s ease;
+  opacity: 1;
 }
-
-.project-card:hover .project-card-back-image img {
-  transform: scale(1.05);
-}
-
 body.light-mode .project-card-back-image {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--bg-light-subtle);
+  border: 1px solid var(--border-light);
+}
+
+.project-card-back-image img:last-child {
+  opacity: 0;
+}
+
+.project-card-back:hover .project-card-back-image img:first-child {
+  opacity: 0;
+}
+
+.project-card-back:hover .project-card-back-image img:last-child {
+  opacity: 1;
 }
 
 /* Project Content (Front Side) */
@@ -1594,6 +1601,7 @@ button:focus,
   z-index: 1000;
   pointer-events: none;
 }
+
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (min-width: 768px) {
