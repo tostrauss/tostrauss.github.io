@@ -1592,6 +1592,46 @@ button:focus,
   top: 0;
 }
 
+/* Add after the projects section styles */
+
+/* Certifications Section Specific Styles */
+.certifications .project-card {
+  height: 480px; /* Slightly shorter than project cards */
+}
+
+.certifications .project-card-back-image {
+  height: 150px; /* Adjusted for certification logos */
+}
+
+.certifications .tech-tags {
+  margin-top: 1rem;
+}
+
+.certifications .feature-list {
+  max-height: 180px;
+}
+
+/* Certificate Card Specific Styles */
+.certifications .project-description {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.certifications .project-tag {
+  font-size: var(--font-size-xs);
+}
+
+/* Certificate Image Styles */
+.certifications .project-card-back-image img {
+  object-fit: contain;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.light-mode .certifications .project-card-back-image img {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
 #interactive-bg {
   position: fixed;
   top: 0;
