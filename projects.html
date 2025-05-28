@@ -24,16 +24,44 @@
       left: 0 !important;
       width: 100% !important;
       height: 100% !important;
-      z-index: -1 !important; /* Ensure it stays behind other content */
+      z-index: -1 !important;
       pointer-events: none !important;
-      opacity: 0.5 !important; /* Adjust visibility as needed */
+      opacity: 0.5 !important;
     }
     
-    /* This ensures the canvas element has proper dimensions */
     #interactive-bg canvas {
       display: block;
       width: 100% !important;
       height: 100% !important;
+    }
+
+    /* Fixed image display styling */
+    .project-card-back-image {
+      width: 100%;
+      height: 180px;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-card-back-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card-back-image:hover img {
+      transform: scale(1.05);
+    }
+
+    body.light-mode .project-card-back-image {
+      background-color: rgba(0, 0, 0, 0.05);
     }
   </style>
 </head>
@@ -63,7 +91,7 @@
         development.</p>
 
       <div class="projects-grid">
-        <!-- Project 1 -->
+        <!-- Project 1: College Recruit App -->
         <div class="project-card fade-in">
           <div class="shimmer-effect"></div>
           <button class="flip-button" aria-label="Flip card">
@@ -91,7 +119,7 @@
 
           <div class="project-card-back">
             <div class="project-card-back-image">
-              <img src="images/CollegeRecruit_Logo.png" alt="College Recruit App">
+              <img src="images/CollegeRecruit_Logo.png" alt="College Recruit App Logo">
             </div>
             <div class="project-back-content">
               <div class="tech-tags">
@@ -129,7 +157,7 @@
           </div>
         </div>
 
-        <!-- Project 2 -->
+        <!-- Project 2: Stock Analysis & Options Trading Tool -->
         <div class="project-card fade-in">
           <div class="shimmer-effect"></div>
           <button class="flip-button" aria-label="Flip card">
@@ -153,13 +181,14 @@
                   GitHub</a>
                 <a href="https://github.com/tostrauss/tp2" target="_blank"
                   class="button-outline">Dash/Flask/PostgreSQL</a>
+                <a href="https://github.com/tostrauss/finance-learning-forge" target="_blank" class="button-outline">For Colleges</a>
               </div>
             </div>
           </div>
 
           <div class="project-card-back">
             <div class="project-card-back-image">
-              <img src="images/lockin.png" alt="Stock Analysis & Options Trading">
+              <img src="images/lockin.png" alt="Stock Analysis Dashboard Screenshot">
             </div>
             <div class="project-back-content">
               <div class="tech-tags">
@@ -200,7 +229,7 @@
           </div>
         </div>
 
-        <!-- Project 3 -->
+        <!-- Project 3: Time Tracking & Gantt-Chart -->
         <div class="project-card fade-in">
           <div class="shimmer-effect"></div>
           <button class="flip-button" aria-label="Flip card">
@@ -222,19 +251,20 @@
               <div class="project-links">
                 <a href="https://github.com/tostrauss/Merged-Time-Recording-Gantt-Chart" target="_blank"
                   class="button">View on GitHub</a>
+                <a href="#" target="_blank" class="button-outline">Live Demo</a>
               </div>
             </div>
           </div>
 
           <div class="project-card-back">
             <div class="project-card-back-image">
-              <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time Tracker App">
+              <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time Tracking Dashboard">
             </div>
             <div class="project-back-content">
               <div class="tech-tags">
                 <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">HTML</span>
-                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
                 <span class="tech-tag">Chart.js</span>
                 <span class="tech-tag">jQuery</span>
                 <span class="tech-tag">Bootstrap</span>
@@ -267,7 +297,7 @@
           </div>
         </div>
 
-        <!-- Project 4 -->
+        <!-- Project 4: 1Percent Training -->
         <div class="project-card fade-in">
           <div class="shimmer-effect"></div>
           <button class="flip-button" aria-label="Flip card">
@@ -283,17 +313,17 @@
                 <span class="project-tag">Web Design</span>
               </div>
               <div class="project-description">
-                <p>A professional website for three soccer coaches offering personalized training services in Waterbury, CT. Features responsive design, dark/light mode, and integrated booking system.</p>
+                <p>A professional website for three soccer coaches offering personalized training services in Waterbury, CT. Features responsive design, dark/light mode toggle, and integrated booking system with modern UI/UX.</p>
               </div>
               <div class="project-links">
-                <a href="#" target="_blank" class="button">View Live</a>
+                <a href="https://github.com/tostrauss/1Percent" target="_blank" class="button">View on GitHub</a>
               </div>
             </div>
           </div>
 
           <div class="project-card-back">
             <div class="project-card-back-image">
-              <img src="images/1P2.png" alt="1Percent Training">
+              <img src="images/1P2.png" alt="1Percent Training Website">
             </div>
             <div class="project-back-content">
               <div class="tech-tags">
@@ -301,13 +331,15 @@
                 <span class="tech-tag">CSS3</span>
                 <span class="tech-tag">JavaScript</span>
                 <span class="tech-tag">Responsive Design</span>
+                <span class="tech-tag">SASS</span>
+                <span class="tech-tag">jQuery</span>
               </div>
               <div class="project-features">
                 <h4>Key Features</h4>
                 <div class="feature-list">
                   <div class="feature-item">
                     <span class="feature-item-icon">★</span>
-                    <span>Custom training packages</span>
+                    <span>Custom training packages showcase</span>
                   </div>
                   <div class="feature-item">
                     <span class="feature-item-icon">★</span>
@@ -315,11 +347,145 @@
                   </div>
                   <div class="feature-item">
                     <span class="feature-item-icon">★</span>
-                    <span>Mobile-first design</span>
+                    <span>Mobile-first responsive design</span>
                   </div>
                   <div class="feature-item">
                     <span class="feature-item-icon">★</span>
-                    <span>Service booking system</span>
+                    <span>Integrated contact & booking system</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="flip-button">
+              <i class="fas fa-undo"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 5: Swift Tracker -->
+        <div class="project-card fade-in">
+          <div class="shimmer-effect"></div>
+          <button class="flip-button" aria-label="Flip card">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+
+          <div class="project-card-front">
+            <div class="project-content">
+              <h3>Swift Tracker</h3>
+              <div class="project-tags">
+                <span class="project-tag">Swift</span>
+                <span class="project-tag">Node.js</span>
+                <span class="project-tag">Real-time</span>
+              </div>
+              <div class="project-description">
+                <p>A modern, real-time tracking application built with React and Node.js. Features live updates, interactive dashboards, and comprehensive analytics for tracking various metrics and KPIs.</p>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/tostrauss/SWiftTS" target="_blank" class="button">View on GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card-back">
+            <div class="project-card-back-image">
+              <img src="https://via.placeholder.com/400x200/1a1a1a/ffcc00?text=Swift+Tracker" alt="Swift Tracker Dashboard">
+            </div>
+            <div class="project-back-content">
+              <div class="tech-tags">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">.io</span>
+                <span class="tech-tag">Socket.io</span>
+                
+              </div>
+              <div class="project-features">
+                <h4>Key Features</h4>
+                <div class="feature-list">
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Real-time data synchronization</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Interactive analytics dashboard</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Multi-user collaboration</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Custom notification system</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="flip-button">
+              <i class="fas fa-undo"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 6: HabitFlow - Habit Tracker -->
+        <div class="project-card fade-in">
+          <div class="shimmer-effect"></div>
+          <button class="flip-button" aria-label="Flip card">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+
+          <div class="project-card-front">
+            <div class="project-content">
+              <h3>HabitFlow - Habit Tracker</h3>
+              <div class="project-tags">
+                <span class="project-tag">Next.js</span>
+                <span class="project-tag">TypeScript</span>
+                <span class="project-tag">PWA</span>
+              </div>
+              <div class="project-description">
+                <p>A modern habit tracking application designed to help users build positive habits through an intuitive interface. Features streak tracking, calendar visualization, and local data persistence. Final project for CIS290 - Mobile Development Development class.</p>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/tostrauss/HabitTracker-CIS290" target="_blank" class="button">View on GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card-back">
+            <div class="project-card-back-image">
+              <img src="/images/HabitTracker3.png">
+            </div>
+            <div class="project-back-content">
+              <div class="tech-tags">
+                <span class="tech-tag">Next.js 15</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Tailwind CSS</span>
+                <span class="tech-tag">React 19</span>
+                <span class="tech-tag">localStorage</span>
+                <span class="tech-tag">Lucide Icons</span>
+              </div>
+              <div class="project-features">
+                <h4>Key Features</h4>
+                <div class="feature-list">
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Custom habit creation with flexible scheduling</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Streak tracking & progress visualization</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Calendar view with habit overview</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Dark mode support & responsive design</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-item-icon">★</span>
+                    <span>Offline functionality with local storage</span>
                   </div>
                 </div>
               </div>
@@ -330,7 +496,6 @@
           </div>
         </div>
       </div>
-    </div>
     </div>
   </section>
 
