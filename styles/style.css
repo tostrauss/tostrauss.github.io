@@ -486,6 +486,7 @@ body.light-mode .button-outline:hover {
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 50%;
   background-color: rgba(255, 204, 0, 0.05);
 }
@@ -840,12 +841,7 @@ body.light-mode .project-card-back {
   border: 1px solid var(--border-light);
 }
 
-/* Project Card Back - Image Display */
-.project-card-back-image {
-  position: relative;
-  height: 180px;
-  overflow: hidden;
-}
+
 
 .project-card-back-image img {
   position: absolute;
