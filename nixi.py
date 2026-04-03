@@ -45,4 +45,4 @@ while True:
         break
 
     else:
-        print("Invalid choice, please enter a number between 1-4.")
+        print("Sami du Hund! Please enter a valid choice (1-4).")
