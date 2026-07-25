@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Projects by Tobias Strauss - AI Research, Full-Stack Engineering, and Freelance Web Development.">
+  <meta name="description" content="Projects by Tobias Strauss — shipped mobile apps, production SaaS, AI research and client work.">
   <meta property="og:title" content="Projects | Tobias Strauss">
-  <meta property="og:description" content="Explore my portfolio of AI research, production-grade applications, and client projects.">
+  <meta property="og:description" content="Shipped apps with real users, a production operations platform, and explainable-AI research.">
   <meta property="og:type" content="website">
 
   <title>Projects | Tobias Strauss</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+  <div class="bg-layer"></div>
   <div id="interactive-bg"></div>
 
   <nav class="navbar">
     <div class="container navbar-container">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-mark">TS</span>
+        <span>tobias&nbsp;strauss</span>
+      </a>
       <div class="nav-links" id="nav-links">
         <a href="index.html" class="nav-link">.home()</a>
         <a href="about.html" class="nav-link">.about()</a>
@@ -25,458 +32,522 @@
         <a href="resume.html" class="nav-link">.resume()</a>
         <a href="contact.html" class="nav-link">.contact()</a>
       </div>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
+      </button>
+      <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <i class="fas fa-bars"></i>
       </button>
     </div>
   </nav>
 
-  <section id="projects" class="projects-section page-section">
-    <div class="container">
-      <h1 class="section-title fade-in">My Projects</h1>
-      <p class="section-subtitle fade-in">A curated selection of research, engineering, and client work.</p>
-
-      <div class="projects-grid">
+  <main id="content">
+    <!-- ============ FLAGSHIP WORK ============ -->
+    <section class="projects-section page-section">
+      <div class="container">
+        <h1 class="section-title fade-in" data-index="01 — Shipped">Work that runs in production</h1>
+        <p class="section-subtitle fade-in">
+          Two products with real users, real payments and real uptime. Everything below is built and maintained by me.
+        </p>
 
         <!-- JAMIE -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>JAMIE — Social Activity Platform</h3>
-              <div class="project-tags">
-                <span class="project-tag">React 18</span>
-                <span class="project-tag">Node.js</span>
-                <span class="project-tag">PostgreSQL</span>
-              </div>
-              <div class="project-description">
-                <p>A production-grade full-stack application for social discovery. Features complex group/club architectures, real-time chat, and JWT authentication with mobile-first design.</p>
-              </div>
-              <div class="project-links">
-                <a href="#" class="button">In Development</a>
-                <a href="#" class="button-outline">View Specs</a>
-              </div>
-            </div>
+        <article class="spotlight fade-in">
+          <div class="spotlight-media">
+            <img src="images/Screenshot 2026-07-07 120450.png" alt="JAMIE app showing group and club discovery">
           </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images\App logo Neu (4).png" alt="Jamie App Architecture">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">Vite/React</span>
-                <span class="tech-tag">Express.js</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">JWT Auth</span>
-                <span class="tech-tag">Socket.io</span>
-                <span class="tech-tag">REST API</span>
-              </div>
-              <div class="project-features">
-                <h4>System Architecture</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Scalable SQL Schema (Groups vs Clubs)</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time Websocket Messaging</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Secure Bcrypt/JWT Auth Flow</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Mobile-First Responsive UI</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
+          <div class="spotlight-body">
+            <span class="mono-label">Live on iOS &amp; Android</span>
+            <h3>JAMIE — Social Activity App</h3>
+            <p>
+              A social discovery app for Austria: create groups and clubs, chat in real time, find
+              activities on a map and redeem partner deals. Shipped as a React PWA wrapped in
+              Capacitor for iOS and a Trusted Web Activity for Android, on an Express/PostgreSQL
+              backend with Socket.IO, Stripe and push notifications.
+            </p>
 
-        <!-- XAI Research -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>Model Explainability (XAI)</h3>
-              <div class="project-tags">
-                <span class="project-tag">Artificial Intelligence</span>
-                <span class="project-tag">Research</span>
-                <span class="project-tag">Python</span>
+            <div class="metrics">
+              <div>
+                <div class="metric-num">500+</div>
+                <div class="metric-label">users</div>
               </div>
-              <div class="project-description">
-                <p>Master's level research project on Explainable AI. Implementing and comparing approaches to visualize black-box model behaviors to increase trust and aid debugging.</p>
+              <div>
+                <div class="metric-num">2</div>
+                <div class="metric-label">app stores</div>
               </div>
-              <div class="project-links">
-                <a href="https://github.com/jku-icg-classroom/assignment-2-model-explanations-hostile-nightingale-chewbaccas" class="button" target="_blank" rel="noopener">View Research</a>
+              <div>
+                <div class="metric-num">AT → DE/CH</div>
+                <div class="metric-label">market expansion</div>
               </div>
             </div>
-          </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images/1234.png" alt="XAI Visualizations">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">PyTorch</span>
-                <span class="tech-tag">TensorFlow</span>
-                <span class="tech-tag">LIME/SHAP</span>
-                <span class="tech-tag">Saliency Maps</span>
-                <span class="tech-tag">Matplotlib</span>
-              </div>
-              <div class="project-features">
-                <h4>Research Focus</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Visualizing Neural Network Decisions</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Comparative Analysis of XAI Methods</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Trust & Interpretability Metrics</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Reproducible Research Implementation</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
 
-        <!-- Therapie Blumau -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>Therapiezentrum Blumau</h3>
-              <div class="project-tags">
-                <span class="project-tag">Freelance</span>
-                <span class="project-tag">Web Design</span>
-                <span class="project-tag">Healthcare</span>
-              </div>
-              <div class="project-description">
-                <p>Professional website for Therapiezentrum Blumau in Linz, Austria — a multidisciplinary therapy center offering physiotherapy, osteopathy, ergotherapy, and more. Features online booking integration, team profiles, and responsive design.</p>
-              </div>
-              <div class="project-links">
-                <a href="https://www.therapie-linz.at/" target="_blank" rel="noopener" class="button">View Live</a>
-              </div>
+            <div class="project-tags">
+              <span class="project-tag">React 18 / Vite</span>
+              <span class="project-tag">Capacitor + TWA</span>
+              <span class="project-tag">Express.js</span>
+              <span class="project-tag">PostgreSQL</span>
+              <span class="project-tag">Socket.IO + Redis</span>
+              <span class="project-tag">Stripe</span>
             </div>
-          </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images\Screenshot 2026-06-18 190203.png" alt="Therapiezentrum Blumau Website">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Responsive Design</span>
-                <span class="tech-tag">SEO</span>
-                <span class="tech-tag">Accessibility</span>
-              </div>
-              <div class="project-features">
-                <h4>Key Features</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Online booking system integration</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Team & service showcase pages</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>WCAG-compliant accessibility</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Mobile-first responsive layout</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>SEO optimization for local search</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
 
-        <!-- College Recruit -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>College Recruit App</h3>
-              <div class="project-tags">
-                <span class="project-tag">Angular</span>
-                <span class="project-tag">iOS & Android</span>
-                <span class="project-tag">Shipped</span>
-              </div>
-              <div class="project-description">
-                <p>A cross-platform mobile app connecting international student-athletes with US college sports programs. Live on the Apple App Store and Google Play Store.</p>
-              </div>
-              <div class="project-links">
-                <a href="https://collegerecruit.us/" target="_blank" rel="noopener" class="button">View Live</a>
-                <a href="https://play.google.com/store/apps/details?id=us.collegerecruit&pli=1" target="_blank" rel="noopener" class="button-outline">Google Play</a>
-              </div>
+            <div class="project-links">
+              <!-- TODO: add App Store link once the Apple app ID is available -->
+              <a href="https://play.google.com/store/apps/details?id=jamie.app" target="_blank" rel="noopener" class="button">Google Play</a>
+              <a href="https://app.jamie-app.com" target="_blank" rel="noopener" class="button-outline">Open the web app</a>
             </div>
           </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images/CollegeRecruit_Logo.png" alt="College Recruit App">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">Angular</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">Ionic</span>
-                <span class="tech-tag">HTML/CSS</span>
-                <span class="tech-tag">Firebase</span>
-              </div>
-              <div class="project-features">
-                <h4>Key Features</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Comprehensive recruitment platform</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Cross-platform iOS & Android</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>User profiles and college matching</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time messaging</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
+        </article>
 
-        <!-- Stock Analysis -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>Stock Analysis & Options Tool</h3>
-              <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">Data Science</span>
-                <span class="project-tag">Finance</span>
-              </div>
-              <div class="project-description">
-                <p>Deep integration of financial data analysis, interactive dashboards, and automated trading strategies using Python, Dash, and PostgreSQL.</p>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/tostrauss/ToFuStockTracker" target="_blank" rel="noopener" class="button">View on GitHub</a>
-                <a href="https://github.com/tostrauss/tp2" target="_blank" rel="noopener" class="button-outline">Dash/Flask</a>
+        <!-- Gastropoly -->
+        <article class="spotlight spotlight--reverse fade-in">
+          <div class="spotlight-media">
+            <div>
+              <span class="mono-label">Modules</span>
+              <div class="project-tags" style="margin-top: 0.9rem; max-width: 22rem;">
+                <span class="project-tag">Personal</span>
+                <span class="project-tag">Zeiterfassung</span>
+                <span class="project-tag">Waren</span>
+                <span class="project-tag">Lieferanten</span>
+                <span class="project-tag">HACCP</span>
+                <span class="project-tag">Hygiene-Doku</span>
+                <span class="project-tag">Berichte</span>
+                <span class="project-tag">Steuerberater-Export</span>
               </div>
             </div>
           </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images/lockin.png" alt="Stock Analysis Dashboard">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Pandas</span>
-                <span class="tech-tag">Flask</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">Dash/Plotly</span>
-              </div>
-              <div class="project-features">
-                <h4>Key Features</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time market data integration</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Interactive financial dashboards</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Technical analysis tools</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Automated trading strategies</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
+          <div class="spotlight-body">
+            <span class="mono-label">In production since July 2026</span>
+            <h3>Gastropoly — Gastronomy Operations</h3>
+            <p>
+              An all-in-one operations tool for independent gastronomy businesses in the DACH region:
+              staff and time tracking, goods and suppliers, HACCP hygiene documentation, tax-advisor
+              exports and reporting in a single app. In daily use at a seasonal Austrian pilot
+              operation, and built against a full season of that business's real operating data.
+            </p>
 
-        <!-- Time Tracking -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>Time Tracking & Gantt-Chart</h3>
-              <div class="project-tags">
-                <span class="project-tag">JavaScript</span>
-                <span class="project-tag">Project Mgmt</span>
-                <span class="project-tag">Web App</span>
+            <div class="metrics">
+              <div>
+                <div class="metric-num">1 season</div>
+                <div class="metric-label">of real data behind it</div>
               </div>
-              <div class="project-description">
-                <p>Work hours tracker with clock in/out and Gantt chart visualization. Fully integrated into the CollegeRecruit library for project management.</p>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/tostrauss/Merged-Time-Recording-Gantt-Chart" target="_blank" rel="noopener" class="button">View on GitHub</a>
+              <div>
+                <div class="metric-num">EU-hosted</div>
+                <div class="metric-label">Frankfurt, for data residency</div>
               </div>
             </div>
-          </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time Tracking Dashboard">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Chart.js</span>
-                <span class="tech-tag">HTML5/CSS3</span>
-                <span class="tech-tag">Bootstrap</span>
-              </div>
-              <div class="project-features">
-                <h4>Key Features</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Time tracking with clock in/out</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Gantt chart visualization</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Team collaboration tools</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Project progress tracking</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
 
-        <!-- 1Percent Training -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>1Percent Training</h3>
-              <div class="project-tags">
-                <span class="project-tag">HTML/CSS</span>
-                <span class="project-tag">JavaScript</span>
-                <span class="project-tag">Web Design</span>
-              </div>
-              <div class="project-description">
-                <p>Professional website for soccer coaches in Waterbury, CT. Features responsive design, dark/light mode, and integrated booking with modern UI/UX.</p>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/tostrauss/1Percent" target="_blank" rel="noopener" class="button">View on GitHub</a>
-              </div>
+            <div class="project-tags">
+              <span class="project-tag">Next.js</span>
+              <span class="project-tag">TypeScript</span>
+              <span class="project-tag">Supabase</span>
+              <span class="project-tag">PostgreSQL / RLS</span>
+              <span class="project-tag">Stripe</span>
+              <span class="project-tag">Vercel</span>
             </div>
-          </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images/1P2.png" alt="1Percent Training Website">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3/SASS</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Responsive</span>
-              </div>
-              <div class="project-features">
-                <h4>Key Features</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Custom training packages showcase</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Dark/Light theme toggle</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Mobile-first responsive design</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Integrated contact & booking</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
 
-        <!-- HabitFlow -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>HabitFlow — Habit Tracker</h3>
-              <div class="project-tags">
-                <span class="project-tag">Next.js</span>
-                <span class="project-tag">TypeScript</span>
-                <span class="project-tag">PWA</span>
-              </div>
-              <div class="project-description">
-                <p>Modern habit tracking app with streak tracking, calendar visualization, and local data persistence. Final project for CIS290 Mobile Development.</p>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/tostrauss/HabitTracker-CIS290" target="_blank" rel="noopener" class="button">View on GitHub</a>
-              </div>
+            <div class="project-links">
+              <a href="https://all-in-gastro.vercel.app" target="_blank" rel="noopener" class="button">View live</a>
             </div>
           </div>
-          <div class="project-card-back">
-            <div class="project-card-back-image">
-              <img src="images/HabitTracker3.png" alt="HabitFlow App">
-            </div>
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">Next.js 15</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">Tailwind CSS</span>
-                <span class="tech-tag">React 19</span>
-              </div>
-              <div class="project-features">
-                <h4>Key Features</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Custom habit creation with scheduling</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Streak tracking & progress charts</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Calendar view with habit overview</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Dark mode & offline support</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
-
-        <!-- Swift Tracker -->
-        <div class="project-card fade-in">
-          <div class="shimmer-effect"></div>
-          <button class="flip-button" aria-label="Flip card"><i class="fas fa-sync-alt"></i></button>
-          <div class="project-card-front">
-            <div class="project-content">
-              <h3>Swift Tracker</h3>
-              <div class="project-tags">
-                <span class="project-tag">Swift</span>
-                <span class="project-tag">Node.js</span>
-                <span class="project-tag">Real-time</span>
-              </div>
-              <div class="project-description">
-                <p>A real-time tracking application built with Swift and Node.js. Features live updates, interactive dashboards, and comprehensive analytics.</p>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/tostrauss/SWiftTS" target="_blank" rel="noopener" class="button">View on GitHub</a>
-              </div>
-            </div>
-          </div>
-          <div class="project-card-back">
-            <div class="project-back-content">
-              <div class="tech-tags">
-                <span class="tech-tag">Swift</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">Express</span>
-                <span class="tech-tag">Socket.io</span>
-              </div>
-              <div class="project-features">
-                <h4>Key Features</h4>
-                <div class="feature-list">
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time data synchronization</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Interactive analytics dashboard</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Multi-user collaboration</span></div>
-                  <div class="feature-item"><span class="feature-item-icon">★</span><span>Custom notification system</span></div>
-                </div>
-              </div>
-            </div>
-            <button class="flip-button" aria-label="Flip back"><i class="fas fa-undo"></i></button>
-          </div>
-        </div>
-
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ============ EVERYTHING ELSE ============ -->
+    <section class="projects-section page-section">
+      <div class="container">
+        <h2 class="section-title fade-in" data-index="02 — Research &amp; craft">Other work</h2>
+        <p class="section-subtitle fade-in">
+          Research projects, client sites and tools. Flip any card for the stack and the details.
+        </p>
+
+        <div class="projects-grid">
+
+          <!-- XAI Research -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>Model Explainability (XAI)</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Research</span>
+                  <span class="project-tag">PyTorch</span>
+                  <span class="project-tag">Python</span>
+                </div>
+                <div class="project-description">
+                  <p>Master's-level research at JKU Linz on explainable AI: implementing and comparing methods that visualise black-box model behaviour to increase trust and aid debugging.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/jku-icg-classroom/assignment-2-model-explanations-hostile-nightingale-chewbaccas" class="button" target="_blank" rel="noopener">View research</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/1234.png" alt="XAI visualisations">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">PyTorch</span>
+                  <span class="tech-tag">TensorFlow</span>
+                  <span class="tech-tag">LIME / SHAP</span>
+                  <span class="tech-tag">Saliency Maps</span>
+                </div>
+                <div class="project-features">
+                  <h4>Research focus</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Visualising neural network decisions</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Comparative analysis of XAI methods</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Trust &amp; interpretability metrics</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Reproducible research implementation</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+          <!-- College Recruit -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>CollegeRecruit</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Shipped</span>
+                  <span class="project-tag">Angular / Ionic</span>
+                  <span class="project-tag">iOS &amp; Android</span>
+                </div>
+                <div class="project-description">
+                  <p>Co-founded a cross-platform app connecting international student-athletes with US college sports programs. Live on the Apple App Store and Google Play.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://collegerecruit.us/" target="_blank" rel="noopener" class="button">View live</a>
+                  <a href="https://play.google.com/store/apps/details?id=us.collegerecruit&pli=1" target="_blank" rel="noopener" class="button-outline">Google Play</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/CollegeRecruit_Logo.png" alt="CollegeRecruit app">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">Angular</span>
+                  <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">Ionic</span>
+                  <span class="tech-tag">Firebase</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>End-to-end recruitment platform</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Cross-platform iOS &amp; Android build</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Athlete profiles and college matching</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time messaging</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+          <!-- Therapie Blumau -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>Therapiezentrum Blumau</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Client work</span>
+                  <span class="project-tag">Web Design</span>
+                  <span class="project-tag">Healthcare</span>
+                </div>
+                <div class="project-description">
+                  <p>Website for a multidisciplinary therapy centre in Linz offering physiotherapy, osteopathy and ergotherapy — with online booking, team profiles and local SEO.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://www.therapie-linz.at/" target="_blank" rel="noopener" class="button">View live</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/Screenshot 2026-06-18 190203.png" alt="Therapiezentrum Blumau website">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">SEO</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Online booking integration</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Team &amp; service showcase pages</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>WCAG-compliant accessibility</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Local-search SEO</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+          <!-- Stock Analysis -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>Stock Analysis &amp; Options Tool</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">Data Science</span>
+                  <span class="project-tag">Finance</span>
+                </div>
+                <div class="project-description">
+                  <p>Financial data analysis with interactive dashboards and automated strategy backtesting, built on Python, Dash and PostgreSQL.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/tostrauss/ToFuStockTracker" target="_blank" rel="noopener" class="button">GitHub</a>
+                  <a href="https://github.com/tostrauss/tp2" target="_blank" rel="noopener" class="button-outline">Dash/Flask</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/lockin.png" alt="Stock analysis dashboard">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Pandas</span>
+                  <span class="tech-tag">Flask</span>
+                  <span class="tech-tag">PostgreSQL</span>
+                  <span class="tech-tag">Dash/Plotly</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time market data integration</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Interactive financial dashboards</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Technical analysis tooling</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Automated strategy testing</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+          <!-- HabitFlow -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>HabitFlow — Habit Tracker</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Next.js 15</span>
+                  <span class="project-tag">TypeScript</span>
+                  <span class="project-tag">PWA</span>
+                </div>
+                <div class="project-description">
+                  <p>Habit tracking app with streaks, calendar visualisation and offline persistence. Final project for CIS290 Mobile Development.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/tostrauss/HabitTracker-CIS290" target="_blank" rel="noopener" class="button">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/HabitTracker3.png" alt="HabitFlow app">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">Next.js 15</span>
+                  <span class="tech-tag">React 19</span>
+                  <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">Tailwind CSS</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Custom habits with scheduling</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Streak tracking &amp; progress charts</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Calendar overview</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Dark mode &amp; offline support</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+          <!-- Time Tracking -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>Time Tracking &amp; Gantt Chart</h3>
+                <div class="project-tags">
+                  <span class="project-tag">JavaScript</span>
+                  <span class="project-tag">Project Mgmt</span>
+                  <span class="project-tag">Web App</span>
+                </div>
+                <div class="project-description">
+                  <p>Work-hours tracker with clock in/out and Gantt visualisation, integrated into the CollegeRecruit toolchain for project management.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/tostrauss/Merged-Time-Recording-Gantt-Chart" target="_blank" rel="noopener" class="button">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time tracking dashboard">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">Chart.js</span>
+                  <span class="tech-tag">HTML5/CSS3</span>
+                  <span class="tech-tag">Bootstrap</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Clock in/out time tracking</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Gantt chart visualisation</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Team collaboration tools</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Project progress tracking</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+          <!-- 1Percent Training -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>1Percent Training</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Client work</span>
+                  <span class="project-tag">JavaScript</span>
+                  <span class="project-tag">Web Design</span>
+                </div>
+                <div class="project-description">
+                  <p>Website for soccer coaches in Waterbury, CT — responsive layout, dark/light mode and integrated booking.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/tostrauss/1Percent" target="_blank" rel="noopener" class="button">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/1P2.png" alt="1Percent Training website">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3/SASS</span>
+                  <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Training package showcase</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Dark/light theme toggle</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Mobile-first responsive design</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Integrated contact &amp; booking</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+          <!-- Swift Tracker -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>Swift Tracker</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Swift</span>
+                  <span class="project-tag">Node.js</span>
+                  <span class="project-tag">Real-time</span>
+                </div>
+                <div class="project-description">
+                  <p>Real-time tracking application built with Swift and Node.js, with live updates and an analytics dashboard.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/tostrauss/SWiftTS" target="_blank" rel="noopener" class="button">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">Swift</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Express</span>
+                  <span class="tech-tag">Socket.io</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time data synchronisation</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Interactive analytics dashboard</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Multi-user collaboration</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Custom notification system</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div>
-          <h3>Tobias Strauss</h3>
-          <p>AI Engineer & Full-Stack Developer</p>
+          <h3>Let's build something.</h3>
+          <p>Open to internships, thesis collaborations and freelance work.</p>
         </div>
         <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <a href="about.html" class="footer-link">About</a>
-          <a href="projects.html" class="footer-link">Projects</a>
-          <a href="resume.html" class="footer-link">Resume</a>
-          <a href="contact.html" class="footer-link">Contact</a>
+          <a href="index.html" class="footer-link">.home()</a>
+          <a href="about.html" class="footer-link">.about()</a>
+          <a href="projects.html" class="footer-link">.projects()</a>
+          <a href="resume.html" class="footer-link">.resume()</a>
+          <a href="contact.html" class="footer-link">.contact()</a>
         </div>
       </div>
       <div class="copyright">
-        &copy; 2026 Tobias Strauss. All Rights Reserved.
+        &copy; <span data-year>2026</span> Tobias Strauss — built from scratch, no framework.
       </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="scripts/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+  <script src="scripts/main.js" defer></script>
 </body>
 </html>

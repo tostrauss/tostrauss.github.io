@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Resume of Tobias Strauss - AI Engineer and Full-stack Developer. Master's Student at JKU Linz.">
+  <meta name="description" content="Resume of Tobias Strauss — AI researcher at JKU Linz and full-stack engineer. Education, experience and technical skills.">
   <meta property="og:title" content="Resume | Tobias Strauss">
-  <meta property="og:description" content="Academic and professional background of an AI Engineer and Full-Stack Developer.">
+  <meta property="og:description" content="Academic and professional background of an AI researcher and full-stack engineer.">
   <meta property="og:type" content="website">
 
   <title>Resume | Tobias Strauss</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+  <div class="bg-layer"></div>
   <div id="interactive-bg"></div>
 
   <nav class="navbar">
     <div class="container navbar-container">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-mark">TS</span>
+        <span>tobias&nbsp;strauss</span>
+      </a>
       <div class="nav-links" id="nav-links">
         <a href="index.html" class="nav-link">.home()</a>
         <a href="about.html" class="nav-link">.about()</a>
@@ -25,90 +32,104 @@
         <a href="resume.html" class="nav-link active">.resume()</a>
         <a href="contact.html" class="nav-link">.contact()</a>
       </div>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
+      </button>
+      <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <i class="fas fa-bars"></i>
       </button>
     </div>
   </nav>
 
-  <section id="resume" class="resume-section page-section">
-    <div class="container">
-      <h1 class="section-title fade-in">My Journey</h1>
-      <p class="section-subtitle fade-in">Bridging advanced academic research with production-grade engineering.</p>
+  <main id="content">
+    <section id="resume" class="resume-section page-section">
+      <div class="container">
+        <h1 class="section-title fade-in" data-index="01 — Track record">The path so far</h1>
+        <p class="section-subtitle fade-in">
+          Research at JKU Linz, products in the App Store, and clients who keep coming back.
+        </p>
 
-      <div class="resume-grid">
-        <div class="resume-column fade-in">
-          <h2>Education</h2>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-date">Oct 2025 — Present</div>
-              <h3 class="timeline-title">Johannes Kepler University (JKU) Linz</h3>
-              <p class="timeline-subtitle">Master of Science in Artificial Intelligence</p>
-              <p>Specializing in Deep Learning and Explainable AI (XAI). Conducting research on model interpretability and visualization techniques for black-box neural networks.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">Graduated May 2025</div>
-              <h3 class="timeline-title">Post University</h3>
-              <p class="timeline-subtitle">Bachelor of Science in CIS (Honors)</p>
-              <p>Graduated Summa Cum Laude. Minored in Data Analytics. NCAA Division II Student-Athlete (Tennis).</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">Graduated 2021</div>
-              <h3 class="timeline-title">Khevenhüller Gymnasium Linz</h3>
-              <p class="timeline-subtitle">High School Diploma with Honors</p>
-              <p>Specialized in Science and Mathematics. Cambridge Certificate B2 First.</p>
+        <div class="resume-grid">
+          <div class="resume-column fade-in">
+            <h2>Education</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">Oct 2025 — Present</div>
+                <h3 class="timeline-title">Johannes Kepler University (JKU) Linz</h3>
+                <p class="timeline-subtitle">MSc Artificial Intelligence</p>
+                <p>Specialising in deep learning and explainable AI. Researching model interpretability and visualisation techniques for black-box neural networks.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Graduated May 2025</div>
+                <h3 class="timeline-title">Post University</h3>
+                <p class="timeline-subtitle">BS Computer Information Systems (Honors)</p>
+                <p>Graduated summa cum laude with a minor in Data Analytics. NCAA Division II student-athlete (tennis).</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Graduated 2021</div>
+                <h3 class="timeline-title">Khevenhüller Gymnasium Linz</h3>
+                <p class="timeline-subtitle">High school diploma with honors</p>
+                <p>Specialised in science and mathematics. Cambridge Certificate B2 First.</p>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="resume-column fade-in">
-          <h2>Experience</h2>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-date">Oct 2025 — Present</div>
-              <h3 class="timeline-title">AI Researcher</h3>
-              <p class="timeline-subtitle">JKU Institute for Machine Learning</p>
-              <p>Developing novel approaches to visualize neural network decision-making processes. Comparative analysis of Saliency Maps, LIME, and SHAP on complex datasets.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">Sept 2025 — Present</div>
-              <h3 class="timeline-title">Lead Software Engineer</h3>
-              <p class="timeline-subtitle">JAMIE Social Platform</p>
-              <p>Architecting a scalable social discovery application using React 18, Node.js, and PostgreSQL. Real-time websocket messaging, JWT authentication, and complex relational data structures.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">2025 — Present</div>
-              <h3 class="timeline-title">Freelance Web Developer</h3>
-              <p class="timeline-subtitle">Therapiezentrum Blumau & Others</p>
-              <p>Designing and building professional websites for Austrian healthcare practices and businesses. Delivering responsive, SEO-optimized, accessible web solutions with online booking systems.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">Feb 2024 — May 2025</div>
-              <h3 class="timeline-title">Co-Founder & Lead Developer</h3>
-              <p class="timeline-subtitle">College Recruit</p>
-              <p>Successfully shipped a cross-platform mobile app (iOS/Android) connecting international athletes with US colleges. Built with Angular and Ionic.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">Summer 2023</div>
-              <h3 class="timeline-title">Data Analytics Intern</h3>
-              <p class="timeline-subtitle">eEvolution GmbH</p>
-              <p>Designed ETL pipelines and PowerBI dashboards to visualize key business KPIs, directly influencing management decisions.</p>
+
+          <div class="resume-column fade-in">
+            <h2>Experience</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">Oct 2025 — Present</div>
+                <h3 class="timeline-title">AI Researcher</h3>
+                <p class="timeline-subtitle">JKU Institute for Machine Learning</p>
+                <p>Developing approaches to visualise neural network decision-making. Comparative analysis of saliency maps, LIME and SHAP on complex datasets.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Sept 2025 — Present</div>
+                <h3 class="timeline-title">Lead Software Engineer</h3>
+                <p class="timeline-subtitle">JAMIE Social Activity App</p>
+                <p>Built and shipped a social discovery app to the App Store and Google Play, now serving 500+ users. React 18 and Vite delivered as a PWA via Capacitor (iOS) and a Trusted Web Activity (Android), on an Express/PostgreSQL backend with Socket.IO chat, Stripe billing and push notifications.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2026 — Present</div>
+                <h3 class="timeline-title">Developer &amp; Co-Founder</h3>
+                <p class="timeline-subtitle">Gastropoly — Gastronomy Operations Platform</p>
+                <p>All-in-one operations SaaS for independent gastronomy businesses in the DACH region — staffing, goods, HACCP compliance and tax-advisor exports. In production since July 2026 on Next.js and Supabase, validated against a full season of real operating data from an Austrian pilot business.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2025 — Present</div>
+                <h3 class="timeline-title">Freelance Web Developer</h3>
+                <p class="timeline-subtitle">Therapiezentrum Blumau &amp; others</p>
+                <p>Designing and building websites for Austrian healthcare practices and businesses — responsive, SEO-optimised and accessible, with online booking systems.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Feb 2024 — May 2025</div>
+                <h3 class="timeline-title">Co-Founder &amp; Lead Developer</h3>
+                <p class="timeline-subtitle">CollegeRecruit</p>
+                <p>Shipped a cross-platform mobile app (iOS/Android) connecting international athletes with US colleges. Built with Angular and Ionic.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Summer 2023</div>
+                <h3 class="timeline-title">Data Analytics Intern</h3>
+                <p class="timeline-subtitle">eEvolution GmbH</p>
+                <p>Designed ETL pipelines and PowerBI dashboards visualising business KPIs, feeding directly into management decisions.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <br><br>
+    <section class="page-section">
+      <div class="container">
+        <h2 class="section-title fade-in" data-index="02 — Skills">Technical expertise</h2>
+        <p class="section-subtitle fade-in">Filter by discipline.</p>
 
-      <div class="text-center fade-in">
         <div class="skills-section fade-in">
-          <h3 class="section-title" style="font-size: 1.75rem;">Technical Expertise</h3>
-          <br>
           <div class="skills-categories">
-            <div class="skill-category active" data-category="all">All</div>
-            <div class="skill-category" data-category="ai">AI / Data</div>
-            <div class="skill-category" data-category="dev">Engineering</div>
-            <div class="skill-category" data-category="tools">Tools</div>
+            <div class="skill-category active" data-category="all">all</div>
+            <div class="skill-category" data-category="ai">ai / data</div>
+            <div class="skill-category" data-category="dev">engineering</div>
+            <div class="skill-category" data-category="tools">tools</div>
           </div>
 
           <div class="skills-container">
@@ -117,15 +138,15 @@
               <div class="skill-bar"><div class="skill-level" style="width: 85%;"><span class="skill-percent">85%</span></div></div>
             </div>
             <div class="skill-item" data-category="ai">
-              <div class="skill-info"><i class="fas fa-search skill-icon"></i><span class="skill-name">Explainable AI (XAI)</span></div>
+              <div class="skill-info"><i class="fas fa-magnifying-glass-chart skill-icon"></i><span class="skill-name">Explainable AI (XAI)</span></div>
               <div class="skill-bar"><div class="skill-level" style="width: 90%;"><span class="skill-percent">90%</span></div></div>
             </div>
             <div class="skill-item" data-category="ai">
-              <div class="skill-info"><i class="fab fa-python skill-icon"></i><span class="skill-name">Python & Pandas</span></div>
+              <div class="skill-info"><i class="fab fa-python skill-icon"></i><span class="skill-name">Python &amp; Pandas</span></div>
               <div class="skill-bar"><div class="skill-level" style="width: 95%;"><span class="skill-percent">95%</span></div></div>
             </div>
             <div class="skill-item" data-category="dev">
-              <div class="skill-info"><i class="fab fa-react skill-icon"></i><span class="skill-name">React 18 & Vite</span></div>
+              <div class="skill-info"><i class="fab fa-react skill-icon"></i><span class="skill-name">React 18 &amp; Vite</span></div>
               <div class="skill-bar"><div class="skill-level" style="width: 90%;"><span class="skill-percent">90%</span></div></div>
             </div>
             <div class="skill-item" data-category="dev">
@@ -133,49 +154,55 @@
               <div class="skill-bar"><div class="skill-level" style="width: 85%;"><span class="skill-percent">85%</span></div></div>
             </div>
             <div class="skill-item" data-category="dev">
-              <div class="skill-info"><i class="fas fa-server skill-icon"></i><span class="skill-name">Node.js & Express</span></div>
+              <div class="skill-info"><i class="fab fa-node-js skill-icon"></i><span class="skill-name">Node.js &amp; Express</span></div>
               <div class="skill-bar"><div class="skill-level" style="width: 85%;"><span class="skill-percent">85%</span></div></div>
             </div>
             <div class="skill-item" data-category="dev">
-              <div class="skill-info"><i class="fas fa-database skill-icon"></i><span class="skill-name">PostgreSQL & SQL</span></div>
+              <div class="skill-info"><i class="fas fa-database skill-icon"></i><span class="skill-name">PostgreSQL &amp; SQL</span></div>
               <div class="skill-bar"><div class="skill-level" style="width: 90%;"><span class="skill-percent">90%</span></div></div>
             </div>
             <div class="skill-item" data-category="tools">
-              <div class="skill-info"><i class="fab fa-docker skill-icon"></i><span class="skill-name">Docker & CI/CD</span></div>
+              <div class="skill-info"><i class="fab fa-docker skill-icon"></i><span class="skill-name">Docker &amp; CI/CD</span></div>
               <div class="skill-bar"><div class="skill-level" style="width: 70%;"><span class="skill-percent">70%</span></div></div>
             </div>
             <div class="skill-item" data-category="tools">
-              <div class="skill-info"><i class="fas fa-chart-bar skill-icon"></i><span class="skill-name">PowerBI & Tableau</span></div>
+              <div class="skill-info"><i class="fas fa-chart-bar skill-icon"></i><span class="skill-name">PowerBI &amp; Tableau</span></div>
               <div class="skill-bar"><div class="skill-level" style="width: 80%;"><span class="skill-percent">80%</span></div></div>
             </div>
           </div>
-          
-          <a href="Tobias_Strauss_Resume.pdf" class="button download-btn" target="_blank">Download Full CV</a>
+
+          <div class="text-center">
+            <a href="Tobias_Strauss_Resume.pdf" class="button download-btn" target="_blank" rel="noopener">
+              <i class="fas fa-arrow-down"></i> Download full CV
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div>
-          <h3>Tobias Strauss</h3>
-          <p>AI Engineer & Full-Stack Developer</p>
+          <h3>Let's build something.</h3>
+          <p>Open to internships, thesis collaborations and freelance work.</p>
         </div>
         <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <a href="about.html" class="footer-link">About</a>
-          <a href="projects.html" class="footer-link">Projects</a>
-          <a href="resume.html" class="footer-link">Resume</a>
-          <a href="contact.html" class="footer-link">Contact</a>
+          <a href="index.html" class="footer-link">.home()</a>
+          <a href="about.html" class="footer-link">.about()</a>
+          <a href="projects.html" class="footer-link">.projects()</a>
+          <a href="resume.html" class="footer-link">.resume()</a>
+          <a href="contact.html" class="footer-link">.contact()</a>
         </div>
       </div>
-      <div class="copyright">&copy; 2026 Tobias Strauss. All Rights Reserved.</div>
+      <div class="copyright">
+        &copy; <span data-year>2026</span> Tobias Strauss — built from scratch, no framework.
+      </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="scripts/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+  <script src="scripts/main.js" defer></script>
 </body>
 </html>

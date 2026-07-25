@@ -1,309 +1,362 @@
 /**
- * Main JavaScript — Tobias Strauss Portfolio
- * Cleaned up: removed duplicate inits, consolidated event listeners
+ * Tobias Strauss — portfolio behaviour
+ * Rebuilt July 2026: sticky nav state, mobile menu, scroll reveals,
+ * cursor-lit project cards, flip handling, skill animation, and a much
+ * quieter particle field. Everything degrades if JS or the CDN fails.
  */
 
-document.addEventListener("DOMContentLoaded", function () {
-  initInteractiveBackground();
-  initThemeToggle();
-  initMobileNavigation();
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+document.addEventListener("DOMContentLoaded", () => {
+  initSkipLink();
+  initTheme();
+  initNav();
+  initReveal();
   initProjectCards();
-  initFadeIn();
-  initSkillsAnimation();
-  initSkillsSection();
-  initNameUnderline();
-  enhanceNavigationLinks();
-  addAccessibilityFeatures();
+  initSkills();
+  initSkillFilter();
+  initCopyButtons();
+  initYear();
+  initParticles();
 });
 
-/* ===== PARTICLES BACKGROUND ===== */
-function initInteractiveBackground() {
-  const el = document.getElementById("interactive-bg");
-  if (!el) return;
+/* ============================================================
+   THEME
+   ============================================================ */
+function initTheme() {
+  const toggle = document.getElementById("theme-toggle");
+  const stored = safeGet("theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  const isLight = stored ? stored === "light" : prefersLight;
 
-  const isLight = document.body.classList.contains("light-mode");
+  applyTheme(isLight);
 
-  if (typeof particlesJS === "undefined") {
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
-    script.onload = () => runParticles(isLight);
-    script.onerror = () => fallbackBg(el, isLight);
-    document.body.appendChild(script);
-  } else {
-    runParticles(isLight);
+  if (!toggle) return;
+  toggle.addEventListener("click", () => {
+    const next = !document.body.classList.contains("light-mode");
+    applyTheme(next);
+    safeSet("theme", next ? "light" : "dark");
+    restartParticles();
+  });
+}
+
+function applyTheme(isLight) {
+  document.body.classList.toggle("light-mode", isLight);
+  const icon = document.querySelector("#theme-toggle i");
+  if (icon) {
+    icon.classList.toggle("fa-sun", isLight);
+    icon.classList.toggle("fa-moon", !isLight);
+  }
+  const toggle = document.getElementById("theme-toggle");
+  if (toggle) {
+    toggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
   }
 }
 
-function runParticles(isLight) {
-  const el = document.getElementById("interactive-bg");
-  if (!el) return;
-  el.innerHTML = "";
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function initNav() {
+  const nav = document.querySelector(".navbar");
+  const links = document.getElementById("nav-links");
+  const toggle = document.getElementById("nav-toggle");
+
+  if (nav) {
+    const onScroll = () => nav.classList.toggle("is-stuck", window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  if (!links || !toggle) return;
+
+  const close = () => {
+    links.classList.remove("active");
+    toggle.setAttribute("aria-expanded", "false");
+  };
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = links.classList.toggle("active");
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+
+  links.querySelectorAll(".nav-link").forEach((link) => link.addEventListener("click", close));
+
+  document.addEventListener("click", (e) => {
+    if (!links.contains(e.target) && e.target !== toggle) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+}
+
+/* ============================================================
+   SCROLL REVEALS
+   ============================================================ */
+function initReveal() {
+  const els = document.querySelectorAll(".fade-in");
+  if (!els.length) return;
+
+  if (REDUCED_MOTION || !("IntersectionObserver" in window)) {
+    els.forEach((el) => el.classList.add("active"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      let staggered = 0;
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const delay = staggered++ * 70;
+        setTimeout(() => entry.target.classList.add("active"), delay);
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+  );
+
+  els.forEach((el) => observer.observe(el));
+}
+
+/* ============================================================
+   PROJECT CARDS — cursor glow + flip
+   ============================================================ */
+function initProjectCards() {
+  const cards = document.querySelectorAll(".project-card");
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    const front = card.querySelector(".project-card-front");
+
+    if (front && !REDUCED_MOTION) {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        front.style.setProperty("--mx", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+        front.style.setProperty("--my", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+      });
+    }
+
+    const flip = () => {
+      const wasFlipped = card.classList.contains("flipped");
+      cards.forEach((c) => c.classList.remove("flipped"));
+      card.classList.toggle("flipped", !wasFlipped);
+    };
+
+    card.querySelectorAll(".flip-button").forEach((btn) => {
+      btn.setAttribute("aria-label", "Show details");
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        flip();
+      });
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    cards.forEach((card) => {
+      if (card.classList.contains("flipped") && !card.contains(e.target)) {
+        card.classList.remove("flipped");
+      }
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") cards.forEach((c) => c.classList.remove("flipped"));
+  });
+}
+
+/* ============================================================
+   SKILL BARS
+   ============================================================ */
+function initSkills() {
+  const bars = document.querySelectorAll(".progress, .skill-level");
+  if (!bars.length) return;
+
+  bars.forEach((bar) => {
+    const target = bar.dataset.width || bar.style.width || "0%";
+    bar.dataset.width = target;
+    bar.style.width = "0%";
+  });
+
+  const fill = (bar) => {
+    requestAnimationFrame(() => (bar.style.width = bar.dataset.width));
+  };
+
+  if (REDUCED_MOTION || !("IntersectionObserver" in window)) {
+    bars.forEach(fill);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        fill(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  bars.forEach((bar) => observer.observe(bar));
+}
+
+/* ============================================================
+   SKILL FILTER (resume page)
+   ============================================================ */
+function initSkillFilter() {
+  const chips = document.querySelectorAll(".skills-categories .skill-category");
+  const items = document.querySelectorAll(".skill-item");
+  if (!chips.length || !items.length) return;
+
+  chips.forEach((chip) => {
+    chip.setAttribute("role", "button");
+    chip.setAttribute("tabindex", "0");
+
+    const activate = () => {
+      chips.forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      const selected = chip.dataset.category;
+
+      items.forEach((item) => {
+        const show = selected === "all" || item.dataset.category === selected;
+        item.hidden = !show;
+        if (!show) return;
+        const bar = item.querySelector(".skill-level");
+        if (!bar) return;
+        bar.style.width = "0%";
+        requestAnimationFrame(() => (bar.style.width = bar.dataset.width || "0%"));
+      });
+    };
+
+    chip.addEventListener("click", activate);
+    chip.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        activate();
+      }
+    });
+  });
+}
+
+/* ============================================================
+   COPY TO CLIPBOARD (contact page)
+   ============================================================ */
+function initCopyButtons() {
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy);
+        const original = btn.textContent;
+        btn.textContent = "copied";
+        setTimeout(() => (btn.textContent = original), 1600);
+      } catch (_) {
+        /* clipboard blocked — the address is visible next to the button anyway */
+      }
+    });
+  });
+}
+
+/* ============================================================
+   FOOTER YEAR
+   ============================================================ */
+function initYear() {
+  document.querySelectorAll("[data-year]").forEach((el) => {
+    el.textContent = String(new Date().getFullYear());
+  });
+}
+
+/* ============================================================
+   SKIP LINK
+   ============================================================ */
+function initSkipLink() {
+  if (document.querySelector(".skip-to-content")) return;
+  const main = document.querySelector("main, [id='content'], section");
+  if (main && !main.id) main.id = "content";
+  const link = document.createElement("a");
+  link.className = "skip-to-content";
+  link.href = `#${main ? main.id : "content"}`;
+  link.textContent = "Skip to content";
+  document.body.prepend(link);
+}
+
+/* ============================================================
+   PARTICLE FIELD
+   Kept from the original site, but dialled right down: fewer nodes,
+   slower drift, gold at low opacity. It is atmosphere, not the subject.
+   ============================================================ */
+function initParticles() {
+  const host = document.getElementById("interactive-bg");
+  if (!host || REDUCED_MOTION || window.innerWidth < 700) return;
+  if (typeof particlesJS === "undefined") return;
+  runParticles();
+}
+
+function runParticles() {
+  const host = document.getElementById("interactive-bg");
+  if (!host || typeof particlesJS === "undefined") return;
+  host.innerHTML = "";
+
+  const gold = document.body.classList.contains("light-mode") ? "#b57800" : "#ffc93c";
 
   particlesJS("interactive-bg", {
     particles: {
-      number: { value: 100, density: { enable: true, value_area: 900 } },
-      color: { value: isLight ? "#ffcc00" : "#ffaa00" },
-      opacity: {
-        value: isLight ? 0.3 : 0.45,
-        random: false,
-        anim: { enable: true, speed: 0.2, opacity_min: 0.1, sync: false },
-      },
-      size: {
-        value: 3.5,
-        random: true,
-        anim: { enable: true, speed: 0.4, size_min: 0.1, sync: false },
-      },
-      line_linked: {
-        enable: true,
-        distance: 140,
-        color: isLight ? "#ffaa00" : "#ffcc00",
-        opacity: isLight ? 0.25 : 0.35,
-        width: 1,
-      },
+      number: { value: 32, density: { enable: true, value_area: 1100 } },
+      color: { value: gold },
+      shape: { type: "circle" },
+      opacity: { value: 0.4, random: true, anim: { enable: false } },
+      size: { value: 1.8, random: true, anim: { enable: false } },
+      line_linked: { enable: true, distance: 165, color: gold, opacity: 0.14, width: 1 },
       move: {
         enable: true,
-        speed: 1.2,
+        speed: 0.45,
         direction: "none",
-        random: false,
+        random: true,
         straight: false,
         out_mode: "out",
-        bounce: false,
       },
     },
     interactivity: {
       detect_on: "window",
       events: {
         onhover: { enable: true, mode: "grab" },
-        onclick: { enable: true, mode: "push" },
+        onclick: { enable: false },
         resize: true,
       },
-      modes: {
-        grab: { distance: 130, line_linked: { opacity: 0.7 } },
-        push: { particles_nb: 3 },
-      },
+      modes: { grab: { distance: 170, line_linked: { opacity: 0.32 } } },
     },
     retina_detect: true,
   });
 }
 
-function fallbackBg(el, isLight) {
-  el.style.backgroundImage = isLight
-    ? "radial-gradient(circle, rgba(255,170,0,0.15) 0%, transparent 70%)"
-    : "radial-gradient(circle, rgba(255,204,0,0.15) 0%, transparent 70%)";
-  el.style.backgroundSize = "100px 100px";
+function restartParticles() {
+  const host = document.getElementById("interactive-bg");
+  if (!host || REDUCED_MOTION || window.innerWidth < 700) return;
+  runParticles();
 }
 
-/* ===== THEME TOGGLE ===== */
-function initThemeToggle() {
-  const toggle = document.getElementById("theme-toggle");
-  if (!toggle) return;
-  const icon = toggle.querySelector("i");
-  if (!icon) return;
-
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function safeGet(key) {
   try {
-    if (localStorage.getItem("theme") === "light") {
-      document.body.classList.add("light-mode");
-      icon.classList.replace("fa-moon", "fa-sun");
-    }
-  } catch (_) {}
-
-  toggle.addEventListener("click", function () {
-    document.body.classList.toggle("light-mode");
-    const isLight = document.body.classList.contains("light-mode");
-
-    if (isLight) {
-      icon.classList.replace("fa-moon", "fa-sun");
-    } else {
-      icon.classList.replace("fa-sun", "fa-moon");
-    }
-
-    try { localStorage.setItem("theme", isLight ? "light" : "dark"); } catch (_) {}
-
-    // Refresh particles
-    const bg = document.getElementById("interactive-bg");
-    if (bg) { bg.innerHTML = ""; runParticles(isLight); }
-  });
-}
-
-/* ===== MOBILE NAV ===== */
-function initMobileNavigation() {
-  const btn = document.getElementById("mobile-toggle");
-  const nav = document.getElementById("nav-links");
-  if (!btn || !nav) return;
-
-  btn.addEventListener("click", () => {
-    nav.classList.toggle("active");
-    const i = btn.querySelector("i");
-    if (i) i.classList.toggle("fa-bars"), i.classList.toggle("fa-times");
-  });
-
-  document.querySelectorAll(".nav-link").forEach((link) =>
-    link.addEventListener("click", () => {
-      nav.classList.remove("active");
-      const i = btn.querySelector("i");
-      if (i) { i.classList.add("fa-bars"); i.classList.remove("fa-times"); }
-    })
-  );
-}
-
-/* ===== PROJECT CARDS ===== */
-function initProjectCards() {
-  const cards = document.querySelectorAll(".project-card");
-  if (!cards.length) return;
-
-  cards.forEach((card) => {
-    card.addEventListener("mousemove", function (e) {
-      if (this.classList.contains("flipped")) return;
-      const r = this.getBoundingClientRect();
-      const rY = ((e.clientX - r.left - r.width / 2) / (r.width / 2)) * 4;
-      const rX = ((r.height / 2 - (e.clientY - r.top)) / (r.height / 2)) * 4;
-      this.style.transform = `perspective(1000px) rotateX(${rX}deg) rotateY(${rY}deg) translateY(-4px)`;
-    });
-
-    card.addEventListener("mouseleave", function () {
-      if (!this.classList.contains("flipped")) this.style.transform = "";
-    });
-  });
-
-  document.querySelectorAll(".flip-button").forEach((btn) =>
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const card = this.closest(".project-card");
-      if (!card) return;
-      card.classList.toggle("flipped");
-      card.style.transform = card.classList.contains("flipped") ? "rotateY(180deg)" : "";
-    })
-  );
-
-  document.addEventListener("click", (e) =>
-    cards.forEach((c) => {
-      if (c.classList.contains("flipped") && !c.contains(e.target)) {
-        c.classList.remove("flipped");
-        c.style.transform = "";
-      }
-    })
-  );
-}
-
-/* ===== FADE-IN ===== */
-function initFadeIn() {
-  const els = document.querySelectorAll(".fade-in");
-  if (!els.length) return;
-
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add("active"), 80 + i * 60);
-            obs.unobserve(entry.target);
-          }
-        }),
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    els.forEach((el) => obs.observe(el));
-  } else {
-    els.forEach((el, i) => setTimeout(() => el.classList.add("active"), 80 + i * 80));
+    return localStorage.getItem(key);
+  } catch (_) {
+    return null;
   }
 }
 
-/* ===== SKILLS ANIMATION ===== */
-function initSkillsAnimation() {
-  const cards = document.querySelectorAll(".skill-card");
-  if (!cards.length) return;
-
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateSkillCard(entry.target);
-            obs.unobserve(entry.target);
-          }
-        }),
-      { threshold: 0.1 }
-    );
-    cards.forEach((c) => obs.observe(c));
-  } else {
-    cards.forEach(animateSkillCard);
+function safeSet(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (_) {
+    /* private mode — theme just won't persist */
   }
 }
 
-function animateSkillCard(card) {
-  const bar = card.querySelector(".progress");
-  if (bar) {
-    const target = bar.style.width;
-    bar.style.width = "0%";
-    setTimeout(() => (bar.style.width = target), 200);
-  }
-}
-
-/* ===== SKILLS FILTERING ===== */
-function initSkillsSection() {
-  const cats = document.querySelectorAll(".skills-categories .skill-category");
-  const items = document.querySelectorAll(".skill-item");
-  if (!cats.length || !items.length) return;
-
-  cats.forEach((cat) =>
-    cat.addEventListener("click", function () {
-      cats.forEach((c) => c.classList.remove("active"));
-      this.classList.add("active");
-      const sel = this.dataset.category;
-
-      items.forEach((item) => {
-        const show = sel === "all" || item.dataset.category === sel;
-        item.style.display = show ? "block" : "none";
-        if (show) {
-          const lv = item.querySelector(".skill-level");
-          if (lv) {
-            const w = lv.style.width;
-            lv.style.width = "0%";
-            setTimeout(() => (lv.style.width = w), 50);
-          }
-        }
-      });
-    })
-  );
-}
-
-/* ===== NAME UNDERLINE ===== */
-function initNameUnderline() {
-  const span = document.querySelector(".hero-text h1 span");
-  if (!span) return;
-  if (!span.querySelector(".name-underline")) {
-    const ul = document.createElement("span");
-    ul.className = "name-underline";
-    span.appendChild(ul);
-  }
-  setTimeout(() => span.classList.add("auto-underline"), 700);
-}
-
-/* ===== NAV ENHANCEMENTS ===== */
-function enhanceNavigationLinks() {
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("mouseenter", function () { this.style.transform = "translateY(-2px)"; });
-    link.addEventListener("mouseleave", function () { this.style.transform = ""; });
-  });
-}
-
-/* ===== ACCESSIBILITY ===== */
-function addAccessibilityFeatures() {
-  if (!document.querySelector(".skip-to-content")) {
-    const skip = document.createElement("a");
-    skip.className = "skip-to-content";
-    skip.href = "#content";
-    skip.textContent = "Skip to content";
-    document.body.insertBefore(skip, document.body.firstChild);
-  }
-}
-
-/* ===== RESIZE HANDLER ===== */
 let resizeTimer;
 window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    const bg = document.getElementById("interactive-bg");
-    if (bg) { bg.innerHTML = ""; initInteractiveBackground(); }
-  }, 300);
+  resizeTimer = setTimeout(restartParticles, 400);
 });
