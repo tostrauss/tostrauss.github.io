@@ -1,8 +1,8 @@
 /**
  * Tobias Strauss — portfolio behaviour
- * Rebuilt July 2026: sticky nav state, mobile menu, scroll reveals,
- * cursor-lit project cards, flip handling, skill animation, and a much
- * quieter particle field. Everything degrades if JS or the CDN fails.
+ * Sticky nav state, mobile menu, scroll reveals, cursor-lit project cards,
+ * flip handling, counting stats, skill filtering, copy-to-clipboard, print,
+ * and a very quiet particle field. Everything degrades if JS or the CDN fails.
  */
 
 const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -13,9 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initReveal();
   initProjectCards();
-  initSkills();
+  initCounters();
   initSkillFilter();
   initCopyButtons();
+  initPrintButtons();
   initYear();
   initParticles();
 });
@@ -167,39 +168,51 @@ function initProjectCards() {
 }
 
 /* ============================================================
-   SKILL BARS
+   COUNTING STATS
+   The markup already contains the final value, so this only ever
+   makes an already-correct number more interesting.
    ============================================================ */
-function initSkills() {
-  const bars = document.querySelectorAll(".progress, .skill-level");
-  if (!bars.length) return;
+function initCounters() {
+  const els = document.querySelectorAll("[data-count]");
+  if (!els.length) return;
 
-  bars.forEach((bar) => {
-    const target = bar.dataset.width || bar.style.width || "0%";
-    bar.dataset.width = target;
-    bar.style.width = "0%";
-  });
-
-  const fill = (bar) => {
-    requestAnimationFrame(() => (bar.style.width = bar.dataset.width));
-  };
+  const format = (value) => Number(value).toLocaleString("en-US");
 
   if (REDUCED_MOTION || !("IntersectionObserver" in window)) {
-    bars.forEach(fill);
+    els.forEach((el) => (el.textContent = format(el.dataset.count)));
     return;
   }
+
+  const run = (el) => {
+    const target = Number(el.dataset.count);
+    if (!Number.isFinite(target)) return;
+
+    const duration = 900;
+    let startedAt = null;
+
+    const step = (now) => {
+      if (startedAt === null) startedAt = now;
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = format(Math.round(target * eased));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        fill(entry.target);
+        run(entry.target);
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.4 }
   );
 
-  bars.forEach((bar) => observer.observe(bar));
+  els.forEach((el) => observer.observe(el));
 }
 
 /* ============================================================
@@ -215,18 +228,16 @@ function initSkillFilter() {
     chip.setAttribute("tabindex", "0");
 
     const activate = () => {
-      chips.forEach((c) => c.classList.remove("active"));
+      chips.forEach((c) => {
+        c.classList.remove("active");
+        c.setAttribute("aria-pressed", "false");
+      });
       chip.classList.add("active");
-      const selected = chip.dataset.category;
+      chip.setAttribute("aria-pressed", "true");
 
+      const selected = chip.dataset.category;
       items.forEach((item) => {
-        const show = selected === "all" || item.dataset.category === selected;
-        item.hidden = !show;
-        if (!show) return;
-        const bar = item.querySelector(".skill-level");
-        if (!bar) return;
-        bar.style.width = "0%";
-        requestAnimationFrame(() => (bar.style.width = bar.dataset.width || "0%"));
+        item.hidden = selected !== "all" && item.dataset.category !== selected;
       });
     };
 
@@ -259,6 +270,15 @@ function initCopyButtons() {
 }
 
 /* ============================================================
+   PRINT (resume page)
+   ============================================================ */
+function initPrintButtons() {
+  document.querySelectorAll("[data-print]").forEach((btn) => {
+    btn.addEventListener("click", () => window.print());
+  });
+}
+
+/* ============================================================
    FOOTER YEAR
    ============================================================ */
 function initYear() {
@@ -283,8 +303,7 @@ function initSkipLink() {
 
 /* ============================================================
    PARTICLE FIELD
-   Kept from the original site, but dialled right down: fewer nodes,
-   slower drift, gold at low opacity. It is atmosphere, not the subject.
+   Atmosphere, not the subject: few nodes, slow drift, gold at low opacity.
    ============================================================ */
 function initParticles() {
   const host = document.getElementById("interactive-bg");

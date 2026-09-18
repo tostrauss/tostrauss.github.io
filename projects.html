@@ -90,6 +90,9 @@
                 <li><strong>AI assistant</strong> — a Claude-powered assistant with a voice mode for hands-busy staff.</li>
               </ul>
 
+            </div>
+
+            <div class="case-col">
               <h3 class="case-h">Role</h3>
               <p class="case-p">
                 Co-founder. I own the architecture and the product, and I set the engineering process for a
@@ -97,10 +100,11 @@
                 so 155 migrations never collided.
               </p>
             </div>
+          </div>
 
-            <div class="case-col">
-              <h3 class="case-h">Architecture</h3>
-              <figure class="arch">
+          <div class="case-arch">
+            <h3 class="case-h">Architecture</h3>
+            <figure class="arch">
                 <svg viewBox="0 0 620 350" role="img" aria-labelledby="gastro-arch-title gastro-arch-desc">
                   <title id="gastro-arch-title">Gastropoly system architecture</title>
                   <desc id="gastro-arch-desc">Manager PWA and offline PIN kiosk talk to a Next.js app with 63 API routes, which reads and writes a Supabase Postgres database with row level security per tenant. POS, weather, turnstile, payment and AI integrations attach to the application layer, and a demand model feeds ordering and rostering.</desc>
@@ -152,8 +156,7 @@
                   <text class="arch-s" x="310" y="328" text-anchor="middle">forecast × turnstile counts × POS history → purchase suggestions &amp; shift plans</text>
                 </svg>
                 <figcaption>One app, one database, isolation enforced below the application layer.</figcaption>
-              </figure>
-            </div>
+            </figure>
           </div>
 
           <div class="case-highlights">
@@ -262,16 +265,20 @@
                 <li><strong>Backups I have restored</strong> — encrypted off-site backups with a rehearsed restore, because an untested backup is a rumour.</li>
               </ul>
 
+            </div>
+
+            <div class="case-col">
               <h3 class="case-h">Role</h3>
               <p class="case-p">
                 Co-founder and lead developer. I own the whole technical side: architecture, the store
                 releases, the backend, the real-time stack and the operational work behind six markets.
               </p>
             </div>
+          </div>
 
-            <div class="case-col">
-              <h3 class="case-h">Architecture</h3>
-              <figure class="arch">
+          <div class="case-arch">
+            <h3 class="case-h">Architecture</h3>
+            <figure class="arch">
                 <svg viewBox="0 0 620 350" role="img" aria-labelledby="jamie-arch-title jamie-arch-desc">
                   <title id="jamie-arch-title">JAMIE system architecture</title>
                   <desc id="jamie-arch-desc">Web, Android Trusted Web Activity and iOS Capacitor targets all run one React and Vite codebase, which talks to a Node.js Express API with Socket.IO, a push service using Web Push and APNs, and a PostgreSQL database on Railway with encrypted off-site backups.</desc>
@@ -307,7 +314,7 @@
                   <!-- api -->
                   <rect class="arch-box" x="20" y="206" width="380" height="58" rx="10"/>
                   <text class="arch-t" x="210" y="234" text-anchor="middle">Node.js / Express API · Socket.IO</text>
-                  <text class="arch-s" x="210" y="252" text-anchor="middle">moderation · reporting · rate limiting · GDPR export &amp; deletion</text>
+                  <text class="arch-s" x="210" y="252" text-anchor="middle">moderation · rate limiting · GDPR export &amp; deletion</text>
 
                   <rect class="arch-box arch-box--dashed" x="420" y="206" width="180" height="58" rx="10"/>
                   <text class="arch-t" x="510" y="234" text-anchor="middle">Push</text>
@@ -326,11 +333,10 @@
 
                   <rect class="arch-box arch-box--band" x="420" y="296" width="180" height="50" rx="10"/>
                   <text class="arch-t" x="510" y="320" text-anchor="middle">6 markets</text>
-                  <text class="arch-s" x="510" y="337" text-anchor="middle">AT DE CH IT FR ES · 5 langs</text>
+                  <text class="arch-s" x="510" y="337" text-anchor="middle">AT·DE·CH·IT·FR·ES</text>
                 </svg>
                 <figcaption>One codebase, three delivery targets, one backend that has to stay up.</figcaption>
-              </figure>
-            </div>
+            </figure>
           </div>
 
           <div class="case-highlights">
@@ -755,7 +761,7 @@
                   <span class="tech-tag">Swift</span>
                   <span class="tech-tag">Node.js</span>
                   <span class="tech-tag">Express</span>
-                  <span class="tech-tag">Socket.io</span>
+                  <span class="tech-tag">Socket.IO</span>
                 </div>
                 <div class="project-features">
                   <h4>Key features</h4>
