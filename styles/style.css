@@ -19,6 +19,9 @@
   --accent-line: rgba(255, 201, 60, 0.32);
   --accent-glow: rgba(255, 201, 60, 0.16);
   --on-accent: #17130a;
+  /* accent used as TEXT — kept separate so light mode can darken it
+     to clear WCAG AA without dulling buttons and fills */
+  --accent-text: #ffc93c;
 
   /* Secondary — kept for depth in gradients only, never for buttons */
   --primary-color: #4c8dff;
@@ -36,7 +39,7 @@
   /* --- Ink --- */
   --fg: #edeef1;
   --fg-muted: #9ba2ae;
-  --fg-faint: #6b7280;
+  --fg-faint: #737a86;
 
   /* --- Type --- */
   --font-primary: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -85,6 +88,7 @@ body.light-mode {
   --accent-line: rgba(181, 120, 0, 0.3);
   --accent-glow: rgba(181, 120, 0, 0.14);
   --on-accent: #fffdf7;
+  --accent-text: #8a6400;
 
   --primary-color: #1f5fd0;
   --primary-soft: rgba(31, 95, 208, 0.07);
@@ -98,7 +102,7 @@ body.light-mode {
 
   --fg: #16171a;
   --fg-muted: #565c66;
-  --fg-faint: #838a94;
+  --fg-faint: #6b7178;
 
   --shadow-md: 0 12px 32px -14px rgba(30, 25, 10, 0.28);
   --shadow-lg: 0 28px 60px -24px rgba(30, 25, 10, 0.32);
@@ -252,7 +256,7 @@ button {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent-color);
+  color: var(--accent-text);
   margin-bottom: 1rem;
 }
 
@@ -277,7 +281,7 @@ button {
   font-size: var(--text-xs);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-color);
+  color: var(--accent-text);
 }
 
 /* ============================================================
@@ -326,7 +330,7 @@ button {
   place-items: center;
   border-radius: 8px;
   border: 1px solid var(--line-strong);
-  color: var(--accent-color);
+  color: var(--accent-text);
   font-weight: 700;
   font-size: 0.7rem;
   transition: border-color var(--fast), background-color var(--fast),
@@ -399,7 +403,7 @@ button {
 }
 
 .theme-toggle:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
   background: var(--accent-light);
 }
@@ -609,7 +613,7 @@ body.light-mode .bg-layer::after {
 }
 
 .stat-num .unit {
-  color: var(--accent-color);
+  color: var(--accent-text);
 }
 
 .stat-label {
@@ -704,7 +708,7 @@ body.light-mode .bg-layer::after {
 }
 
 .button-outline:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
   background: var(--accent-light);
   transform: translateY(-2px);
@@ -750,7 +754,7 @@ body.light-mode .bg-layer::after {
 }
 
 .text-link:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
 }
 
@@ -782,7 +786,7 @@ body.light-mode .bg-layer::after {
 }
 
 .social-icon:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
   background: var(--accent-light);
   transform: translateY(-3px);
@@ -939,13 +943,13 @@ body.light-mode .bg-layer::after {
 
 .project-tag:hover,
 .tech-tag:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
 }
 
 /* First tag reads as the headline fact (stack / status) */
 .project-tag:first-child {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
   background: var(--accent-light);
 }
@@ -1074,7 +1078,7 @@ body.light-mode .bg-layer::after {
 }
 
 .flip-button:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
   background: var(--accent-light);
   transform: rotate(90deg);
@@ -1107,7 +1111,7 @@ body.light-mode .bg-layer::after {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent-color);
+  color: var(--accent-text);
   padding-bottom: 1rem;
   margin-bottom: 2rem;
   border-bottom: 1px solid var(--line);
@@ -1179,7 +1183,7 @@ body.light-mode .bg-layer::after {
 .timeline-subtitle {
   font-size: 0.88rem;
   font-weight: 500;
-  color: var(--accent-color);
+  color: var(--accent-text);
   margin-bottom: 0.55rem;
 }
 
@@ -1261,7 +1265,7 @@ body.light-mode .bg-layer::after {
 }
 
 .skill-icon {
-  color: var(--accent-color);
+  color: var(--accent-text);
   font-size: 1rem;
   width: 1.2rem;
   text-align: center;
@@ -1361,7 +1365,7 @@ body.light-mode .bg-layer::after {
   display: grid;
   place-items: center;
   font-size: 0.9rem;
-  color: var(--accent-color);
+  color: var(--accent-text);
   background: var(--accent-light);
   border: 1px solid var(--accent-line);
   border-radius: var(--radius-sm);
@@ -1372,7 +1376,7 @@ body.light-mode .bg-layer::after {
   transform: translateY(-2px);
 }
 
-.contact-item h3 {
+.contact-item h2 {
   font-family: var(--font-mono);
   font-size: 0.66rem;
   font-weight: 500;
@@ -1483,13 +1487,15 @@ body.light-mode .bg-layer::after {
 }
 
 .footer-link {
+  display: inline-block;
+  padding-block: 0.35rem;
   font-family: var(--font-mono);
   font-size: 0.76rem;
   color: var(--fg-muted);
 }
 
 .footer-link:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
 }
 
 .copyright {
@@ -1760,7 +1766,7 @@ body.light-mode .bg-layer::after {
   gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--accent-color);
+  color: var(--accent-text);
 }
 
 .card-cta i {
@@ -1893,7 +1899,7 @@ body.light-mode .bg-layer::after {
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-color);
+  color: var(--accent-text);
   margin-bottom: 0.9rem;
 }
 
@@ -1915,7 +1921,7 @@ body.light-mode .bg-layer::after {
   content: "▸";
   position: absolute;
   left: 0;
-  color: var(--accent-color);
+  color: var(--accent-text);
 }
 
 .case-list strong,
@@ -1999,7 +2005,7 @@ body.light-mode .bg-layer::after {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.14em;
-  fill: var(--accent-color);
+  fill: var(--accent-text);
 }
 
 .arch-line {
@@ -2055,7 +2061,7 @@ body.light-mode .bg-layer::after {
 .highlight code {
   font-family: var(--font-mono);
   font-size: 0.82em;
-  color: var(--accent-color);
+  color: var(--accent-text);
   background: var(--accent-light);
   padding: 0.05em 0.35em;
   border-radius: 4px;
@@ -2136,7 +2142,7 @@ body.light-mode .bg-layer::after {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.14em;
-  color: var(--accent-color);
+  color: var(--accent-text);
 }
 
 .principle h3 {
@@ -2166,7 +2172,7 @@ body.light-mode .bg-layer::after {
 }
 
 .stack-card h3 i {
-  color: var(--accent-color);
+  color: var(--accent-text);
   font-size: 0.95rem;
 }
 
@@ -2179,7 +2185,7 @@ body.light-mode .bg-layer::after {
 }
 
 .fact i {
-  color: var(--accent-color);
+  color: var(--accent-text);
   font-size: 1.15rem;
 }
 
@@ -2211,7 +2217,7 @@ body.light-mode .bg-layer::after {
   content: "—";
   position: absolute;
   left: 0;
-  color: var(--accent-color);
+  color: var(--accent-text);
 }
 
 .plain-list strong {
@@ -2244,7 +2250,7 @@ body.light-mode .bg-layer::after {
 }
 
 .copy-btn:hover {
-  color: var(--accent-color);
+  color: var(--accent-text);
   border-color: var(--accent-line);
 }
 
@@ -2285,6 +2291,7 @@ body.light-mode .bg-layer::after {
     --bg-elevated: #ffffff;
     --accent-color: #8a6400;
     --accent-strong: #8a6400;
+    --accent-text: #6b4e00;
     --accent-line: #cccccc;
     --accent-light: transparent;
     --accent-medium: transparent;
