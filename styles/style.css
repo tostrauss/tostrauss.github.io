@@ -207,7 +207,12 @@ button {
 
 .section + .page-section,
 .page-section + .page-section {
-  padding-top: clamp(3rem, 7vw, 5rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* the hero already carries generous padding — don't stack another gap on it */
+.hero + .page-section {
+  padding-top: clamp(1.25rem, 3vw, 2.25rem);
 }
 
 .centered {
