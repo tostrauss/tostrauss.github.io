@@ -85,15 +85,6 @@ EXPERIENCE = [
         ],
     ),
     (
-        "AI Researcher",
-        "JKU Institute for Machine Learning — Linz",
-        "Oct 2025 – present",
-        [
-            "Developing approaches to visualise neural network decision-making; comparative analysis of "
-            "saliency maps, LIME and SHAP on complex datasets.",
-        ],
-    ),
-    (
         "Freelance Web Developer",
         "Therapiezentrum Blumau &amp; others — Austria",
         "2025 – present",
@@ -115,7 +106,7 @@ EXPERIENCE = [
     (
         "Software Developer",
         "TigerEyeTechnology",
-        "until May 2025",
+        "Mar 2024 – May 2025",
         ["Application development alongside my degree."],
     ),
     (
@@ -134,7 +125,7 @@ EDUCATION = [
         "MSc Artificial Intelligence",
         "Johannes Kepler University (JKU) Linz",
         "Oct 2025 – present",
-        "Focus on deep learning; explainable-AI research at the Institute for Machine Learning.",
+        "Focus on deep learning, with coursework in explainable AI: saliency maps, LIME and SHAP.",
     ),
     (
         "BS Computer Information Systems, summa cum laude",
