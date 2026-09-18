@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#08090b">
+  <title>404 — page not found | Tobias Strauss</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="bg-layer"></div>
+
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-mark">TS</span>
+        <span>tobias&nbsp;strauss</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html" class="nav-link">.home()</a>
+        <a href="about.html" class="nav-link">.about()</a>
+        <a href="projects.html" class="nav-link">.projects()</a>
+        <a href="resume.html" class="nav-link">.resume()</a>
+        <a href="contact.html" class="nav-link">.contact()</a>
+      </div>
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main id="content">
+    <section class="page-section">
+      <div class="container centered">
+        <span class="mono-label">HTTP 404</span>
+        <h1 class="section-title" data-index="Error">This page doesn't exist</h1>
+        <p class="section-subtitle">
+          Wrong URL, or something I moved. The work is all one click away.
+        </p>
+        <div class="button-container">
+          <a href="index.html" class="button">Back to home <i class="fas fa-arrow-right"></i></a>
+          <a href="projects.html" class="button-outline">See the projects</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; <span data-year>2026</span> Tobias Strauss — built from scratch, no framework.
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/main.js" defer></script>
+</body>
+</html>

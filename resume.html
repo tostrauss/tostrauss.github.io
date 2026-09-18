@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Resume of Tobias Strauss — AI researcher at JKU Linz and full-stack engineer. Education, experience and technical skills.">
+  <meta name="description" content="Resume of Tobias Strauss — co-founder and lead engineer of Gastropoly and JAMIE, MSc Artificial Intelligence at JKU Linz. Education, experience, skills and languages.">
+  <meta name="theme-color" content="#08090b">
+  <link rel="canonical" href="https://tostrauss.github.io/resume.html">
   <meta property="og:title" content="Resume | Tobias Strauss">
-  <meta property="og:description" content="Academic and professional background of an AI researcher and full-stack engineer.">
+  <meta property="og:description" content="Two products in production, an MSc in AI, and a track record that starts with shipping.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tostrauss.github.io/resume.html">
+  <meta name="twitter:card" content="summary">
 
   <title>Resume | Tobias Strauss</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,8 +51,15 @@
       <div class="container">
         <h1 class="section-title fade-in" data-index="01 — Track record">The path so far</h1>
         <p class="section-subtitle fade-in">
-          Research at JKU Linz, products in the App Store, and clients who keep coming back.
+          Two products in production, a Master's in Artificial Intelligence, and clients who keep coming back.
         </p>
+
+        <div class="resume-actions fade-in">
+          <a href="Tobias_Strauss_Resume.pdf" class="button" target="_blank" rel="noopener">
+            <i class="fas fa-arrow-down"></i> Download CV (PDF)
+          </a>
+          <button type="button" class="button-outline" data-print>Print this page</button>
+        </div>
 
         <div class="resume-grid">
           <div class="resume-column fade-in">
@@ -57,13 +69,20 @@
                 <div class="timeline-date">Oct 2025 — Present</div>
                 <h3 class="timeline-title">Johannes Kepler University (JKU) Linz</h3>
                 <p class="timeline-subtitle">MSc Artificial Intelligence</p>
-                <p>Specialising in deep learning and explainable AI. Researching model interpretability and visualisation techniques for black-box neural networks.</p>
+                <p>
+                  Focus on deep learning. Explainable-AI research at the Institute for Machine Learning:
+                  implementing and comparing saliency maps, LIME and SHAP so black-box model decisions can be
+                  inspected and debugged.
+                </p>
               </div>
               <div class="timeline-item">
                 <div class="timeline-date">Graduated May 2025</div>
-                <h3 class="timeline-title">Post University</h3>
-                <p class="timeline-subtitle">BS Computer Information Systems (Honors)</p>
-                <p>Graduated summa cum laude with a minor in Data Analytics. NCAA Division II student-athlete (tennis).</p>
+                <h3 class="timeline-title">Post University — Waterbury, CT, USA</h3>
+                <p class="timeline-subtitle">BS Computer Information Systems, summa cum laude</p>
+                <p>
+                  Concentration in Software Development, minor in Data Analytics. GPA 3.7/4.0, Honors Program.
+                  International student-athlete: vice-captain of the NCAA Division II men's tennis team.
+                </p>
               </div>
               <div class="timeline-item">
                 <div class="timeline-date">Graduated 2021</div>
@@ -72,46 +91,104 @@
                 <p>Specialised in science and mathematics. Cambridge Certificate B2 First.</p>
               </div>
             </div>
+
+            <h2 class="resume-subhead">Languages</h2>
+            <ul class="plain-list">
+              <li><strong>German</strong> — native</li>
+              <li><strong>English</strong> — fluent (four years studying and competing in the US)</li>
+              <li><strong>Austrian Sign Language</strong> — native</li>
+            </ul>
+
+            <h2 class="resume-subhead">Selected outcomes</h2>
+            <ul class="plain-list">
+              <li>Took two products from zero to production — one to both app stores in six markets.</li>
+              <li>1,200+ registered users on JAMIE, localised in five languages.</li>
+              <li>Gastropoly in daily use at its pilot venue since July 2026: 158 pages, 63 API routes, 155 migrations.</li>
+              <li>370+ automated test files gating every merge across a three-person team.</li>
+              <li>Ran a restore drill on encrypted off-site backups instead of assuming they worked.</li>
+              <li>Shipped GDPR export and deletion as product features, not support tickets.</li>
+            </ul>
           </div>
 
           <div class="resume-column fade-in">
             <h2>Experience</h2>
             <div class="timeline">
               <div class="timeline-item">
-                <div class="timeline-date">Oct 2025 — Present</div>
+                <div class="timeline-date">Jun 2026 — Present · Vienna</div>
+                <h3 class="timeline-title">Co-Founder &amp; Lead Software Engineer</h3>
+                <p class="timeline-subtitle">Gastropoly — restaurant operations platform</p>
+                <p>
+                  Architected and shipped a multi-tenant SaaS on Next.js 16, React 19, TypeScript, Supabase and
+                  Vercel — 158 pages, 63 API routes and 155 migrations. Six modules from scratch: shift planning
+                  with an offline PIN time-clock kiosk, inventory and supplier ordering, HACCP logging, an
+                  accountant cockpit with DATEV export, reporting, and a Claude-powered assistant with voice
+                  mode. Integrated ready2order POS, Open-Meteo and AXESS turnstile data into a weather-based
+                  demand model driving purchasing and rostering. Tenant isolation enforced in the database, not
+                  the app layer. Set the engineering process for a three-person team; ~1,800 commits.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Mar 2026 — Present · Vienna</div>
+                <h3 class="timeline-title">Co-Founder &amp; Lead Developer</h3>
+                <p class="timeline-subtitle">JAMIE.groups — social activity app</p>
+                <p>
+                  Took the product from zero to both app stores: a React/Vite PWA shipped as a Trusted Web
+                  Activity on Android and via Capacitor on iOS, so one deploy updates web and Android at once.
+                  Built the real-time layer — Socket.IO chat with voice messages, photos, replies, read receipts
+                  and reactions — plus a push pipeline on Web Push and APNs. Node.js/Express and PostgreSQL on
+                  Railway with moderation and reporting, rate limiting, GDPR export and deletion, and encrypted
+                  off-site backups with a rehearsed restore. 1,200+ registered users across AT, DE, CH, IT, FR
+                  and ES, localised in five languages.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Current · Vienna</div>
+                <h3 class="timeline-title">Software Developer</h3>
+                <p class="timeline-subtitle">TigerEyeTechnology</p>
+                <p>Software development alongside the MSc programme.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">Oct 2025 — Present · Linz</div>
                 <h3 class="timeline-title">AI Researcher</h3>
                 <p class="timeline-subtitle">JKU Institute for Machine Learning</p>
-                <p>Developing approaches to visualise neural network decision-making. Comparative analysis of saliency maps, LIME and SHAP on complex datasets.</p>
+                <p>
+                  Developing approaches to visualise neural network decision-making — comparative analysis of
+                  saliency maps, LIME and SHAP on complex datasets.
+                </p>
               </div>
               <div class="timeline-item">
-                <div class="timeline-date">Sept 2025 — Present</div>
-                <h3 class="timeline-title">Lead Software Engineer</h3>
-                <p class="timeline-subtitle">JAMIE Social Activity App</p>
-                <p>Built and shipped a social discovery app to the App Store and Google Play, now serving 500+ users. React 18 and Vite delivered as a PWA via Capacitor (iOS) and a Trusted Web Activity (Android), on an Express/PostgreSQL backend with Socket.IO chat, Stripe billing and push notifications.</p>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-date">2026 — Present</div>
-                <h3 class="timeline-title">Developer &amp; Co-Founder</h3>
-                <p class="timeline-subtitle">Gastropoly — Gastronomy Operations Platform</p>
-                <p>All-in-one operations SaaS for independent gastronomy businesses in the DACH region — staffing, goods, HACCP compliance and tax-advisor exports. In production since July 2026 on Next.js and Supabase, validated against a full season of real operating data from an Austrian pilot business.</p>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-date">2025 — Present</div>
+                <div class="timeline-date">2025 — Present · Austria</div>
                 <h3 class="timeline-title">Freelance Web Developer</h3>
                 <p class="timeline-subtitle">Therapiezentrum Blumau &amp; others</p>
-                <p>Designing and building websites for Austrian healthcare practices and businesses — responsive, SEO-optimised and accessible, with online booking systems.</p>
+                <p>
+                  Websites for Austrian healthcare practices and small businesses — responsive, accessible and
+                  SEO-optimised, with online booking.
+                </p>
               </div>
               <div class="timeline-item">
-                <div class="timeline-date">Feb 2024 — May 2025</div>
+                <div class="timeline-date">Feb 2024 — May 2025 · Waterbury, CT</div>
                 <h3 class="timeline-title">Co-Founder &amp; Lead Developer</h3>
                 <p class="timeline-subtitle">CollegeRecruit</p>
-                <p>Shipped a cross-platform mobile app (iOS/Android) connecting international athletes with US colleges. Built with Angular and Ionic.</p>
+                <p>
+                  Built and launched a standalone Angular/TypeScript application connecting international
+                  student-athletes with US college programs — profiles, college matching, document management
+                  and real-time messaging — shipped to the App Store and Google Play.
+                </p>
               </div>
               <div class="timeline-item">
-                <div class="timeline-date">Summer 2023</div>
+                <div class="timeline-date">Jun — Aug 2023 · Linz</div>
                 <h3 class="timeline-title">Data Analytics Intern</h3>
                 <p class="timeline-subtitle">eEvolution GmbH</p>
-                <p>Designed ETL pipelines and PowerBI dashboards visualising business KPIs, feeding directly into management decisions.</p>
+                <p>
+                  Built Power BI dashboards on business KPIs for executive decision-making, cleaned and modelled
+                  data in Python, and presented findings to stakeholders.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2017 — 2022 · seasonal, Linz</div>
+                <h3 class="timeline-title">Tennis Coach</h3>
+                <p class="timeline-subtitle">ÖTB Urfahr</p>
+                <p>Training programmes for clients aged 3 to 80, with the client relationships that come with them.</p>
               </div>
             </div>
           </div>
@@ -122,52 +199,98 @@
     <section class="page-section">
       <div class="container">
         <h2 class="section-title fade-in" data-index="02 — Skills">Technical expertise</h2>
-        <p class="section-subtitle fade-in">Filter by discipline.</p>
+        <p class="section-subtitle fade-in">Filter by discipline — each one lists where it is actually used.</p>
 
         <div class="skills-section fade-in">
           <div class="skills-categories">
             <div class="skill-category active" data-category="all">all</div>
+            <div class="skill-category" data-category="frontend">frontend</div>
+            <div class="skill-category" data-category="backend">backend</div>
+            <div class="skill-category" data-category="mobile">mobile</div>
             <div class="skill-category" data-category="ai">ai / data</div>
-            <div class="skill-category" data-category="dev">engineering</div>
-            <div class="skill-category" data-category="tools">tools</div>
+            <div class="skill-category" data-category="ops">platform</div>
           </div>
 
           <div class="skills-container">
-            <div class="skill-item" data-category="ai">
-              <div class="skill-info"><i class="fas fa-brain skill-icon"></i><span class="skill-name">Deep Learning (PyTorch/TensorFlow)</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 85%;"><span class="skill-percent">85%</span></div></div>
+            <div class="skill-item" data-category="frontend">
+              <div class="skill-info"><i class="fab fa-react skill-icon"></i><span class="skill-name">React &amp; Next.js</span></div>
+              <p class="skill-context">158 pages in Gastropoly (Next.js 16 / React 19); JAMIE's React 18 + Vite PWA.</p>
             </div>
-            <div class="skill-item" data-category="ai">
-              <div class="skill-info"><i class="fas fa-magnifying-glass-chart skill-icon"></i><span class="skill-name">Explainable AI (XAI)</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 90%;"><span class="skill-percent">90%</span></div></div>
+            <div class="skill-item" data-category="frontend">
+              <div class="skill-info"><i class="fas fa-code skill-icon"></i><span class="skill-name">TypeScript</span></div>
+              <p class="skill-context">The whole Gastropoly codebase and the earlier CollegeRecruit application.</p>
             </div>
-            <div class="skill-item" data-category="ai">
-              <div class="skill-info"><i class="fab fa-python skill-icon"></i><span class="skill-name">Python &amp; Pandas</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 95%;"><span class="skill-percent">95%</span></div></div>
+            <div class="skill-item" data-category="frontend">
+              <div class="skill-info"><i class="fas fa-plug-circle-bolt skill-icon"></i><span class="skill-name">PWA &amp; offline-first</span></div>
+              <p class="skill-context">Service workers and a sync queue for a venue whose Wi-Fi drops mid-shift.</p>
             </div>
-            <div class="skill-item" data-category="dev">
-              <div class="skill-info"><i class="fab fa-react skill-icon"></i><span class="skill-name">React 18 &amp; Vite</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 90%;"><span class="skill-percent">90%</span></div></div>
+            <div class="skill-item" data-category="frontend">
+              <div class="skill-info"><i class="fab fa-angular skill-icon"></i><span class="skill-name">Angular &amp; Ionic</span></div>
+              <p class="skill-context">CollegeRecruit, from first commit to both app stores.</p>
             </div>
-            <div class="skill-item" data-category="dev">
-              <div class="skill-info"><i class="fab fa-angular skill-icon"></i><span class="skill-name">Angular</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 85%;"><span class="skill-percent">85%</span></div></div>
-            </div>
-            <div class="skill-item" data-category="dev">
+            <div class="skill-item" data-category="backend">
               <div class="skill-info"><i class="fab fa-node-js skill-icon"></i><span class="skill-name">Node.js &amp; Express</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 85%;"><span class="skill-percent">85%</span></div></div>
+              <p class="skill-context">JAMIE's API: auth, moderation, reporting, rate limiting, GDPR flows.</p>
             </div>
-            <div class="skill-item" data-category="dev">
-              <div class="skill-info"><i class="fas fa-database skill-icon"></i><span class="skill-name">PostgreSQL &amp; SQL</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 90%;"><span class="skill-percent">90%</span></div></div>
+            <div class="skill-item" data-category="backend">
+              <div class="skill-info"><i class="fas fa-database skill-icon"></i><span class="skill-name">PostgreSQL &amp; schema design</span></div>
+              <p class="skill-context">155 coordinated migrations on Gastropoly; JAMIE's production database on Railway.</p>
             </div>
-            <div class="skill-item" data-category="tools">
-              <div class="skill-info"><i class="fab fa-docker skill-icon"></i><span class="skill-name">Docker &amp; CI/CD</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 70%;"><span class="skill-percent">70%</span></div></div>
+            <div class="skill-item" data-category="backend">
+              <div class="skill-info"><i class="fas fa-shield-halved skill-icon"></i><span class="skill-name">Supabase &amp; Row Level Security</span></div>
+              <p class="skill-context">Multi-tenant isolation enforced in the database rather than the application layer.</p>
             </div>
-            <div class="skill-item" data-category="tools">
-              <div class="skill-info"><i class="fas fa-chart-bar skill-icon"></i><span class="skill-name">PowerBI &amp; Tableau</span></div>
-              <div class="skill-bar"><div class="skill-level" style="width: 80%;"><span class="skill-percent">80%</span></div></div>
+            <div class="skill-item" data-category="backend">
+              <div class="skill-info"><i class="fas fa-bolt skill-icon"></i><span class="skill-name">Real-time (Socket.IO)</span></div>
+              <p class="skill-context">Chat with voice messages, photos, replies, read receipts and reactions.</p>
+            </div>
+            <div class="skill-item" data-category="backend">
+              <div class="skill-info"><i class="fab fa-python skill-icon"></i><span class="skill-name">Flask &amp; SQLAlchemy</span></div>
+              <p class="skill-context">JWT-authenticated REST API behind my stock analysis platform.</p>
+            </div>
+            <div class="skill-item" data-category="mobile">
+              <div class="skill-info"><i class="fab fa-apple skill-icon"></i><span class="skill-name">iOS delivery (Capacitor)</span></div>
+              <p class="skill-context">JAMIE through App Store review, native permissions and release management.</p>
+            </div>
+            <div class="skill-item" data-category="mobile">
+              <div class="skill-info"><i class="fab fa-android skill-icon"></i><span class="skill-name">Android delivery (TWA)</span></div>
+              <p class="skill-context">Trusted Web Activity with asset links, so a web deploy ships the Android app too.</p>
+            </div>
+            <div class="skill-item" data-category="mobile">
+              <div class="skill-info"><i class="fas fa-bell skill-icon"></i><span class="skill-name">Web Push &amp; APNs</span></div>
+              <p class="skill-context">One notification pipeline across browser, Android and iOS installs.</p>
+            </div>
+            <div class="skill-item" data-category="ai">
+              <div class="skill-info"><i class="fas fa-brain skill-icon"></i><span class="skill-name">Deep learning (PyTorch / TensorFlow)</span></div>
+              <p class="skill-context">MSc coursework and research work at JKU's Institute for Machine Learning.</p>
+            </div>
+            <div class="skill-item" data-category="ai">
+              <div class="skill-info"><i class="fas fa-magnifying-glass-chart skill-icon"></i><span class="skill-name">Explainable AI</span></div>
+              <p class="skill-context">Saliency maps, LIME and SHAP compared on complex datasets.</p>
+            </div>
+            <div class="skill-item" data-category="ai">
+              <div class="skill-info"><i class="fas fa-robot skill-icon"></i><span class="skill-name">LLM integration</span></div>
+              <p class="skill-context">A Claude-powered assistant with voice mode, shipped inside Gastropoly.</p>
+            </div>
+            <div class="skill-item" data-category="ai">
+              <div class="skill-info"><i class="fas fa-chart-bar skill-icon"></i><span class="skill-name">Analytics &amp; forecasting</span></div>
+              <p class="skill-context">Power BI dashboards at eEvolution; weather × turnstile × POS demand model at Gastropoly.</p>
+            </div>
+            <div class="skill-item" data-category="ops">
+              <div class="skill-info"><i class="fas fa-cloud skill-icon"></i><span class="skill-name">Vercel &amp; Railway</span></div>
+              <p class="skill-context">Production hosting for both products, including environment and release management.</p>
+            </div>
+            <div class="skill-item" data-category="ops">
+              <div class="skill-info"><i class="fab fa-stripe-s skill-icon"></i><span class="skill-name">Stripe billing</span></div>
+              <p class="skill-context">Subscriptions for modular packages — venues pay for the modules they use.</p>
+            </div>
+            <div class="skill-item" data-category="ops">
+              <div class="skill-info"><i class="fas fa-vial-circle-check skill-icon"></i><span class="skill-name">Testing &amp; CI/CD</span></div>
+              <p class="skill-context">370+ test files gating every merge; one slice per branch, mandatory review.</p>
+            </div>
+            <div class="skill-item" data-category="ops">
+              <div class="skill-info"><i class="fas fa-lock skill-icon"></i><span class="skill-name">Backups, GDPR &amp; data safety</span></div>
+              <p class="skill-context">Encrypted off-site backups with a rehearsed restore; export and deletion in-product.</p>
             </div>
           </div>
 

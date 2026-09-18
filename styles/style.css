@@ -813,95 +813,6 @@ body.light-mode .bg-layer::after {
 }
 
 /* ============================================================
-   11. SKILL CARDS
-   ============================================================ */
-.skill-category-title {
-  font-family: var(--font-primary);
-  font-size: var(--text-xl);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  color: var(--fg);
-  text-align: center;
-  margin-bottom: 0.4rem;
-}
-
-.category-line {
-  width: 32px;
-  height: 2px;
-  background: var(--accent-color);
-  margin: 0 auto 2rem;
-  border-radius: 2px;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-}
-
-.skill-card {
-  position: relative;
-  padding: 1.6rem 1.4rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  text-align: center;
-  overflow: hidden;
-  transition: border-color var(--normal), background-color var(--normal),
-    transform var(--normal);
-}
-
-.skill-card:hover {
-  border-color: var(--line-strong);
-  background: var(--surface-hover);
-  transform: translateY(-4px);
-}
-
-.skill-card img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  margin: 0 auto 1.1rem;
-  border-radius: 8px;
-  transition: transform var(--normal);
-}
-
-.skill-card:hover img {
-  transform: scale(1.08) translateY(-2px);
-}
-
-.skill-card h3 {
-  font-family: var(--font-primary);
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-  margin-bottom: 0.35rem;
-}
-
-.skill-card p {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  line-height: 1.5;
-  color: var(--fg-faint);
-  margin-bottom: 1rem;
-}
-
-.progress-bar {
-  height: 3px;
-  border-radius: 3px;
-  background: var(--line);
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--accent-deep), var(--accent-color));
-  transition: width 1.4s var(--ease);
-}
-
-/* ============================================================
    12. PROJECT CARDS (flip kept — rebuilt)
    ============================================================ */
 .projects-grid {
@@ -1170,115 +1081,6 @@ body.light-mode .bg-layer::after {
 }
 
 /* ============================================================
-   13. SPOTLIGHT (flagship projects — no flip, everything visible)
-   ============================================================ */
-.spotlight {
-  display: grid;
-  grid-template-columns: 1fr;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  overflow: hidden;
-  margin-bottom: 1.25rem;
-  transition: border-color var(--normal);
-}
-
-.spotlight:hover {
-  border-color: var(--line-strong);
-}
-
-.spotlight-media {
-  display: grid;
-  place-items: center;
-  padding: 2.25rem;
-  min-height: 250px;
-  border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(65% 60% at 50% 38%, var(--accent-glow), transparent 70%),
-    var(--bg-elevated);
-  overflow: hidden;
-}
-
-.spotlight-media img {
-  max-height: 330px;
-  width: auto;
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--slow);
-}
-
-.spotlight:hover .spotlight-media img {
-  transform: translateY(-6px) scale(1.02);
-}
-
-.spotlight-body {
-  padding: clamp(1.6rem, 3vw, 2.4rem);
-  display: flex;
-  flex-direction: column;
-}
-
-.spotlight-body h3 {
-  font-family: var(--font-primary);
-  font-size: var(--text-2xl);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
-  margin: 0.8rem 0 0.9rem;
-}
-
-.spotlight-body > p {
-  color: var(--fg-muted);
-  max-width: 52ch;
-  margin-bottom: 1.5rem;
-}
-
-.spotlight .metrics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.metric-num {
-  font-family: var(--font-primary);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-}
-
-.metric-label {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--fg-faint);
-}
-
-.spotlight .project-links {
-  border-top: 1px solid var(--line);
-  padding-top: 1.4rem;
-}
-
-@media (min-width: 800px) {
-  .spotlight {
-    grid-template-columns: 0.9fr 1.1fr;
-  }
-
-  .spotlight-media {
-    border-bottom: 0;
-    border-right: 1px solid var(--line);
-    min-height: 100%;
-  }
-
-  .spotlight--reverse .spotlight-media {
-    order: 2;
-    border-right: 0;
-    border-left: 1px solid var(--line);
-  }
-}
-
-/* ============================================================
    14. RESUME / TIMELINE
    ============================================================ */
 .resume-grid {
@@ -1466,36 +1268,18 @@ body.light-mode .bg-layer::after {
   letter-spacing: -0.015em;
 }
 
-.skill-bar {
-  position: relative;
-  height: 3px;
-  border-radius: 3px;
-  background: var(--line);
-  overflow: visible;
+.skill-context {
+  margin: 0.55rem 0 0;
+  padding-left: 2rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
 }
 
-.skill-level {
-  height: 3px;
-  width: 0;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--accent-deep), var(--accent-color));
-  transition: width 1.4s var(--ease);
-  position: relative;
-}
-
-.skill-percent {
-  position: absolute;
-  right: 0;
-  top: -1.65rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--accent-color);
-  opacity: 0;
-  transition: opacity var(--fast);
-}
-
-.skill-item:hover .skill-percent {
-  opacity: 1;
+@media (max-width: 520px) {
+  .skill-context {
+    padding-left: 0;
+  }
 }
 
 /* ============================================================

@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="About Tobias Strauss — AI researcher at JKU Linz's Institute for Machine Learning and full-stack engineer shipping production apps.">
+  <meta name="description" content="About Tobias Strauss — software engineer in Vienna, co-founder of JAMIE and Gastropoly, MSc Artificial Intelligence student at JKU Linz.">
+  <meta name="theme-color" content="#08090b">
+  <link rel="canonical" href="https://tostrauss.github.io/about.html">
   <meta property="og:title" content="About | Tobias Strauss">
-  <meta property="og:description" content="AI researcher and full-stack engineer based in Linz, Austria.">
+  <meta property="og:description" content="I build and ship software end to end — consumer apps, vertical SaaS, and the unglamorous parts that keep both alive.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tostrauss.github.io/about.html">
+  <meta name="twitter:card" content="summary">
 
   <title>About | Tobias Strauss</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,112 +50,219 @@
     <!-- ============ BIO ============ -->
     <section id="about" class="about-section page-section">
       <div class="container">
-        <h1 class="section-title fade-in" data-index="01 — Who">Theory and deployment, same person</h1>
+        <h1 class="section-title fade-in" data-index="01 — Who">Ships product, reads papers</h1>
         <p class="section-subtitle fade-in">
-          AI researcher and full-stack engineer based in Linz, Austria.
+          Software engineer and MSc Artificial Intelligence student. Based in Vienna, Austria.
         </p>
 
         <div class="about-content">
           <div class="about-text fade-in">
             <p>
-              I'm an AI researcher and full-stack engineer. After graduating <strong>summa cum laude</strong>
-              in Computer Information Systems with a minor in Data Analytics from Post University (CT, USA)
-              in May 2025, I returned to Austria for my MSc in Artificial Intelligence at JKU Linz, where I
-              also research at the Institute for Machine Learning.
+              I build and ship software end to end — most recently <strong>JAMIE</strong>, a social app for
+              finding people to actually do things with, live on the App&nbsp;Store and Google&nbsp;Play across
+              six European markets, and <strong>Gastropoly</strong>, an operations platform that has been
+              running an Austrian restaurant's daily shift since July 2026.
             </p>
             <p>
-              My work sits at the intersection of research and production. At JKU I develop and compare
-              <strong>explainable AI</strong> methods — saliency maps, LIME, SHAP — to make neural network
-              decisions transparent and debuggable. Outside the lab I ship products: I co-founded
-              <strong>CollegeRecruit</strong> (live on the App Store and Google Play), built and launched
-              <strong>JAMIE</strong> — a social activity app now on both stores with 500+ users — and run
-              <strong>Gastropoly</strong>, an operations platform for independent gastronomy businesses that
-              has been in production since July 2026.
+              At JAMIE I lead the technical side: a React/Vite PWA shipped natively on both platforms, a
+              Node.js and PostgreSQL backend, real-time chat over Socket.IO, and push notifications via Web
+              Push and APNs — plus the unglamorous parts that decide whether a product survives contact with
+              real users: moderation and reporting, rate limiting, GDPR data export and deletion, and
+              encrypted off-site backups I have actually rehearsed restoring. It serves
+              <strong>1,200+ registered users in five languages</strong>.
             </p>
             <p>
-              I think the best AI engineers understand both halves of the job. Whether it's implementing a
-              GPT-style transformer from scratch, designing a PostgreSQL schema that survives real traffic,
-              or getting an app through App Store review — I bring the same rigour to all of it.
+              In parallel I co-founded <strong>Gastropoly</strong> and lead its architecture and product: an
+              all-in-one operations platform for independent restaurants. A multi-tenant Next.js and Supabase
+              app where tenant isolation is enforced in the database rather than in the app layer, an
+              offline-first PWA and PIN time-clock kiosk for a venue whose Wi-Fi drops, food-safety records
+              and DATEV exports the accountant actually accepts, and a weather model that feeds both ordering
+              and shift planning. POS, weather and turnstile integrations are live; 370+ automated test files
+              gate every merge. The hardest requirement was not technical: a seasonal worker has to clock in
+              correctly on the first try, without being trained.
             </p>
             <p>
-              When I'm not training models or shipping features, you'll find me on the tennis court,
-              travelling, or cooking something new.
+              Alongside those I'm doing a Master's in Artificial Intelligence at Johannes Kepler University
+              Linz with a focus on deep learning, researching explainable AI at the Institute for Machine
+              Learning, and working as a software developer at TigerEyeTechnology.
+            </p>
+            <p>
+              Earlier: a standalone Angular/TypeScript application at <strong>CollegeRecruit</strong>, and a
+              stock analysis platform of my own — a Flask REST API with JWT auth and SQLAlchemy behind a
+              Dash/React frontend, with live charts and strategy backtesting against historical market data.
+              I studied Computer Information Systems (Software Development, minor in Data Analytics) as an
+              international honors student and played vice-captain of the men's tennis team — balancing
+              training and competition with a full course load is where I learned to work to a deadline that
+              does not move.
+            </p>
+            <p>
+              Tri-lingual, based in Vienna. Happy to talk about shipping consumer products, vertical SaaS that
+              has to survive a real operation, or anything where AI meets an actual user.
             </p>
 
             <div class="button-container">
-              <a href="projects.html" class="button">See the work <i class="fas fa-arrow-right"></i></a>
-              <a href="resume.html" class="button-outline">My experience</a>
+              <a href="projects.html" class="button">Read the case studies <i class="fas fa-arrow-right"></i></a>
+              <a href="resume.html" class="button-outline">My track record</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ SKILLS ============ -->
-    <section id="skills" class="page-section">
+    <!-- ============ HOW I WORK ============ -->
+    <section id="principles" class="page-section">
       <div class="container">
-        <h2 class="section-title fade-in" data-index="02 — Toolkit">Technical expertise</h2>
+        <h2 class="section-title fade-in" data-index="02 — How I work">Four things I insist on</h2>
         <p class="section-subtitle fade-in">
-          The stack I actually reach for — split between the research side and the production side.
+          Every one of these came out of something that broke, or nearly did.
         </p>
 
-        <div class="skills-container">
-          <div class="skill-category fade-in">
-            <h3 class="skill-category-title">Artificial Intelligence &amp; Data</h3>
-            <div class="category-line"></div>
-            <div class="skills-grid">
-              <div class="skill-card">
-                <img src="images/OIP.jpg" alt="Python and deep learning">
-                <h3>Python &amp; Deep Learning</h3>
-                <p>PyTorch · TensorFlow · Pandas</p>
-                <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
-              </div>
-              <div class="skill-card">
-                <img src="images/SQL.jpg" alt="Data science and SQL">
-                <h3>Data Science &amp; SQL</h3>
-                <p>Complex queries · ETL · Visualisation</p>
-                <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
-              </div>
-              <div class="skill-card">
-                <img src="images/brin-of-artificial-intelligence-icons-ai-icon-design-used-in-ai-concepts-artificial-intelligence-icon-set-in-line-style-free-vector.jpg" alt="Explainable AI">
-                <h3>Explainable AI</h3>
-                <p>LIME · SHAP · Saliency maps</p>
-                <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
-              </div>
+        <div class="principle-grid">
+          <div class="principle fade-in">
+            <span class="principle-num">01</span>
+            <h3>Put the guarantee where it can't be bypassed</h3>
+            <p>
+              Gastropoly's tenant isolation lives in Postgres Row Level Security, not in a controller.
+              A forgotten filter returns nothing instead of another restaurant's payroll. If a rule matters,
+              it belongs below the layer where people make mistakes.
+            </p>
+          </div>
+          <div class="principle fade-in">
+            <span class="principle-num">02</span>
+            <h3>The unglamorous half is the product</h3>
+            <p>
+              Moderation, reporting, rate limiting, GDPR export and deletion, backups that have actually been
+              restored. None of it demos well, all of it decides whether a product survives its first real
+              week.
+            </p>
+          </div>
+          <div class="principle fade-in">
+            <span class="principle-num">03</span>
+            <h3>Design for the worst environment, not the demo</h3>
+            <p>
+              The venue's Wi-Fi drops, the phone is old, the user is a seasonal worker on their first shift.
+              Offline-first with a sync queue and an interface that needs no training is not polish — it's
+              the requirement.
+            </p>
+          </div>
+          <div class="principle fade-in">
+            <span class="principle-num">04</span>
+            <h3>Small team, strict process</h3>
+            <p>
+              One slice per branch, mandatory review, coordinated migration numbering across three engineers,
+              370+ automated test files gating every merge. Process is what lets a small team move fast twice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TOOLKIT ============ -->
+    <section id="skills" class="page-section">
+      <div class="container">
+        <h2 class="section-title fade-in" data-index="03 — Toolkit">The stack, and where it runs</h2>
+        <p class="section-subtitle fade-in">
+          No percentage bars. Just what I use and the production system it is used in.
+        </p>
+
+        <div class="stack-grid">
+          <div class="stack-card fade-in">
+            <h3><i class="fas fa-window-maximize"></i> Product &amp; frontend</h3>
+            <div class="project-tags">
+              <span class="project-tag">React 18 / 19</span>
+              <span class="project-tag">Next.js 16</span>
+              <span class="project-tag">TypeScript</span>
+              <span class="project-tag">Vite</span>
+              <span class="project-tag">PWA / Service Workers</span>
+              <span class="project-tag">Tailwind CSS</span>
+              <span class="project-tag">Angular</span>
             </div>
+            <p class="stack-where">
+              158 pages of Gastropoly, JAMIE's installable PWA, and an offline-first kiosk UI built for
+              untrained staff.
+            </p>
           </div>
 
-          <br>
-
-          <div class="skill-category fade-in">
-            <h3 class="skill-category-title">Full-Stack Engineering</h3>
-            <div class="category-line"></div>
-            <div class="skills-grid">
-              <div class="skill-card">
-                <img src="images/React.png" alt="React">
-                <h3>React &amp; Modern Web</h3>
-                <p>React 18 · Vite · Next.js</p>
-                <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
-              </div>
-              <div class="skill-card">
-                <img src="images/Angular.jpg" alt="Angular">
-                <h3>Angular &amp; Ionic</h3>
-                <p>Cross-platform · Enterprise apps</p>
-                <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
-              </div>
-              <div class="skill-card">
-                <img src="images/Node.js_logo.svg.png" alt="Node.js">
-                <h3>Node.js &amp; Backend</h3>
-                <p>Express · PostgreSQL · REST APIs</p>
-                <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
-              </div>
-              <div class="skill-card">
-                <img src="images/HTML5_logo_and_wordmark.svg.png" alt="Frontend core">
-                <h3>Frontend Core</h3>
-                <p>HTML5 · CSS3 · Responsive design</p>
-                <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
-              </div>
+          <div class="stack-card fade-in">
+            <h3><i class="fas fa-database"></i> Backend &amp; data</h3>
+            <div class="project-tags">
+              <span class="project-tag">Node.js / Express</span>
+              <span class="project-tag">PostgreSQL</span>
+              <span class="project-tag">Supabase</span>
+              <span class="project-tag">Row Level Security</span>
+              <span class="project-tag">Socket.IO</span>
+              <span class="project-tag">Flask</span>
+              <span class="project-tag">SQLAlchemy</span>
+              <span class="project-tag">REST / JWT</span>
             </div>
+            <p class="stack-where">
+              JAMIE's real-time API and Gastropoly's 155-migration multi-tenant schema, plus a JWT-secured
+              Flask API behind my own trading-research platform.
+            </p>
+          </div>
+
+          <div class="stack-card fade-in">
+            <h3><i class="fas fa-mobile-screen"></i> Mobile delivery</h3>
+            <div class="project-tags">
+              <span class="project-tag">Capacitor (iOS)</span>
+              <span class="project-tag">Trusted Web Activity</span>
+              <span class="project-tag">Web Push</span>
+              <span class="project-tag">APNs</span>
+              <span class="project-tag">App Store / Play releases</span>
+              <span class="project-tag">Swift</span>
+            </div>
+            <p class="stack-where">
+              Two apps through store review and out to six markets — one codebase serving web, Android and
+              iOS, with a push pipeline that spans all three.
+            </p>
+          </div>
+
+          <div class="stack-card fade-in">
+            <h3><i class="fas fa-brain"></i> AI &amp; research</h3>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">PyTorch</span>
+              <span class="project-tag">TensorFlow</span>
+              <span class="project-tag">pandas / NumPy</span>
+              <span class="project-tag">LIME · SHAP · saliency</span>
+              <span class="project-tag">LLM integration</span>
+            </div>
+            <p class="stack-where">
+              Deep learning and explainable-AI work for my MSc at JKU Linz, and a Claude-powered assistant
+              with a voice mode shipped inside Gastropoly.
+            </p>
+          </div>
+
+          <div class="stack-card fade-in">
+            <h3><i class="fas fa-server"></i> Platform &amp; operations</h3>
+            <div class="project-tags">
+              <span class="project-tag">Vercel</span>
+              <span class="project-tag">Railway</span>
+              <span class="project-tag">Stripe</span>
+              <span class="project-tag">CI/CD</span>
+              <span class="project-tag">Git / PR review</span>
+              <span class="project-tag">Automated testing</span>
+              <span class="project-tag">Encrypted backups</span>
+            </div>
+            <p class="stack-where">
+              Subscription billing for modular packages, 370+ test files gating merges, and a restore drill
+              I have run rather than assumed.
+            </p>
+          </div>
+
+          <div class="stack-card fade-in">
+            <h3><i class="fas fa-chart-line"></i> Data &amp; analytics</h3>
+            <div class="project-tags">
+              <span class="project-tag">SQL</span>
+              <span class="project-tag">Power BI</span>
+              <span class="project-tag">ETL pipelines</span>
+              <span class="project-tag">Dash / Plotly</span>
+              <span class="project-tag">Forecasting</span>
+            </div>
+            <p class="stack-where">
+              KPI dashboards during my analytics internship, and the weather × turnstile × POS demand model
+              that drives Gastropoly's ordering and rostering.
+            </p>
           </div>
         </div>
       </div>
@@ -159,7 +271,7 @@
     <!-- ============ CERTIFICATIONS ============ -->
     <section id="certifications" class="certifications page-section">
       <div class="container">
-        <h2 class="section-title fade-in" data-index="03 — Credentials">Certifications</h2>
+        <h2 class="section-title fade-in" data-index="04 — Credentials">Certifications</h2>
         <p class="section-subtitle fade-in">Coursework and certifications in software development and AI.</p>
 
         <div class="projects-grid">
@@ -390,6 +502,46 @@
               </div>
               <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BEYOND THE CODE ============ -->
+    <section id="beyond" class="page-section">
+      <div class="container">
+        <h2 class="section-title fade-in" data-index="05 — Off screen">Beyond the code</h2>
+        <p class="section-subtitle fade-in">The parts of the CV that explain how I work.</p>
+
+        <div class="fact-grid">
+          <div class="fact fade-in">
+            <i class="fas fa-table-tennis-paddle-ball"></i>
+            <h3>NCAA Division II tennis</h3>
+            <p>
+              Vice-captain of the men's team while carrying a full honors course load in the US. Training,
+              competition and deadlines that do not move — the habit stuck.
+            </p>
+          </div>
+          <div class="fact fade-in">
+            <i class="fas fa-language"></i>
+            <h3>Tri-lingual</h3>
+            <p>German (native) · English (fluent, four years studying in the US) · Austrian Sign Language (native).</p>
+          </div>
+          <div class="fact fade-in">
+            <i class="fas fa-chalkboard-user"></i>
+            <h3>Six seasons coaching tennis</h3>
+            <p>
+              Clients aged 3 to 80 at ÖTB Urfahr in Linz. Explaining something hard to someone who has never
+              done it before is a skill I use every week in product work.
+            </p>
+          </div>
+          <div class="fact fade-in">
+            <i class="fas fa-earth-europe"></i>
+            <h3>Austria → Connecticut → Vienna</h3>
+            <p>
+              Four years as an international student in the US, back home for the MSc. Comfortable in
+              teams, timezones and codebases that are not my own.
+            </p>
           </div>
         </div>
       </div>

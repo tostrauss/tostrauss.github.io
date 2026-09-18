@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Projects by Tobias Strauss — shipped mobile apps, production SaaS, AI research and client work.">
+  <meta name="description" content="Case studies by Tobias Strauss — Gastropoly, a multi-tenant restaurant operations platform in production, and JAMIE, a social app live on the App Store and Google Play in six European markets.">
+  <meta name="theme-color" content="#08090b">
+  <link rel="canonical" href="https://tostrauss.github.io/projects.html">
   <meta property="og:title" content="Projects | Tobias Strauss">
-  <meta property="og:description" content="Shipped apps with real users, a production operations platform, and explainable-AI research.">
+  <meta property="og:description" content="Two production case studies with architecture, trade-offs and numbers — plus research, client work and tools.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tostrauss.github.io/projects.html">
+  <meta name="twitter:card" content="summary">
 
   <title>Projects | Tobias Strauss</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,112 +47,357 @@
   </nav>
 
   <main id="content">
-    <!-- ============ FLAGSHIP WORK ============ -->
+    <!-- ============ FLAGSHIP CASE STUDIES ============ -->
     <section class="projects-section page-section">
       <div class="container">
         <h1 class="section-title fade-in" data-index="01 — Shipped">Work that runs in production</h1>
         <p class="section-subtitle fade-in">
-          Two products with real users, real payments and real uptime. Everything below is built and maintained by me.
+          Two products I co-founded and lead technically. Below each one: what the problem actually was,
+          how the system is put together, and the parts that were hard.
         </p>
 
-        <!-- JAMIE -->
-        <article class="spotlight fade-in">
-          <div class="spotlight-media">
-            <img src="images/Screenshot 2026-07-07 120450.png" alt="JAMIE app showing group and club discovery">
-          </div>
-          <div class="spotlight-body">
-            <span class="mono-label">Live on iOS &amp; Android</span>
-            <h3>JAMIE — Social Activity App</h3>
-            <p>
-              A social discovery app for Austria: create groups and clubs, chat in real time, find
-              activities on a map and redeem partner deals. Shipped as a React PWA wrapped in
-              Capacitor for iOS and a Trusted Web Activity for Android, on an Express/PostgreSQL
-              backend with Socket.IO, Stripe and push notifications.
+        <!-- ------------------------------------------------ GASTROPOLY -->
+        <article class="case fade-in" id="gastropoly">
+          <header class="case-head">
+            <span class="mono-label">Vertical SaaS · in production since July&nbsp;2026</span>
+            <h2>Gastropoly — the platform that runs a restaurant's day</h2>
+            <p class="case-lede">
+              Independent restaurants run on paper, spreadsheets and WhatsApp: the roster is on the wall,
+              the delivery notes are in a drawer, the fridge temperatures are on a clipboard and the
+              accountant gets a shoebox. Gastropoly replaces all of it with one multi-tenant app —
+              in daily use at our pilot venue in Austria, where it runs the actual shift.
             </p>
 
-            <div class="metrics">
-              <div>
-                <div class="metric-num">500+</div>
-                <div class="metric-label">users</div>
-              </div>
-              <div>
-                <div class="metric-num">2</div>
-                <div class="metric-label">app stores</div>
-              </div>
-              <div>
-                <div class="metric-num">AT → DE/CH</div>
-                <div class="metric-label">market expansion</div>
-              </div>
+            <div class="kpi-row">
+              <div class="kpi"><span class="kpi-num">158</span><span class="kpi-label">pages</span></div>
+              <div class="kpi"><span class="kpi-num">63</span><span class="kpi-label">API routes</span></div>
+              <div class="kpi"><span class="kpi-num">155</span><span class="kpi-label">DB migrations</span></div>
+              <div class="kpi"><span class="kpi-num">370+</span><span class="kpi-label">test files</span></div>
+              <div class="kpi"><span class="kpi-num">~1,800</span><span class="kpi-label">commits</span></div>
+              <div class="kpi"><span class="kpi-num">3</span><span class="kpi-label">engineers led</span></div>
+            </div>
+          </header>
+
+          <div class="case-grid">
+            <div class="case-col">
+              <h3 class="case-h">What I built</h3>
+              <ul class="case-list">
+                <li><strong>Shift planning &amp; time clock</strong> — rostering plus an offline PIN kiosk that keeps working when the venue Wi-Fi drops.</li>
+                <li><strong>Inventory &amp; supplier ordering</strong> — stock levels, order proposals and delivery reconciliation.</li>
+                <li><strong>HACCP compliance</strong> — food-safety records that hold up to an inspection, logged where the work happens.</li>
+                <li><strong>Accountant cockpit</strong> — DATEV export the accountant actually accepts, no manual re-keying.</li>
+                <li><strong>Reporting</strong> — revenue, labour cost and consumption per day, service and product.</li>
+                <li><strong>AI assistant</strong> — a Claude-powered assistant with a voice mode for hands-busy staff.</li>
+              </ul>
+
+              <h3 class="case-h">Role</h3>
+              <p class="case-p">
+                Co-founder. I own the architecture and the product, and I set the engineering process for a
+                three-person team: one slice per branch, mandatory PR review, coordinated migration numbering
+                so 155 migrations never collided.
+              </p>
             </div>
 
-            <div class="project-tags">
-              <span class="project-tag">React 18 / Vite</span>
-              <span class="project-tag">Capacitor + TWA</span>
-              <span class="project-tag">Express.js</span>
-              <span class="project-tag">PostgreSQL</span>
-              <span class="project-tag">Socket.IO + Redis</span>
-              <span class="project-tag">Stripe</span>
-            </div>
+            <div class="case-col">
+              <h3 class="case-h">Architecture</h3>
+              <figure class="arch">
+                <svg viewBox="0 0 620 350" role="img" aria-labelledby="gastro-arch-title gastro-arch-desc">
+                  <title id="gastro-arch-title">Gastropoly system architecture</title>
+                  <desc id="gastro-arch-desc">Manager PWA and offline PIN kiosk talk to a Next.js app with 63 API routes, which reads and writes a Supabase Postgres database with row level security per tenant. POS, weather, turnstile, payment and AI integrations attach to the application layer, and a demand model feeds ordering and rostering.</desc>
 
-            <div class="project-links">
-              <!-- TODO: add App Store link once the Apple app ID is available -->
-              <a href="https://play.google.com/store/apps/details?id=jamie.app" target="_blank" rel="noopener" class="button">Google Play</a>
-              <a href="https://app.jamie-app.com" target="_blank" rel="noopener" class="button-outline">Open the web app</a>
+                  <!-- clients -->
+                  <rect class="arch-box" x="20" y="14" width="195" height="54" rx="10"/>
+                  <text class="arch-t" x="117" y="40" text-anchor="middle">Manager &amp; staff PWA</text>
+                  <text class="arch-s" x="117" y="57" text-anchor="middle">offline-first · sync queue</text>
+
+                  <rect class="arch-box" x="235" y="14" width="195" height="54" rx="10"/>
+                  <text class="arch-t" x="332" y="40" text-anchor="middle">PIN time-clock kiosk</text>
+                  <text class="arch-s" x="332" y="57" text-anchor="middle">clocks in with no network</text>
+
+                  <path class="arch-line" d="M117 68 L117 100"/>
+                  <path class="arch-head" d="M111 96 L117 106 L123 96 Z"/>
+                  <path class="arch-line" d="M332 68 L332 100"/>
+                  <path class="arch-head" d="M326 96 L332 106 L338 96 Z"/>
+
+                  <!-- app layer -->
+                  <rect class="arch-box arch-box--accent" x="20" y="108" width="410" height="58" rx="10"/>
+                  <text class="arch-t" x="225" y="136" text-anchor="middle">Next.js 16 · React 19 · TypeScript</text>
+                  <text class="arch-s" x="225" y="154" text-anchor="middle">158 pages · 63 API routes · deployed on Vercel</text>
+
+                  <path class="arch-line" d="M225 166 L225 198"/>
+                  <path class="arch-head" d="M219 194 L225 204 L231 194 Z"/>
+
+                  <!-- data layer -->
+                  <rect class="arch-box" x="20" y="206" width="410" height="58" rx="10"/>
+                  <text class="arch-t" x="225" y="234" text-anchor="middle">Supabase · PostgreSQL</text>
+                  <text class="arch-s" x="225" y="252" text-anchor="middle">Row Level Security per tenant · 155 migrations</text>
+
+                  <!-- integrations -->
+                  <rect class="arch-box arch-box--dashed" x="460" y="14" width="140" height="250" rx="10"/>
+                  <text class="arch-l" x="530" y="38" text-anchor="middle">INTEGRATIONS</text>
+                  <text class="arch-s" x="530" y="70" text-anchor="middle">ready2order POS</text>
+                  <text class="arch-s" x="530" y="96" text-anchor="middle">Open-Meteo weather</text>
+                  <text class="arch-s" x="530" y="122" text-anchor="middle">AXESS turnstiles</text>
+                  <text class="arch-s" x="530" y="148" text-anchor="middle">Stripe billing</text>
+                  <text class="arch-s" x="530" y="174" text-anchor="middle">Claude assistant</text>
+                  <text class="arch-s" x="530" y="200" text-anchor="middle">Web Push</text>
+                  <text class="arch-s" x="530" y="226" text-anchor="middle">PDF / Excel export</text>
+
+                  <path class="arch-line" d="M458 137 L438 137"/>
+                  <path class="arch-head" d="M442 131 L432 137 L442 143 Z"/>
+
+                  <!-- demand model band -->
+                  <rect class="arch-box arch-box--band" x="20" y="290" width="580" height="46" rx="10"/>
+                  <text class="arch-t" x="310" y="311" text-anchor="middle">Weather-driven demand model</text>
+                  <text class="arch-s" x="310" y="328" text-anchor="middle">forecast × turnstile counts × POS history → purchase suggestions &amp; shift plans</text>
+                </svg>
+                <figcaption>One app, one database, isolation enforced below the application layer.</figcaption>
+              </figure>
             </div>
           </div>
-        </article>
 
-        <!-- Gastropoly -->
-        <article class="spotlight spotlight--reverse fade-in">
-          <div class="spotlight-media">
-            <div>
-              <span class="mono-label">Modules</span>
-              <div class="project-tags" style="margin-top: 0.9rem; max-width: 22rem;">
-                <span class="project-tag">Personal</span>
-                <span class="project-tag">Zeiterfassung</span>
-                <span class="project-tag">Waren</span>
-                <span class="project-tag">Lieferanten</span>
-                <span class="project-tag">HACCP</span>
-                <span class="project-tag">Hygiene-Doku</span>
-                <span class="project-tag">Berichte</span>
-                <span class="project-tag">Steuerberater-Export</span>
+          <div class="case-highlights">
+            <h3 class="case-h">The parts that were actually hard</h3>
+            <div class="highlight-grid">
+              <div class="highlight">
+                <h4>Tenant isolation in the database</h4>
+                <p>
+                  Every tenant row is guarded by Postgres Row Level Security, not by an <code>if</code> in a
+                  controller. A forgotten <code>WHERE tenant_id = …</code> returns nothing instead of
+                  someone else's payroll.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>A venue whose Wi-Fi drops</h4>
+                <p>
+                  The kiosk and the PWA are offline-first with a sync queue: staff clock in, log a fridge
+                  temperature or take an order with no connection, and the writes reconcile in order once
+                  the network returns.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>Forecasting a demand curve</h4>
+                <p>
+                  Open-Meteo forecasts, AXESS turnstile counts and POS history feed one demand model that
+                  drives both the purchase suggestions and the shift plan — the two decisions that cost a
+                  restaurant money when they are wrong.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>Exports an accountant accepts</h4>
+                <p>
+                  DATEV export, PDF and Excel reporting built to the format the tax advisor already works
+                  in. The measure of success was zero manual re-keying at month end.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>155 migrations, three engineers</h4>
+                <p>
+                  One slice per branch, mandatory review and coordinated migration numbering. 370+ automated
+                  test files gate every merge, so a schema change can't quietly break another module.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>Billing that matches the business</h4>
+                <p>
+                  Stripe subscriptions for modular packages — a venue that only needs rostering and HACCP
+                  pays for rostering and HACCP.
+                </p>
               </div>
             </div>
           </div>
-          <div class="spotlight-body">
-            <span class="mono-label">In production since July 2026</span>
-            <h3>Gastropoly — Gastronomy Operations</h3>
-            <p>
-              An all-in-one operations tool for independent gastronomy businesses in the DACH region:
-              staff and time tracking, goods and suppliers, HACCP hygiene documentation, tax-advisor
-              exports and reporting in a single app. In daily use at a seasonal Austrian pilot
-              operation, and built against a full season of that business's real operating data.
-            </p>
 
-            <div class="metrics">
-              <div>
-                <div class="metric-num">1 season</div>
-                <div class="metric-label">of real data behind it</div>
-              </div>
-              <div>
-                <div class="metric-num">EU-hosted</div>
-                <div class="metric-label">Frankfurt, for data residency</div>
-              </div>
-            </div>
+          <blockquote class="pull-quote">
+            The hardest requirement was not technical: a seasonal worker has to clock in correctly on the
+            first try, without being trained.
+          </blockquote>
 
+          <footer class="case-foot">
             <div class="project-tags">
-              <span class="project-tag">Next.js</span>
+              <span class="project-tag">Next.js 16</span>
+              <span class="project-tag">React 19</span>
               <span class="project-tag">TypeScript</span>
-              <span class="project-tag">Supabase</span>
-              <span class="project-tag">PostgreSQL / RLS</span>
+              <span class="project-tag">Supabase / Postgres</span>
+              <span class="project-tag">Row Level Security</span>
+              <span class="project-tag">Offline-first PWA</span>
               <span class="project-tag">Stripe</span>
               <span class="project-tag">Vercel</span>
             </div>
-
             <div class="project-links">
-              <a href="https://all-in-gastro.vercel.app" target="_blank" rel="noopener" class="button">View live</a>
+              <a href="https://app.gastropoly.at" target="_blank" rel="noopener" class="button">Visit app.gastropoly.at</a>
+            </div>
+          </footer>
+        </article>
+
+        <!-- ------------------------------------------------ JAMIE -->
+        <article class="case fade-in" id="jamie">
+          <header class="case-head">
+            <span class="mono-label">Consumer app · live on iOS &amp; Android</span>
+            <h2>JAMIE — finding people to actually do things with</h2>
+            <p class="case-lede">
+              Bouldering, concerts, Feierabend drinks: JAMIE is a social app for the plans that never happen
+              because nobody organises them. Groups, clubs, a map of activities and real-time chat —
+              live on the App&nbsp;Store and Google&nbsp;Play across six European markets, localised in five
+              languages, with 1,200+ registered users.
+            </p>
+
+            <div class="kpi-row">
+              <div class="kpi"><span class="kpi-num">1,200+</span><span class="kpi-label">registered users</span></div>
+              <div class="kpi"><span class="kpi-num">6</span><span class="kpi-label">markets</span></div>
+              <div class="kpi"><span class="kpi-num">5</span><span class="kpi-label">languages</span></div>
+              <div class="kpi"><span class="kpi-num">2</span><span class="kpi-label">app stores</span></div>
+              <div class="kpi"><span class="kpi-num">1</span><span class="kpi-label">codebase, 3 targets</span></div>
+            </div>
+          </header>
+
+          <div class="case-grid">
+            <div class="case-col">
+              <h3 class="case-h">What I built</h3>
+              <ul class="case-list">
+                <li><strong>Zero to both stores</strong> — one React/Vite PWA shipped to the web, to Android as a Trusted Web Activity and to iOS via Capacitor, so a single deploy updates web and Android together.</li>
+                <li><strong>Real-time layer</strong> — Socket.IO chat with voice messages, photos, replies, read receipts and reactions.</li>
+                <li><strong>Push pipeline</strong> — Web Push and APNs, so a reply reaches you whether you installed from a store or from the browser.</li>
+                <li><strong>Trust &amp; safety</strong> — moderation and reporting flows, rate limiting on the endpoints that invite abuse.</li>
+                <li><strong>GDPR, properly</strong> — self-service data export and account deletion, not a support-ticket promise.</li>
+                <li><strong>Backups I have restored</strong> — encrypted off-site backups with a rehearsed restore, because an untested backup is a rumour.</li>
+              </ul>
+
+              <h3 class="case-h">Role</h3>
+              <p class="case-p">
+                Co-founder and lead developer. I own the whole technical side: architecture, the store
+                releases, the backend, the real-time stack and the operational work behind six markets.
+              </p>
+            </div>
+
+            <div class="case-col">
+              <h3 class="case-h">Architecture</h3>
+              <figure class="arch">
+                <svg viewBox="0 0 620 350" role="img" aria-labelledby="jamie-arch-title jamie-arch-desc">
+                  <title id="jamie-arch-title">JAMIE system architecture</title>
+                  <desc id="jamie-arch-desc">Web, Android Trusted Web Activity and iOS Capacitor targets all run one React and Vite codebase, which talks to a Node.js Express API with Socket.IO, a push service using Web Push and APNs, and a PostgreSQL database on Railway with encrypted off-site backups.</desc>
+
+                  <!-- targets -->
+                  <rect class="arch-box" x="20" y="14" width="180" height="48" rx="10"/>
+                  <text class="arch-t" x="110" y="37" text-anchor="middle">Web app</text>
+                  <text class="arch-s" x="110" y="53" text-anchor="middle">installable PWA</text>
+
+                  <rect class="arch-box" x="220" y="14" width="180" height="48" rx="10"/>
+                  <text class="arch-t" x="310" y="37" text-anchor="middle">Android</text>
+                  <text class="arch-s" x="310" y="53" text-anchor="middle">Trusted Web Activity</text>
+
+                  <rect class="arch-box" x="420" y="14" width="180" height="48" rx="10"/>
+                  <text class="arch-t" x="510" y="37" text-anchor="middle">iOS</text>
+                  <text class="arch-s" x="510" y="53" text-anchor="middle">Capacitor shell</text>
+
+                  <path class="arch-line" d="M110 62 L110 96"/>
+                  <path class="arch-head" d="M104 92 L110 102 L116 92 Z"/>
+                  <path class="arch-line" d="M310 62 L310 96"/>
+                  <path class="arch-head" d="M304 92 L310 102 L316 92 Z"/>
+                  <path class="arch-line" d="M510 62 L510 96"/>
+                  <path class="arch-head" d="M504 92 L510 102 L516 92 Z"/>
+
+                  <!-- shared codebase -->
+                  <rect class="arch-box arch-box--accent" x="20" y="104" width="580" height="56" rx="10"/>
+                  <text class="arch-t" x="310" y="131" text-anchor="middle">One React 18 + Vite codebase</text>
+                  <text class="arch-s" x="310" y="149" text-anchor="middle">one deploy updates the web app and Android at once</text>
+
+                  <path class="arch-line" d="M210 160 L210 198"/>
+                  <path class="arch-head" d="M204 194 L210 204 L216 194 Z"/>
+
+                  <!-- api -->
+                  <rect class="arch-box" x="20" y="206" width="380" height="58" rx="10"/>
+                  <text class="arch-t" x="210" y="234" text-anchor="middle">Node.js / Express API · Socket.IO</text>
+                  <text class="arch-s" x="210" y="252" text-anchor="middle">moderation · reporting · rate limiting · GDPR export &amp; deletion</text>
+
+                  <rect class="arch-box arch-box--dashed" x="420" y="206" width="180" height="58" rx="10"/>
+                  <text class="arch-t" x="510" y="234" text-anchor="middle">Push</text>
+                  <text class="arch-s" x="510" y="252" text-anchor="middle">Web Push · APNs</text>
+
+                  <path class="arch-line" d="M400 235 L416 235"/>
+                  <path class="arch-head" d="M412 229 L422 235 L412 241 Z"/>
+
+                  <path class="arch-line" d="M210 264 L210 290"/>
+                  <path class="arch-head" d="M204 286 L210 296 L216 286 Z"/>
+
+                  <!-- db -->
+                  <rect class="arch-box" x="20" y="296" width="380" height="50" rx="10"/>
+                  <text class="arch-t" x="210" y="320" text-anchor="middle">PostgreSQL on Railway</text>
+                  <text class="arch-s" x="210" y="337" text-anchor="middle">encrypted off-site backups · restore rehearsed</text>
+
+                  <rect class="arch-box arch-box--band" x="420" y="296" width="180" height="50" rx="10"/>
+                  <text class="arch-t" x="510" y="320" text-anchor="middle">6 markets</text>
+                  <text class="arch-s" x="510" y="337" text-anchor="middle">AT DE CH IT FR ES · 5 langs</text>
+                </svg>
+                <figcaption>One codebase, three delivery targets, one backend that has to stay up.</figcaption>
+              </figure>
             </div>
           </div>
+
+          <div class="case-highlights">
+            <h3 class="case-h">The parts that were actually hard</h3>
+            <div class="highlight-grid">
+              <div class="highlight">
+                <h4>Three targets, one deploy</h4>
+                <p>
+                  Shipping the same PWA as a Trusted Web Activity and a Capacitor app means asset links,
+                  store review and native permissions all have to agree with the web build — and a web
+                  deploy must never break the installed apps.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>Chat that feels instant</h4>
+                <p>
+                  Voice messages, photos, replies, read receipts and reactions over Socket.IO, with unread
+                  state that survives reconnects and a sleeping phone.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>Push across two worlds</h4>
+                <p>
+                  Web Push for browser and Android installs, APNs for iOS — one notification pipeline with
+                  two very different delivery contracts behind it.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>The unglamorous half</h4>
+                <p>
+                  Moderation, reporting and rate limiting decide whether a social product survives its first
+                  bad actor. They were in the first release, not the backlog.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>Six markets, five languages</h4>
+                <p>
+                  Localisation, store listings and market-specific content for AT, DE, CH, IT, FR and ES —
+                  from one codebase and a very small team.
+                </p>
+              </div>
+              <div class="highlight">
+                <h4>Data rights by default</h4>
+                <p>
+                  GDPR export and deletion built into the product, so a user request is a button press
+                  rather than a database session.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <footer class="case-foot">
+            <div class="project-tags">
+              <span class="project-tag">React 18 / Vite</span>
+              <span class="project-tag">Capacitor + TWA</span>
+              <span class="project-tag">Node.js / Express</span>
+              <span class="project-tag">PostgreSQL</span>
+              <span class="project-tag">Socket.IO</span>
+              <span class="project-tag">Web Push + APNs</span>
+              <span class="project-tag">Railway</span>
+            </div>
+            <div class="project-links">
+              <a href="https://app.jamie-app.com" target="_blank" rel="noopener" class="button">Open the web app</a>
+              <a href="https://play.google.com/store/apps/details?id=jamie.app" target="_blank" rel="noopener" class="button-outline">Google Play</a>
+              <!-- TODO: swap in the App Store URL once the Apple app ID is to hand -->
+            </div>
+          </footer>
         </article>
       </div>
     </section>
@@ -157,7 +407,7 @@
       <div class="container">
         <h2 class="section-title fade-in" data-index="02 — Research &amp; craft">Other work</h2>
         <p class="section-subtitle fade-in">
-          Research projects, client sites and tools. Flip any card for the stack and the details.
+          Research, earlier products, client sites and tools. Flip any card for the stack and the details.
         </p>
 
         <div class="projects-grid">
@@ -184,7 +434,7 @@
             </div>
             <div class="project-card-back">
               <div class="project-card-back-image">
-                <img src="images/1234.png" alt="XAI visualisations">
+                <img src="images/1234.png" alt="Saliency map visualisations from the XAI research" loading="lazy">
               </div>
               <div class="project-back-content">
                 <div class="tech-tags">
@@ -207,6 +457,53 @@
             </div>
           </div>
 
+          <!-- Stock platform -->
+          <div class="project-card fade-in">
+            <div class="shimmer-effect"></div>
+            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
+            <div class="project-card-front">
+              <div class="project-content">
+                <h3>Stock Analysis Platform</h3>
+                <div class="project-tags">
+                  <span class="project-tag">Flask REST API</span>
+                  <span class="project-tag">JWT auth</span>
+                  <span class="project-tag">Dash / React</span>
+                </div>
+                <div class="project-description">
+                  <p>My own trading-research platform: a Flask REST API with JWT auth and SQLAlchemy behind a Dash/React frontend — live charts, technical indicators and strategy backtesting against historical market data.</p>
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/tostrauss/ToFuStockTracker" target="_blank" rel="noopener" class="button">GitHub</a>
+                  <a href="https://github.com/tostrauss/tp2" target="_blank" rel="noopener" class="button-outline">Dash/Flask</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-card-back-image">
+                <img src="images/lockin.png" alt="Stock analysis dashboard" loading="lazy">
+              </div>
+              <div class="project-back-content">
+                <div class="tech-tags">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Flask</span>
+                  <span class="tech-tag">SQLAlchemy</span>
+                  <span class="tech-tag">PostgreSQL</span>
+                  <span class="tech-tag">Dash / Plotly</span>
+                </div>
+                <div class="project-features">
+                  <h4>Key features</h4>
+                  <div class="feature-list">
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>JWT-authenticated REST API</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Live charts and technical indicators</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Strategy backtesting on historical data</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>SQLAlchemy models over PostgreSQL</span></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
+            </div>
+          </div>
+
           <!-- College Recruit -->
           <div class="project-card fade-in">
             <div class="shimmer-effect"></div>
@@ -215,12 +512,12 @@
               <div class="project-content">
                 <h3>CollegeRecruit</h3>
                 <div class="project-tags">
+                  <span class="project-tag">Angular / TypeScript</span>
                   <span class="project-tag">Shipped</span>
-                  <span class="project-tag">Angular / Ionic</span>
                   <span class="project-tag">iOS &amp; Android</span>
                 </div>
                 <div class="project-description">
-                  <p>Co-founded a cross-platform app connecting international student-athletes with US college sports programs. Live on the Apple App Store and Google Play.</p>
+                  <p>Co-founded a platform connecting international student-athletes with US college sports programs — a standalone Angular/TypeScript application, shipped to the Apple App Store and Google Play.</p>
                 </div>
                 <div class="project-links">
                   <a href="https://collegerecruit.us/" target="_blank" rel="noopener" class="button">View live</a>
@@ -230,7 +527,7 @@
             </div>
             <div class="project-card-back">
               <div class="project-card-back-image">
-                <img src="images/CollegeRecruit_Logo.png" alt="CollegeRecruit app">
+                <img src="images/CollegeRecruit_Logo.png" alt="CollegeRecruit app" loading="lazy">
               </div>
               <div class="project-back-content">
                 <div class="tech-tags">
@@ -275,7 +572,7 @@
             </div>
             <div class="project-card-back">
               <div class="project-card-back-image">
-                <img src="images/Screenshot 2026-06-18 190203.png" alt="Therapiezentrum Blumau website">
+                <img src="images/Screenshot 2026-06-18 190203.png" alt="Therapiezentrum Blumau website" loading="lazy">
               </div>
               <div class="project-back-content">
                 <div class="tech-tags">
@@ -291,53 +588,6 @@
                     <div class="feature-item"><span class="feature-item-icon">★</span><span>Team &amp; service showcase pages</span></div>
                     <div class="feature-item"><span class="feature-item-icon">★</span><span>WCAG-compliant accessibility</span></div>
                     <div class="feature-item"><span class="feature-item-icon">★</span><span>Local-search SEO</span></div>
-                  </div>
-                </div>
-              </div>
-              <button type="button" class="flip-button" aria-label="Flip back"><i class="fas fa-arrow-left"></i></button>
-            </div>
-          </div>
-
-          <!-- Stock Analysis -->
-          <div class="project-card fade-in">
-            <div class="shimmer-effect"></div>
-            <button type="button" class="flip-button" aria-label="Flip card"><i class="fas fa-arrow-right-arrow-left"></i></button>
-            <div class="project-card-front">
-              <div class="project-content">
-                <h3>Stock Analysis &amp; Options Tool</h3>
-                <div class="project-tags">
-                  <span class="project-tag">Python</span>
-                  <span class="project-tag">Data Science</span>
-                  <span class="project-tag">Finance</span>
-                </div>
-                <div class="project-description">
-                  <p>Financial data analysis with interactive dashboards and automated strategy backtesting, built on Python, Dash and PostgreSQL.</p>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/tostrauss/ToFuStockTracker" target="_blank" rel="noopener" class="button">GitHub</a>
-                  <a href="https://github.com/tostrauss/tp2" target="_blank" rel="noopener" class="button-outline">Dash/Flask</a>
-                </div>
-              </div>
-            </div>
-            <div class="project-card-back">
-              <div class="project-card-back-image">
-                <img src="images/lockin.png" alt="Stock analysis dashboard">
-              </div>
-              <div class="project-back-content">
-                <div class="tech-tags">
-                  <span class="tech-tag">Python</span>
-                  <span class="tech-tag">Pandas</span>
-                  <span class="tech-tag">Flask</span>
-                  <span class="tech-tag">PostgreSQL</span>
-                  <span class="tech-tag">Dash/Plotly</span>
-                </div>
-                <div class="project-features">
-                  <h4>Key features</h4>
-                  <div class="feature-list">
-                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Real-time market data integration</span></div>
-                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Interactive financial dashboards</span></div>
-                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Technical analysis tooling</span></div>
-                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Automated strategy testing</span></div>
                   </div>
                 </div>
               </div>
@@ -367,7 +617,7 @@
             </div>
             <div class="project-card-back">
               <div class="project-card-back-image">
-                <img src="images/HabitTracker3.png" alt="HabitFlow app">
+                <img src="images/HabitTracker3.png" alt="HabitFlow app" loading="lazy">
               </div>
               <div class="project-back-content">
                 <div class="tech-tags">
@@ -412,7 +662,7 @@
             </div>
             <div class="project-card-back">
               <div class="project-card-back-image">
-                <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time tracking dashboard">
+                <img src="images/Employee-Time-Tracking-1400.jpg" alt="Time tracking dashboard" loading="lazy">
               </div>
               <div class="project-back-content">
                 <div class="tech-tags">
@@ -426,7 +676,7 @@
                   <div class="feature-list">
                     <div class="feature-item"><span class="feature-item-icon">★</span><span>Clock in/out time tracking</span></div>
                     <div class="feature-item"><span class="feature-item-icon">★</span><span>Gantt chart visualisation</span></div>
-                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Team collaboration tools</span></div>
+                    <div class="feature-item"><span class="feature-item-icon">★</span><span>Role-based access control</span></div>
                     <div class="feature-item"><span class="feature-item-icon">★</span><span>Project progress tracking</span></div>
                   </div>
                 </div>
@@ -457,7 +707,7 @@
             </div>
             <div class="project-card-back">
               <div class="project-card-back-image">
-                <img src="images/1P2.png" alt="1Percent Training website">
+                <img src="images/1P2.png" alt="1Percent Training website" loading="lazy">
               </div>
               <div class="project-back-content">
                 <div class="tech-tags">
