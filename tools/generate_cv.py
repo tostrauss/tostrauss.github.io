@@ -85,12 +85,6 @@ EXPERIENCE = [
         ],
     ),
     (
-        "Software Developer",
-        "TigerEyeTechnology — Vienna",
-        "present",
-        ["Software development alongside the MSc programme."],
-    ),
-    (
         "AI Researcher",
         "JKU Institute for Machine Learning — Linz",
         "Oct 2025 – present",
@@ -117,6 +111,12 @@ EXPERIENCE = [
             "student-athletes with US college programs — profiles, college matching, document management "
             "and real-time messaging — shipped to the App Store and Google Play.",
         ],
+    ),
+    (
+        "Software Developer",
+        "TigerEyeTechnology",
+        "until May 2025",
+        ["Application development alongside my degree."],
     ),
     (
         "Data Analytics Intern",
