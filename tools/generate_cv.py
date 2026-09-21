@@ -58,7 +58,7 @@ EXPERIENCE = [
         "Jun 2026 – present",
         [
             "Architected and shipped a multi-tenant SaaS on Next.js 16, React 19, TypeScript, Supabase and "
-            "Vercel: 158 pages, 63 API routes, 155 database migrations, ~1,800 commits.",
+            "Vercel: 158 pages, 63 API routes, 155 database migrations.",
             "Built six modules from scratch: shift planning with an offline PIN time-clock kiosk, inventory "
             "and supplier ordering, HACCP compliance logging, an accountant cockpit with DATEV export, "
             "reporting, and an AI assistant with a voice mode.",
@@ -67,7 +67,7 @@ EXPERIENCE = [
             "Enforced tenant isolation in the database through Postgres Row Level Security rather than in "
             "the application layer; offline-first PWA with a sync queue for unreliable venue Wi-Fi.",
             "Set the engineering process for a three-person team — one slice per branch, mandatory PR "
-            "review, coordinated migration numbering; 370+ automated test files gate every merge.",
+            "review, coordinated migration numbering; automated tests gate every merge.",
         ],
     ),
     (
