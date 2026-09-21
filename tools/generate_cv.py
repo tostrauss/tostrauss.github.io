@@ -45,7 +45,7 @@ CONTACT = (
 PROFILE = (
     "Software engineer who takes products from zero to production. Co-founder and lead engineer of "
     "<b>JAMIE</b> — a social app live on the App Store and Google Play across six European markets with "
-    "1,200+ registered users — and <b>Gastropoly</b>, a multi-tenant restaurant operations platform in "
+    "1,300+ registered users — and <b>Gastropoly</b>, a multi-tenant restaurant operations platform in "
     "daily production use since July 2026. Currently completing an MSc in Artificial Intelligence at JKU "
     "Linz with a focus on deep learning and explainable AI. Equally at home in the parts that decide "
     "whether a product survives real users: moderation, rate limiting, GDPR flows, tested backups."
@@ -81,7 +81,7 @@ EXPERIENCE = [
             "and reactions — plus a push pipeline on Web Push and APNs.",
             "Node.js/Express and PostgreSQL on Railway with moderation and reporting, rate limiting, GDPR "
             "data export and deletion, and encrypted off-site backups with a rehearsed restore.",
-            "1,200+ registered users across AT, DE, CH, IT, FR and ES, localised in five languages.",
+            "1,300+ registered users across AT, DE, CH, IT, FR and ES, localised in five languages.",
         ],
     ),
     (
