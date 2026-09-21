@@ -66,8 +66,8 @@ EXPERIENCE = [
             "model that drives both purchase suggestions and shift planning.",
             "Enforced tenant isolation in the database through Postgres Row Level Security rather than in "
             "the application layer; offline-first PWA with a sync queue for unreliable venue Wi-Fi.",
-            "Set the engineering process for a three-person team — one slice per branch, mandatory PR "
-            "review, coordinated migration numbering; automated tests gate every merge.",
+            "Set the engineering process for a three-person team, with coordinated migration numbering "
+            "and automated tests gating every merge.",
         ],
     ),
     (
