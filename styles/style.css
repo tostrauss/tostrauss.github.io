@@ -2204,18 +2204,13 @@ html.has-intro .hero-reveal {
 }
 
 /* ============================================================
-   24. PRINCIPLES, STACK & FACT GRIDS (about)
+   24. STACK & FACT GRIDS (about)
    ============================================================ */
-.principle-grid,
 .stack-grid,
 .fact-grid {
   display: grid;
   gap: 1rem;
   margin-top: 1.5rem;
-}
-
-.principle-grid {
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 }
 
 .stack-grid {
@@ -2226,7 +2221,6 @@ html.has-intro .hero-reveal {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-.principle,
 .stack-card,
 .fact {
   padding: clamp(1.25rem, 2.5vw, 1.6rem);
@@ -2237,7 +2231,6 @@ html.has-intro .hero-reveal {
     transform var(--fast);
 }
 
-.principle:hover,
 .stack-card:hover,
 .fact:hover {
   border-color: var(--line-strong);
@@ -2245,23 +2238,6 @@ html.has-intro .hero-reveal {
   transform: translateY(-2px);
 }
 
-.principle-num {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  color: var(--accent-text);
-}
-
-.principle h3 {
-  font-family: var(--font-primary);
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  margin: 0.6rem 0;
-}
-
-.principle p,
 .fact p {
   font-size: 0.92rem;
   color: var(--fg-muted);
@@ -2467,7 +2443,6 @@ html.has-intro .hero-reveal {
   .stack-card,
   .case,
   .kpi,
-  .principle,
   .fact {
     break-inside: avoid;
   }
