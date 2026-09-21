@@ -56,8 +56,8 @@
       <div class="container">
         <h1 class="section-title fade-in" data-index="01 — Shipped">Work that runs in production</h1>
         <p class="section-subtitle fade-in">
-          Two products I co-founded and lead technically. Below each one: what the problem actually was,
-          how the system is put together, and the parts that were hard.
+          Two products I co-founded and lead technically. Below each one: what the problem actually was
+          and how the system is put together.
         </p>
 
         <!-- ------------------------------------------------ GASTROPOLY -->
@@ -76,8 +76,6 @@
               <div class="kpi"><span class="kpi-num">158</span><span class="kpi-label">pages</span></div>
               <div class="kpi"><span class="kpi-num">63</span><span class="kpi-label">API routes</span></div>
               <div class="kpi"><span class="kpi-num">155</span><span class="kpi-label">DB migrations</span></div>
-              <div class="kpi"><span class="kpi-num">370+</span><span class="kpi-label">test files</span></div>
-              <div class="kpi"><span class="kpi-num">~1,800</span><span class="kpi-label">commits</span></div>
               <div class="kpi"><span class="kpi-num">3</span><span class="kpi-label">engineers led</span></div>
             </div>
           </header>
@@ -100,8 +98,7 @@
               <h3 class="case-h">Role</h3>
               <p class="case-p">
                 Co-founder. I own the architecture and the product, and I set the engineering process for a
-                three-person team: one slice per branch, mandatory PR review, coordinated migration numbering
-                so 155 migrations never collided.
+                three-person team.
               </p>
             </div>
           </div>
@@ -161,57 +158,6 @@
                 </svg>
                 <figcaption>One app, one database, isolation enforced below the application layer.</figcaption>
             </figure>
-          </div>
-
-          <div class="case-highlights">
-            <h3 class="case-h">The parts that were actually hard</h3>
-            <div class="highlight-grid">
-              <div class="highlight">
-                <h4>Tenant isolation in the database</h4>
-                <p>
-                  Every tenant row is guarded by Postgres Row Level Security, not by an <code>if</code> in a
-                  controller. A forgotten <code>WHERE tenant_id = …</code> returns nothing instead of
-                  someone else's payroll.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>A venue whose Wi-Fi drops</h4>
-                <p>
-                  The kiosk and the PWA are offline-first with a sync queue: staff clock in, log a fridge
-                  temperature or take an order with no connection, and the writes reconcile in order once
-                  the network returns.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>Forecasting a demand curve</h4>
-                <p>
-                  Open-Meteo forecasts, AXESS turnstile counts and POS history feed one demand model that
-                  drives both the purchase suggestions and the shift plan — the two decisions that cost a
-                  restaurant money when they are wrong.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>Exports an accountant accepts</h4>
-                <p>
-                  DATEV export, PDF and Excel reporting built to the format the tax advisor already works
-                  in. The measure of success was zero manual re-keying at month end.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>155 migrations, three engineers</h4>
-                <p>
-                  One slice per branch, mandatory review and coordinated migration numbering. 370+ automated
-                  test files gate every merge, so a schema change can't quietly break another module.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>Billing that matches the business</h4>
-                <p>
-                  Stripe subscriptions for modular packages — a venue that only needs rostering and HACCP
-                  pays for rostering and HACCP.
-                </p>
-              </div>
-            </div>
           </div>
 
           <blockquote class="pull-quote">
@@ -341,55 +287,6 @@
                 </svg>
                 <figcaption>One codebase, three delivery targets, one backend that has to stay up.</figcaption>
             </figure>
-          </div>
-
-          <div class="case-highlights">
-            <h3 class="case-h">The parts that were actually hard</h3>
-            <div class="highlight-grid">
-              <div class="highlight">
-                <h4>Three targets, one deploy</h4>
-                <p>
-                  Shipping the same PWA as a Trusted Web Activity and a Capacitor app means asset links,
-                  store review and native permissions all have to agree with the web build — and a web
-                  deploy must never break the installed apps.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>Chat that feels instant</h4>
-                <p>
-                  Voice messages, photos, replies, read receipts and reactions over Socket.IO, with unread
-                  state that survives reconnects and a sleeping phone.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>Push across two worlds</h4>
-                <p>
-                  Web Push for browser and Android installs, APNs for iOS — one notification pipeline with
-                  two very different delivery contracts behind it.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>The unglamorous half</h4>
-                <p>
-                  Moderation, reporting and rate limiting decide whether a social product survives its first
-                  bad actor. They were in the first release, not the backlog.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>Six markets, five languages</h4>
-                <p>
-                  Localisation, store listings and market-specific content for AT, DE, CH, IT, FR and ES —
-                  from one codebase and a very small team.
-                </p>
-              </div>
-              <div class="highlight">
-                <h4>Data rights by default</h4>
-                <p>
-                  GDPR export and deletion built into the product, so a user request is a button press
-                  rather than a database session.
-                </p>
-              </div>
-            </div>
           </div>
 
           <footer class="case-foot">

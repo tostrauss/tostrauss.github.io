@@ -29,6 +29,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
 
+  <!-- Load sequence bootstrap: flagged before first paint so nothing flashes.
+       Skipped for reduced-motion visitors. The timer guarantees the page is
+       never left behind the overlay, even if main.js fails to load.
+       Set ONCE_PER_SESSION to true to play the intro only once per tab. -->
+  <script>
+    (function () {
+      var ONCE_PER_SESSION = false;
+      var html = document.documentElement;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (ONCE_PER_SESSION) {
+        try {
+          if (window.sessionStorage.getItem("intro-played")) return;
+        } catch (e) {
+          /* storage blocked — just play it */
+        }
+      }
+      html.classList.add("has-intro");
+      window.setTimeout(function () {
+        html.classList.add("is-loaded");
+      }, 3500);
+    })();
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -59,6 +82,20 @@
   <div class="bg-layer"></div>
   <div id="interactive-bg"></div>
 
+  <!-- Load sequence (home only). Rendered only while <html class="has-intro">,
+       which the inline script in <head> sets — without JS it never shows. -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-inner">
+      <span class="intro-mark">TS</span>
+      <p class="intro-line">
+        <span class="intro-prompt">&gt;</span>
+        <span class="intro-typed">tobias.strauss.init()</span>
+        <span class="intro-caret"></span>
+      </p>
+      <span class="intro-bar"><span class="intro-bar-fill"></span></span>
+    </div>
+  </div>
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container navbar-container">
@@ -88,36 +125,31 @@
       <div class="container">
         <div class="hero-content">
           <div class="hero-text">
-            <span class="hero-kicker">
-              <span class="dot"></span>
-              Open to AI &amp; software engineering internships
-            </span>
-
             <h1>
               <span class="line"><span>Hi, I'm Tobias —</span></span>
               <span class="line"><span>I ship software that</span></span>
               <span class="line"><span>survives <em>real users</em>.</span></span>
             </h1>
 
-            <p>
+            <p class="hero-reveal" style="--i: 0">
               Co-founder and lead engineer on two products in daily production use:
               <strong>JAMIE</strong>, a social app live on the App&nbsp;Store and Google&nbsp;Play across six
               European markets, and <strong>Gastropoly</strong>, the operations platform that runs the shift
               at the restaurant it was built for. Alongside them, an MSc in Artificial Intelligence at JKU Linz.
             </p>
 
-            <p class="hero-meta">
+            <p class="hero-meta hero-reveal" style="--i: 1">
               <span>MSc Artificial Intelligence @ JKU Linz</span>
               <span>BS CIS, summa cum laude</span>
               <span>Vienna, Austria</span>
             </p>
 
-            <div class="button-container">
+            <div class="button-container hero-reveal" style="--i: 2">
               <a href="projects.html" class="button">Read the case studies <i class="fas fa-arrow-right"></i></a>
               <a href="Tobias_Strauss_Resume.pdf" class="button-outline" target="_blank" rel="noopener">Download CV</a>
             </div>
 
-            <div class="social-icons">
+            <div class="social-icons hero-reveal" style="--i: 3">
               <a href="https://github.com/tostrauss" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub profile"><i class="fab fa-github"></i></a>
               <a href="https://www.linkedin.com/in/tobias-strauss-7425012b6/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
               <a href="mailto:tobias.p.strauss@gmail.com" class="social-icon" aria-label="Send email"><i class="fas fa-envelope"></i></a>

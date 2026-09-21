@@ -430,7 +430,7 @@ button {
   inset: 0;
   z-index: -3;
   pointer-events: none;
-  opacity: 0.32;
+  opacity: 0.4;
 }
 
 #interactive-bg canvas {
@@ -477,6 +477,199 @@ body.light-mode .bg-layer::after {
 }
 
 /* ============================================================
+   6b. LOAD SEQUENCE (home)
+   A short terminal-style intro, then the hero is choreographed in.
+   Two flags on <html> drive it: .has-intro, set inline in <head> before
+   first paint, and .is-loaded, set by main.js once the progress bar
+   completes (or by a fail-safe timer). Without JS neither flag exists,
+   the overlay never renders and the hero is simply visible.
+   ============================================================ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  place-items: center;
+  padding: var(--gutter);
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1), visibility 0s linear 0.8s;
+}
+
+html.has-intro .intro {
+  display: grid;
+}
+
+/* the same glow as the page canvas, so the wipe reveals a matching surface */
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(70ch 55ch at 82% -12%, var(--accent-glow), transparent 62%);
+}
+
+.intro-inner {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 1.3rem;
+  min-width: 15rem;
+  transition: opacity 0.4s var(--ease), transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.intro-mark {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--accent-line);
+  border-radius: 14px;
+  background: var(--accent-light);
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-accent);
+  opacity: 0;
+  transform: scale(0.8) translateY(8px);
+  animation: intro-pop 0.7s var(--ease) 0.05s forwards;
+}
+
+.intro-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  opacity: 0;
+  animation: intro-fade 0.35s var(--ease) 0.3s forwards;
+}
+
+.intro-prompt {
+  color: var(--accent-text);
+}
+
+/* typed in one character per step — 21 steps for "tobias.strauss.init()" */
+.intro-typed {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: intro-type 0.8s steps(21, end) 0.4s forwards;
+}
+
+.intro-caret {
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--accent-color);
+  animation: intro-blink 1s step-end infinite;
+}
+
+.intro-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+  opacity: 0;
+  animation: intro-fade 0.35s var(--ease) 0.35s forwards;
+}
+
+/* main.js listens for the end of this fill to lift the overlay */
+.intro-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: intro-fill 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+}
+
+/* --- exit: the panel wipes up, its content drifts ahead of it --- */
+html.is-loaded .intro {
+  transform: translateY(-100%);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html.is-loaded .intro-inner {
+  opacity: 0;
+  transform: translateY(-2.5rem);
+}
+
+/* --- hero choreography: held while the overlay is up, released with it --- */
+html.has-intro {
+  --hero-delay: 0.4s;
+}
+
+html.has-intro:not(.is-loaded) .navbar,
+html.has-intro:not(.is-loaded) .hero-reveal {
+  opacity: 0;
+}
+
+html.has-intro:not(.is-loaded) .navbar {
+  transform: translateY(-10px);
+}
+
+html.has-intro:not(.is-loaded) .hero-reveal {
+  transform: translateY(16px);
+}
+
+html.has-intro:not(.is-loaded) .hero-text h1 .line > span {
+  animation: none;
+}
+
+html.has-intro .navbar {
+  transition: opacity 0.6s var(--ease) 0.6s, transform 0.6s var(--ease) 0.6s,
+    border-color var(--normal), background-color var(--normal);
+}
+
+html.has-intro .hero-reveal {
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+  transition-delay: calc(0.55s + var(--i, 0) * 0.09s);
+}
+
+@keyframes intro-pop {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intro-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-type {
+  to {
+    width: 21ch;
+  }
+}
+
+@keyframes intro-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes intro-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================================
    7. HERO
    ============================================================ */
 .hero {
@@ -488,32 +681,6 @@ body.light-mode .bg-layer::after {
 
 .hero-content {
   width: 100%;
-}
-
-.hero-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  padding: 0.4rem 0.85rem 0.4rem 0.7rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
-}
-
-.hero-kicker .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-color);
-  box-shadow: 0 0 0 0 var(--accent-line);
-  animation: pulse-ring 2.8s var(--ease) infinite;
-  flex-shrink: 0;
 }
 
 .hero-text h1 {
@@ -536,15 +703,15 @@ body.light-mode .bg-layer::after {
 .hero-text h1 .line > span {
   display: block;
   transform: translateY(110%);
-  animation: rise 0.95s var(--ease) forwards;
+  animation: rise 0.95s var(--ease) var(--hero-delay, 0s) forwards;
 }
 
 .hero-text h1 .line:nth-child(2) > span {
-  animation-delay: 0.09s;
+  animation-delay: calc(var(--hero-delay, 0s) + 0.09s);
 }
 
 .hero-text h1 .line:nth-child(3) > span {
-  animation-delay: 0.18s;
+  animation-delay: calc(var(--hero-delay, 0s) + 0.18s);
 }
 
 .hero-text h1 em {
@@ -721,6 +888,10 @@ body.light-mode .bg-layer::after {
   margin: 2rem 0 1.25rem;
 }
 
+.button-container--center {
+  justify-content: center;
+}
+
 .centered .button-container {
   justify-content: center;
 }
@@ -728,10 +899,6 @@ body.light-mode .bg-layer::after {
 .centered .button,
 .centered .button-outline {
   margin: 0;
-}
-
-.download-btn {
-  margin-top: 2rem;
 }
 
 /* Quiet text link with an arrow — used on cards */
@@ -1527,18 +1694,6 @@ body.light-mode .bg-layer::after {
   }
 }
 
-@keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 var(--accent-line);
-  }
-  70% {
-    box-shadow: 0 0 0 9px transparent;
-  }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1558,8 +1713,9 @@ body.light-mode .bg-layer::after {
     transform: none;
   }
 
-  #interactive-bg {
-    display: none;
+  #interactive-bg,
+  .intro {
+    display: none !important;
   }
 }
 
@@ -2018,55 +2174,6 @@ body.light-mode .bg-layer::after {
   fill: var(--line-strong);
 }
 
-/* --- the hard parts --- */
-.case-highlights {
-  margin-top: 2.2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
-}
-
-.highlight-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-top: 1.1rem;
-}
-
-.highlight {
-  padding: 1.2rem 1.3rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--bg-elevated);
-  transition: border-color var(--fast), transform var(--fast);
-}
-
-.highlight:hover {
-  border-color: var(--line-strong);
-  transform: translateY(-2px);
-}
-
-.highlight h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  margin-bottom: 0.5rem;
-}
-
-.highlight p {
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: var(--fg-muted);
-}
-
-.highlight code {
-  font-family: var(--font-mono);
-  font-size: 0.82em;
-  color: var(--accent-text);
-  background: var(--accent-light);
-  padding: 0.05em 0.35em;
-  border-radius: 4px;
-}
-
 .pull-quote {
   margin-top: 2rem;
   padding: 1.4rem 1.6rem;
@@ -2228,6 +2335,7 @@ body.light-mode .bg-layer::after {
 .resume-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.8rem;
   margin-bottom: 2.5rem;
 }
@@ -2305,13 +2413,13 @@ body.light-mode .bg-layer::after {
   .footer,
   .bg-layer,
   #interactive-bg,
+  .intro,
   .theme-toggle,
   .nav-toggle,
   .resume-actions,
   .skills-categories,
   .social-icons,
   .skip-to-content,
-  .download-btn,
   .button,
   .button-outline {
     display: none !important;
@@ -2357,7 +2465,6 @@ body.light-mode .bg-layer::after {
   .timeline-item,
   .skill-item,
   .stack-card,
-  .highlight,
   .case,
   .kpi,
   .principle,

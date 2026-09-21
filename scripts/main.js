@@ -1,8 +1,9 @@
 /**
  * Tobias Strauss — portfolio behaviour
- * Sticky nav state, mobile menu, scroll reveals, cursor-lit project cards,
- * flip handling, counting stats, skill filtering, copy-to-clipboard, print,
- * and a very quiet particle field. Everything degrades if JS or the CDN fails.
+ * Load sequence (home), sticky nav state, mobile menu, scroll reveals,
+ * cursor-lit project cards, flip handling, counting stats, skill filtering,
+ * copy-to-clipboard, print, and a quiet particle field that answers to the
+ * cursor. Everything degrades if JS or the CDN fails.
  */
 
 const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -11,15 +12,75 @@ document.addEventListener("DOMContentLoaded", () => {
   initSkipLink();
   initTheme();
   initNav();
-  initReveal();
   initProjectCards();
-  initCounters();
   initSkillFilter();
   initCopyButtons();
   initPrintButtons();
   initYear();
   initParticles();
+
+  // On the home page the scroll reveals wait until the intro has lifted, so
+  // the hero is choreographed in instead of already sitting there.
+  const revealPage = () => {
+    initReveal();
+    initCounters();
+  };
+  if (!initIntro(revealPage)) revealPage();
 });
+
+/* ============================================================
+   LOAD SEQUENCE (home)
+   <head> flags <html class="has-intro"> before first paint; the CSS holds
+   the hero back and plays the overlay. Once the progress bar has filled we
+   flag .is-loaded, the overlay wipes away and the hero animates in.
+   Returns true when the page reveal has been handed to the callback.
+   ============================================================ */
+const INTRO_FAILSAFE_MS = 2600;
+const INTRO_REVEAL_MS = 320;
+const INTRO_EXIT_MS = 900;
+
+function initIntro(onRevealed) {
+  const html = document.documentElement;
+  const intro = document.getElementById("intro");
+
+  if (!intro || !html.classList.contains("has-intro")) return false;
+
+  if (REDUCED_MOTION) {
+    html.classList.add("is-loaded");
+    intro.remove();
+    return false;
+  }
+
+  let finished = false;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+
+    html.classList.add("is-loaded");
+    safeSessionSet("intro-played", "1");
+
+    // Let the wipe get going before the reveals start, then drop the overlay.
+    setTimeout(onRevealed, INTRO_REVEAL_MS);
+    setTimeout(() => intro.remove(), INTRO_EXIT_MS);
+  };
+
+  const bar = intro.querySelector(".intro-bar-fill");
+  if (bar) {
+    bar.addEventListener("animationend", (e) => {
+      if (e.animationName === "intro-fill") finish();
+    });
+
+    // If we arrive late (slow script) and the bar has already filled, go now.
+    if (typeof bar.getAnimations === "function") {
+      const done = bar.getAnimations().some((a) => a.playState === "finished");
+      if (done || html.classList.contains("is-loaded")) finish();
+    }
+  }
+
+  // Never leave a visitor behind the overlay.
+  setTimeout(finish, INTRO_FAILSAFE_MS);
+  return true;
+}
 
 /* ============================================================
    THEME
@@ -304,29 +365,50 @@ function initSkipLink() {
 /* ============================================================
    PARTICLE FIELD
    Atmosphere, not the subject: few nodes, slow drift, gold at low opacity.
+   The cursor grabs nearby nodes, and a click on empty space drops a new
+   node right there. The click is handled by us rather than the library so
+   the count stays capped and clicks on controls are left alone. Restarts
+   (theme, resize) stop the previous draw loop instead of leaking it.
    ============================================================ */
+const PARTICLES_MIN_WIDTH = 700;
+const PARTICLES_MAX_NODES = 120;
+const NO_SPAWN_TARGETS =
+  "a, button, input, select, textarea, label, summary, [role='button'], [contenteditable]";
+
+let particleClicksBound = false;
+
+function particlesAllowed() {
+  return (
+    !REDUCED_MOTION &&
+    window.innerWidth >= PARTICLES_MIN_WIDTH &&
+    typeof particlesJS === "function" &&
+    !!document.getElementById("interactive-bg")
+  );
+}
+
 function initParticles() {
-  const host = document.getElementById("interactive-bg");
-  if (!host || REDUCED_MOTION || window.innerWidth < 700) return;
-  if (typeof particlesJS === "undefined") return;
+  if (!particlesAllowed()) return;
   runParticles();
+  bindParticleClicks();
 }
 
 function runParticles() {
   const host = document.getElementById("interactive-bg");
-  if (!host || typeof particlesJS === "undefined") return;
+  if (!host || typeof particlesJS !== "function") return;
+
+  destroyParticles();
   host.innerHTML = "";
 
   const gold = document.body.classList.contains("light-mode") ? "#b57800" : "#ffc93c";
 
   particlesJS("interactive-bg", {
     particles: {
-      number: { value: 32, density: { enable: true, value_area: 1100 } },
+      number: { value: 34, density: { enable: true, value_area: 1100 } },
       color: { value: gold },
       shape: { type: "circle" },
-      opacity: { value: 0.4, random: true, anim: { enable: false } },
-      size: { value: 1.8, random: true, anim: { enable: false } },
-      line_linked: { enable: true, distance: 165, color: gold, opacity: 0.14, width: 1 },
+      opacity: { value: 0.5, random: false, anim: { enable: false } },
+      size: { value: 2.2, random: true, anim: { enable: false } },
+      line_linked: { enable: true, distance: 180, color: gold, opacity: 0.16, width: 1 },
       move: {
         enable: true,
         speed: 0.45,
@@ -340,19 +422,95 @@ function runParticles() {
       detect_on: "window",
       events: {
         onhover: { enable: true, mode: "grab" },
-        onclick: { enable: false },
+        onclick: { enable: false }, // see bindParticleClicks()
         resize: true,
       },
-      modes: { grab: { distance: 170, line_linked: { opacity: 0.32 } } },
+      modes: { grab: { distance: 200, line_linked: { opacity: 0.55 } } },
     },
     retina_detect: true,
   });
 }
 
+/* The running instance, if any. particles.js keeps them in window.pJSDom. */
+function activeParticles() {
+  const list = window.pJSDom;
+  if (!Array.isArray(list) || !list.length) return null;
+  const entry = list[list.length - 1];
+  return entry && entry.pJS ? entry.pJS : null;
+}
+
+/* Stop every draw loop and forget the instances. The library's own
+   destroy helper nulls the registry, which breaks the next start. */
+function destroyParticles() {
+  const list = window.pJSDom;
+  if (!Array.isArray(list)) return;
+  list.forEach((entry) => {
+    const inst = entry && entry.pJS;
+    if (inst && inst.fn && inst.fn.drawAnimFrame) cancelAnimationFrame(inst.fn.drawAnimFrame);
+  });
+  window.pJSDom = [];
+}
+
+function bindParticleClicks() {
+  if (particleClicksBound) return;
+  particleClicksBound = true;
+
+  window.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.detail === 0) return; // handled elsewhere / keyboard
+    const target = e.target instanceof Element ? e.target : null;
+    if (target && target.closest(NO_SPAWN_TARGETS)) return;
+    spawnParticle(e.clientX, e.clientY);
+  });
+}
+
+/* One click, one node, right under the cursor — linked to its neighbours
+   by the field's own line logic. Slightly bolder than the ambient nodes so
+   the one you placed reads as yours. */
+function spawnParticle(clientX, clientY) {
+  const inst = activeParticles();
+  if (!inst || !inst.fn || !inst.fn.modes || typeof inst.fn.modes.pushParticles !== "function") {
+    return;
+  }
+
+  try {
+    // The canvas covers the viewport, so client coordinates map 1:1 —
+    // scaled by the pixel ratio when the library renders at retina size.
+    const scale = (inst.tmp && inst.tmp.retina && inst.canvas.pxratio) || 1;
+    inst.fn.modes.pushParticles(1, { pos_x: clientX * scale, pos_y: clientY * scale });
+
+    const nodes = inst.particles.array;
+    const node = nodes[nodes.length - 1];
+    if (node) {
+      node.radius = 2.4 * scale;
+      node.opacity = 0.8;
+    }
+    if (nodes.length > PARTICLES_MAX_NODES) {
+      nodes.splice(0, nodes.length - PARTICLES_MAX_NODES);
+    }
+  } catch (_) {
+    /* decoration only — never let it throw */
+  }
+}
+
 function restartParticles() {
-  const host = document.getElementById("interactive-bg");
-  if (!host || REDUCED_MOTION || window.innerWidth < 700) return;
+  if (!particlesAllowed()) return;
   runParticles();
+}
+
+/* Cross the width threshold in either direction and start/stop the field;
+   otherwise the library resizes its own canvas and nothing needs restarting. */
+function syncParticles() {
+  const host = document.getElementById("interactive-bg");
+  if (!host) return;
+
+  const running = activeParticles() !== null;
+  if (particlesAllowed() && !running) {
+    runParticles();
+    bindParticleClicks();
+  } else if (!particlesAllowed() && running) {
+    destroyParticles();
+    host.innerHTML = "";
+  }
 }
 
 /* ============================================================
@@ -374,8 +532,16 @@ function safeSet(key, value) {
   }
 }
 
+function safeSessionSet(key, value) {
+  try {
+    sessionStorage.setItem(key, value);
+  } catch (_) {
+    /* storage blocked — the intro simply plays again next time */
+  }
+}
+
 let resizeTimer;
 window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(restartParticles, 400);
+  resizeTimer = setTimeout(syncParticles, 300);
 });
