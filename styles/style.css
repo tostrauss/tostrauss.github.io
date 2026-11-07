@@ -682,11 +682,12 @@ html.has-intro .hero-reveal {
 /* ============================================================
    7. HERO
    ============================================================ */
+/* content starts just under the nav, so the availability badge is read first */
 .hero {
   min-height: calc(100vh - 4.5rem);
   display: flex;
-  align-items: center;
-  padding-block: clamp(3rem, 8vw, 6rem);
+  align-items: flex-start;
+  padding-block: clamp(1rem, 2vw, 1.5rem) clamp(3rem, 8vw, 6rem);
 }
 
 .hero-content {
@@ -798,7 +799,10 @@ html.has-intro .hero-reveal {
   font-weight: 600;
 }
 
-.hero-meta {
+/* scoped under .hero-text so it outranks the ".hero-text p" body size;
+   58ch of 12px mono is too narrow, so the measure cap is lifted */
+.hero-text .hero-meta {
+  max-width: none;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: 0.06em;
@@ -810,6 +814,17 @@ html.has-intro .hero-reveal {
   content: "·";
   margin: 0 0.6rem;
   color: var(--line-strong);
+}
+
+/* where the line can't fit, the three facts stack instead of wrapping mid-item */
+@media (max-width: 820px) {
+  .hero-meta span {
+    display: block;
+  }
+
+  .hero-meta span + span::before {
+    display: none;
+  }
 }
 
 /* --- Proof strip: the single biggest upgrade for a hiring manager --- */
