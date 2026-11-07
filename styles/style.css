@@ -28,6 +28,9 @@
   --primary-dark: #1f5fd0;
   --primary-soft: rgba(76, 141, 255, 0.08);
 
+  /* Status — the availability dot only; green reads as "available" */
+  --available: #5fb37c;
+
   /* --- Surfaces (dark) --- */
   --bg: #08090b;
   --bg-elevated: #0e1014;
@@ -92,6 +95,8 @@ body.light-mode {
 
   --primary-color: #1f5fd0;
   --primary-soft: rgba(31, 95, 208, 0.07);
+
+  --available: #2f8a50;
 
   --bg: #faf9f6;
   --bg-elevated: #ffffff;
@@ -229,6 +234,11 @@ button {
 
 .text-center {
   text-align: center;
+}
+
+/* keeps short units together, e.g. "20–30 h/week" — browsers break after an en dash */
+.nowrap {
+  white-space: nowrap;
 }
 
 /* ============================================================
@@ -681,6 +691,57 @@ html.has-intro .hero-reveal {
 
 .hero-content {
   width: 100%;
+}
+
+/* --- Availability badge: the first thing a recruiter reads. Pill and mono
+   type match the skill filter chips; the dot is the one non-gold signal. --- */
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1.5rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 0.25vw + 0.64rem, 0.78rem);
+  letter-spacing: 0;
+  line-height: 1.45;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+.availability-dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--available);
+}
+
+/* a slow ring so the badge registers without shouting —
+   the reduced-motion rule below stops it */
+.availability-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: available-pulse 2.6s var(--ease) infinite;
+}
+
+@keyframes available-pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.8);
+  }
 }
 
 .hero-text h1 {
@@ -1961,7 +2022,14 @@ html.has-intro .hero-reveal {
   max-width: 52ch;
 }
 
+.cta-band .plain-list {
+  max-width: 58ch;
+  margin: 1rem 0;
+}
+
+/* actions stack in one column, so they keep their place beside the copy */
 .cta-band .button-container {
+  flex-direction: column;
   margin: 0;
 }
 
@@ -2316,6 +2384,23 @@ html.has-intro .hero-reveal {
   margin-bottom: 2.5rem;
 }
 
+/* availability sits above the actions so it also prints with the CV */
+.resume-availability {
+  max-width: 62ch;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.resume-availability .availability {
+  margin-bottom: 0.8rem;
+}
+
+.resume-availability p {
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  text-wrap: balance;
+}
+
 .resume-subhead {
   margin-top: 2.75rem;
 }
@@ -2348,6 +2433,10 @@ html.has-intro .hero-reveal {
 
 .contact-note .plain-list {
   margin: 0.8rem 0 0;
+}
+
+.contact-note .button-container {
+  margin: 1.2rem 0 0;
 }
 
 /* ============================================================
