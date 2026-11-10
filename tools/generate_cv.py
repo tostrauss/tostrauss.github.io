@@ -19,6 +19,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.platypus import (
     HRFlowable,
+    KeepTogether,
     ListFlowable,
     ListItem,
     Paragraph,
@@ -34,19 +35,34 @@ ACCENT = colors.HexColor("#a87400")
 RULE = colors.HexColor("#c9c9c9")
 
 NAME = "Tobias Strauss"
-HEADLINE = "Software Engineer &amp; Co-Founder — Vienna, Austria"
-CONTACT = (
-    '<a href="mailto:tobias.p.strauss@gmail.com">tobias.p.strauss@gmail.com</a> · '
-    '<a href="https://tostrauss.github.io">tostrauss.github.io</a> · '
-    '<a href="https://github.com/tostrauss">github.com/tostrauss</a> · '
-    '<a href="https://www.linkedin.com/in/tobias-strauss-7425012b6/">linkedin.com/in/tobias-strauss</a>'
+HEADLINE = "Full-Stack &amp; AI Engineer — Vienna, Austria"
+PHONE = "+43 660 8171720"  # PDF only — never put this on the website
+JAMIE_USERS = "1,800+"
+CONTACT_LINKS = [
+    ("mailto:tobias.p.strauss@gmail.com", "tobias.p.strauss@gmail.com"),
+    ("https://tostrauss.github.io", "tostrauss.github.io"),
+    ("https://github.com/tostrauss", "github.com/tostrauss"),
+    ("https://www.linkedin.com/in/tobias-strauss-7425012b6/", "linkedin.com/in/tobias-strauss-7425012b6"),
+]
+AVAILABILITY = (
+    "<b>Available immediately</b> · part-time roles (20–30 h/week) and freelance projects · "
+    "Vienna, on-site, hybrid or remote"
 )
 
+
+def contact_line():
+    links = list(CONTACT_LINKS)
+    if PHONE:
+        links.insert(0, ("tel:" + PHONE.replace(" ", ""), PHONE))
+    return " · ".join(f'<a href="{href}">{text}</a>' for href, text in links)
+
+
 PROFILE = (
-    "Software engineer who takes products from zero to production. Co-founder and lead engineer of "
+    "Full-stack and AI engineer who takes products from zero to production. Co-founder and lead engineer of "
     "<b>JAMIE</b> — a social app live on the App Store and Google Play across six European markets with "
-    "1,300+ registered users — and <b>Gastropoly</b>, a multi-tenant restaurant operations platform in "
-    "daily production use since July 2026. Currently completing an MSc in Artificial Intelligence at JKU "
+    f"{JAMIE_USERS} registered users — and <b>Gastropoly</b>, a multi-tenant restaurant operations platform "
+    "with a Claude-powered assistant, in production since July 2026 and in use at three pilot venues. "
+    "Currently completing an MSc in Artificial Intelligence at JKU "
     "Linz with a focus on deep learning and explainable AI. Equally at home in the parts that decide "
     "whether a product survives real users: moderation, rate limiting, GDPR flows, tested backups."
 )
@@ -58,10 +74,10 @@ EXPERIENCE = [
         "Jun 2026 – present",
         [
             "Architected and shipped a multi-tenant SaaS on Next.js 16, React 19, TypeScript, Supabase and "
-            "Vercel: 158 pages, 63 API routes, 155 database migrations.",
+            "Vercel: 158 pages, 63 API routes, 155 database migrations. In use at three pilot venues.",
             "Built six modules from scratch: shift planning with an offline PIN time-clock kiosk, inventory "
             "and supplier ordering, HACCP compliance logging, an accountant cockpit with DATEV export, "
-            "reporting, and an AI assistant with a voice mode.",
+            "reporting, and a Claude-powered assistant with a voice mode.",
             "Integrated ready2order POS, Open-Meteo and AXESS turnstile data into a weather-based demand "
             "model that drives both purchase suggestions and shift planning.",
             "Enforced tenant isolation in the database through Postgres Row Level Security rather than in "
@@ -81,7 +97,7 @@ EXPERIENCE = [
             "and reactions — plus a push pipeline on Web Push and APNs.",
             "Node.js/Express and PostgreSQL on Railway with moderation and reporting, rate limiting, GDPR "
             "data export and deletion, and encrypted off-site backups with a rehearsed restore.",
-            "1,300+ registered users across AT, DE, CH, IT, FR and ES, localised in five languages.",
+            f"{JAMIE_USERS} registered users across AT, DE, CH, IT, FR and ES, localised in five languages.",
         ],
     ),
     (
@@ -102,12 +118,6 @@ EXPERIENCE = [
             "student-athletes with US college programs — profiles, college matching, document management "
             "and real-time messaging — shipped to the App Store and Google Play.",
         ],
-    ),
-    (
-        "Software Developer",
-        "TigerEyeTechnology",
-        "Mar 2024 – May 2025",
-        ["Application development alongside my degree."],
     ),
     (
         "Data Analytics Intern",
@@ -147,7 +157,7 @@ SKILLS = [
     ("Frontend", "React 18/19, Next.js 16, Vite, Angular/Ionic, Tailwind CSS, PWA &amp; service workers"),
     ("Backend", "Node.js/Express, PostgreSQL, Supabase (Row Level Security), Socket.IO, Flask, SQLAlchemy, REST/JWT"),
     ("Mobile", "Capacitor (iOS), Trusted Web Activity (Android), Web Push, APNs, App Store &amp; Play releases"),
-    ("AI &amp; data", "PyTorch, TensorFlow, pandas/NumPy, LIME · SHAP · saliency maps, LLM integration, Power BI"),
+    ("AI &amp; data", "LLM integration (Claude), PyTorch, TensorFlow, pandas/NumPy, LIME · SHAP · saliency maps, Power BI"),
     ("Platform", "Vercel, Railway, Stripe, CI/CD, automated testing, Git/PR review, GDPR flows, encrypted backups"),
 ]
 
@@ -161,7 +171,9 @@ def styles():
         "headline": ParagraphStyle("headline", fontName="Helvetica", fontSize=10.5, leading=13,
                                    textColor=ACCENT, spaceAfter=3),
         "contact": ParagraphStyle("contact", fontName="Helvetica", fontSize=8.6, leading=11,
-                                  textColor=MUTED, spaceAfter=10),
+                                  textColor=MUTED, spaceAfter=2),
+        "availability": ParagraphStyle("availability", fontName="Helvetica", fontSize=8.8, leading=11,
+                                       textColor=INK, spaceAfter=10),
         "section": ParagraphStyle("section", fontName="Helvetica-Bold", fontSize=9, leading=11,
                                   textColor=ACCENT, spaceBefore=11, spaceAfter=3),
         "role": ParagraphStyle("role", fontName="Helvetica-Bold", fontSize=10, leading=12.5,
@@ -182,6 +194,27 @@ def rule():
                       spaceBefore=1, spaceAfter=5, lineCap="round")
 
 
+def section(title, groups, s):
+    """Each group is a list of flowables that must stay on one page. The heading and rule are
+    kept with the first group so no heading is stranded at the bottom of a page. KeepTogether
+    must not be nested (an inner one reports an infinite height), so groups are plain lists."""
+    first, *rest = groups
+    return [KeepTogether([Paragraph(title, s["section"]), rule(), *first]),
+            *(KeepTogether(g) for g in rest)]
+
+
+def experience_entry(role, org, dates, bullets, s):
+    return [
+        Paragraph(role, s["role"]),
+        Paragraph(f"{org}  |  {dates}", s["meta"]),
+        ListFlowable(
+            [ListItem(Paragraph(b, s["bullet"]), leftIndent=10, value="circle") for b in bullets],
+            bulletType="bullet", bulletFontSize=5, bulletOffsetY=-1.5,
+            leftIndent=10, start="circle",
+        ),
+    ]
+
+
 def build():
     s = styles()
     doc = SimpleDocTemplate(
@@ -189,43 +222,38 @@ def build():
         leftMargin=17 * mm, rightMargin=17 * mm,
         topMargin=15 * mm, bottomMargin=13 * mm,
         title="Tobias Strauss — CV", author="Tobias Strauss",
-        subject="Curriculum Vitae",
+        subject="Curriculum Vitae — Full-Stack & AI Engineer, Vienna",
+        keywords="Tobias Strauss, full-stack engineer, AI engineer, Vienna, part-time, freelance, "
+                 "React, Next.js, TypeScript, Node.js, PostgreSQL, Supabase, Python, PyTorch, "
+                 "LLM integration, Claude, JAMIE, Gastropoly",
     )
 
     flow = [
         Paragraph(NAME, s["name"]),
         Paragraph(HEADLINE, s["headline"]),
-        Paragraph(CONTACT, s["contact"]),
-        Paragraph("PROFILE", s["section"]), rule(),
-        Paragraph(PROFILE, s["body"]),
-        Paragraph("EXPERIENCE", s["section"]), rule(),
+        Paragraph(contact_line(), s["contact"]),
+        Paragraph(AVAILABILITY, s["availability"]),
     ]
 
-    for role, org, dates, bullets in EXPERIENCE:
-        flow.append(Paragraph(role, s["role"]))
-        flow.append(Paragraph(f"{org}  |  {dates}", s["meta"]))
-        flow.append(ListFlowable(
-            [ListItem(Paragraph(b, s["bullet"]), leftIndent=10, value="circle") for b in bullets],
-            bulletType="bullet", bulletFontSize=5, bulletOffsetY=-1.5,
-            leftIndent=10, start="circle",
-        ))
+    flow += section("PROFILE", [[Paragraph(PROFILE, s["body"])]], s)
 
-    flow.append(Paragraph("EDUCATION", s["section"]))
-    flow.append(rule())
-    for degree, school, dates, detail in EDUCATION:
-        flow.append(Paragraph(degree, s["role"]))
-        flow.append(Paragraph(f"{school}  |  {dates}", s["meta"]))
-        flow.append(Paragraph(detail, s["small"]))
+    flow += section("EXPERIENCE", [experience_entry(*e, s) for e in EXPERIENCE], s)
 
-    flow.append(Paragraph("TECHNICAL SKILLS", s["section"]))
-    flow.append(rule())
-    for label, items in SKILLS:
-        flow.append(Paragraph(f"<b>{label}:</b> {items}", s["small"]))
-        flow.append(Spacer(1, 2))
+    flow += section("EDUCATION", [
+        [
+            Paragraph(degree, s["role"]),
+            Paragraph(f"{school}  |  {dates}", s["meta"]),
+            Paragraph(detail, s["small"]),
+        ]
+        for degree, school, dates, detail in EDUCATION
+    ], s)
 
-    flow.append(Paragraph("LANGUAGES", s["section"]))
-    flow.append(rule())
-    flow.append(Paragraph(LANGUAGES, s["small"]))
+    flow += section("TECHNICAL SKILLS", [
+        [Paragraph(f"<b>{label}:</b> {items}", s["small"]), Spacer(1, 2)]
+        for label, items in SKILLS
+    ], s)
+
+    flow += section("LANGUAGES", [[Paragraph(LANGUAGES, s["small"])]], s)
 
     doc.build(flow)
     print(f"wrote {OUT} ({OUT.stat().st_size / 1024:.1f} KB)")
